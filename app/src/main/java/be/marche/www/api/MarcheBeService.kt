@@ -6,11 +6,11 @@ import retrofit2.http.GET
 
 interface MarcheBeService {
 
-    @GET("avaloirs/api/all")
+    @GET("marchebe/actualites")
     suspend fun findAllNews(
     ): List<News>
 
-    @GET("avaloirs/api/all")
+    @GET("agenda/evenements")
     suspend fun findAllEvents(
     ): List<Event>
 

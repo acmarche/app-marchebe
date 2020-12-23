@@ -1,17 +1,18 @@
 package be.marche.www.event
 
-import android.app.Application
-import androidx.compose.runtime.emit
-import androidx.lifecycle.AndroidViewModel
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import be.marche.www.entity.Event
 import be.marche.www.event.repository.EventRepository
 
-class EventViewModel(
-    application: Application,
+class EventViewModel @ViewModelInject constructor(
+    @Assisted private val savedStateHandle: SavedStateHandle,
     private val avaloirRepository: EventRepository,
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
     fun findAllEvents(): LiveData<List<Event>> = liveData {
         emit(avaloirRepository.findAllEvents())
