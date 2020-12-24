@@ -33,7 +33,7 @@ import timber.log.Timber
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun LiveDataComponent(personListLiveData: LiveData<List<Event>>) {
+fun ListEventsComponent(personListLiveData: LiveData<List<Event>>) {
     // Here we access the live data object and convert it to a form that Jetpack Compose
     // understands using the observeAsState method.
 
