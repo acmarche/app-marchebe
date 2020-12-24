@@ -57,14 +57,14 @@ buildscript {
                     'glideCompiler': "com.github.bumptech.glide:compiler:${versions.glide}"
             ],
             'retrofit'   : [
-                    'core'         : "com.squareup.retrofit2:retrofit:${version.retrofit}",
-                    'converterGson': "com.squareup.retrofit2:converter-gson:${version.retrofit}",
-                    'logging'      : "com.squareup.okhttp3:logging-interceptor:${version.logging}",
+                    'core'         : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+                    'converterGson': "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+                    'logging'      : "com.squareup.okhttp3:logging-interceptor:${versions.logging}",
             ],
             'room'        : [
-                    'runtime' : "androidx.room:room-runtime:${$version.room}",
-                    'compiler': "androidx.room:room-compiler:${$version.room}",//kapt
-                    'ktx'     : "androidx.room:room-ktx:${$version.room}",// optional - Kotlin Extensions and Coroutines support for Room
+                    'runtime' : "androidx.room:room-runtime:${$versions.room}",
+                    'compiler': "androidx.room:room-compiler:${$versions.room}",//kapt
+                    'ktx'     : "androidx.room:room-ktx:${$versions.room}",// optional - Kotlin Extensions and Coroutines support for Room
             ],
             'support'     : [
                     'appCompat'          : "androidx.appcompat:appcompat:${versions.supportLibrary}",
@@ -72,10 +72,10 @@ buildscript {
                     'ktxLiveData'        : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.ktxSupport}",
                     'ktxViewModel'       : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.ktxSupport}",
                     'lifecycleExtensions': "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}",
-                    'fragmentKtx'        : "androidx.fragment:fragment-ktx:${version.fragment}"
+                    'fragmentKtx'        : "androidx.fragment:fragment-ktx:${versions.fragment}"
             ],
             'tool'        : [
-                    'timber': "com.jakewharton.timber:timber:${$version.timber}"
+                    'timber': "com.jakewharton.timber:timber:${$versions.timber}"
             ],
     ]
 
