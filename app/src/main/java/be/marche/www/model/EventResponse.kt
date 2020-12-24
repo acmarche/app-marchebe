@@ -1,4 +1,4 @@
-package be.marche.www.entity
+package be.marche.www.model
 
 data class EventResponse(
     val data: List<Event>?=null,

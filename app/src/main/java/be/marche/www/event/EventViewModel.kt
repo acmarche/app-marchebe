@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import be.marche.www.entity.Event
+import be.marche.www.model.Event
 import be.marche.www.event.repository.EventRepository
 
 class EventViewModel @ViewModelInject constructor(
@@ -14,8 +14,13 @@ class EventViewModel @ViewModelInject constructor(
     private val avaloirRepository: EventRepository,
 ) : ViewModel() {
 
-    fun findAllEvents(): LiveData<List<Event>> = liveData {
-        emit(avaloirRepository.findAllEvents())
+    val allEvents: LiveData<List<Event>> = liveData {
+        val superheroList = loadSuperheroes()
+        emit(superheroList)
+    }
+
+    suspend fun loadSuperheroes(): List<Event> {
+        return avaloirRepository.findAllEvents()
     }
 
 }

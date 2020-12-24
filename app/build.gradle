@@ -44,7 +44,6 @@ android {
 
 dependencies {
 
-
     // Kotlin
     implementation deps.kotlinStdLib
 
@@ -55,6 +54,7 @@ dependencies {
     implementation deps.support.ktxLiveData
     implementation deps.support.lifecycleExtensions
     implementation deps.support.fragmentKtx
+    implementation deps.support.material
 
     // CardView
     implementation deps.cardView
@@ -98,7 +98,6 @@ dependencies {
     implementation deps.room.runtime
     kapt deps.room.compiler
     implementation deps.room.ktx
-
 
     /**
      * Retrofit

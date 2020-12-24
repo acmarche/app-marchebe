@@ -1,7 +1,7 @@
 package be.marche.www.api
 
-import be.marche.www.entity.Event
-import be.marche.www.entity.News
+import be.marche.www.model.Event
+import be.marche.www.model.News
 import retrofit2.http.GET
 
 interface MarcheBeService {

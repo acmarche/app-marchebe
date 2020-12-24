@@ -1,4 +1,4 @@
-package be.marche.www.entity
+package be.marche.www.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
