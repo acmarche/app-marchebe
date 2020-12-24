@@ -62,9 +62,9 @@ buildscript {
                     'logging'      : "com.squareup.okhttp3:logging-interceptor:${versions.logging}",
             ],
             'room'        : [
-                    'runtime' : "androidx.room:room-runtime:${$versions.room}",
-                    'compiler': "androidx.room:room-compiler:${$versions.room}",//kapt
-                    'ktx'     : "androidx.room:room-ktx:${$versions.room}",// optional - Kotlin Extensions and Coroutines support for Room
+                    'runtime' : "androidx.room:room-runtime:${versions.room}",
+                    'compiler': "androidx.room:room-compiler:${versions.room}",//kapt
+                    'ktx'     : "androidx.room:room-ktx:${versions.room}",// optional - Kotlin Extensions and Coroutines support for Room
             ],
             'support'     : [
                     'appCompat'          : "androidx.appcompat:appcompat:${versions.supportLibrary}",
@@ -75,7 +75,7 @@ buildscript {
                     'fragmentKtx'        : "androidx.fragment:fragment-ktx:${versions.fragment}"
             ],
             'tool'        : [
-                    'timber': "com.jakewharton.timber:timber:${$versions.timber}"
+                    'timber': "com.jakewharton.timber:timber:${versions.timber}"
             ],
     ]
 
