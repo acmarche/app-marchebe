@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-  eventViewModel.findAllEvents().observe(this, Observer { events ->
+        eventViewModel.findAllEvents().observe(this, Observer { events ->
             Timber.w("list event" + events)
         })
 
