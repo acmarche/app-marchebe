@@ -25,7 +25,6 @@ import androidx.lifecycle.LiveData
 import be.marche.www.event.fakeNews
 import be.marche.www.model.News
 import be.marche.www.news.NewsViewModel
-import timber.log.Timber
 
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -44,7 +43,6 @@ fun ListNewsComponent(personListLiveData: LiveData<List<News>>) {
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
     val personList by personListLiveData.observeAsState(initial = emptyList())
-    Timber.i("news " + personList)
     // Since Jetpack Compose uses the declarative way of programming, we can easily decide what
     // needs to shows vs hidden based on which branch of code is being executed. In this example,
     // if the personList returned by the live data is empty, we want to show a loading indicator,
@@ -72,9 +70,6 @@ fun LiveDataComponentList2(personList: List<News>) {
             // Card composable is a predefined composable that is meant to represent the
             // card surface as specified by the Material Design specification. We also
             // configure it to have rounded corners and apply a modifier.
-
-
-            Timber.w("news " + person)
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
             // modify the composable that its applied to. In this example, we assign a padding of

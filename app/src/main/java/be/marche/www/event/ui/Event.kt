@@ -25,7 +25,6 @@ import androidx.lifecycle.LiveData
 import be.marche.www.event.EventViewModel
 import be.marche.www.event.fakeEvents
 import be.marche.www.model.Event
-import timber.log.Timber
 
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -71,9 +70,6 @@ fun LiveDataComponentList(personList: List<Event>) {
             // Card composable is a predefined composable that is meant to represent the
             // card surface as specified by the Material Design specification. We also
             // configure it to have rounded corners and apply a modifier.
-
-
-            Timber.w("photo " + person)
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
             // modify the composable that its applied to. In this example, we assign a padding of
