@@ -27,13 +27,13 @@ class Actions(navController: NavHostController) {
         navController.navigate(News)
     }
     val newsShow: (Int) -> Unit = { taskId ->
-        navController.navigate("$NewsShow/$newsId")
+        navController.navigate("$NewsShow/$taskId")
     }
     val listEvents: () -> Unit = {
         navController.navigate(Agenda)
     }
     val eventShow: (Int) -> Unit = { taskId ->
-        navController.navigate("$EventShow/$eventId")
+        navController.navigate("$EventShow/$taskId")
     }
     val navigateUp: () -> Unit = {
         navController.popBackStack()

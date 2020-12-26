@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import be.marche.www.model.News
 import be.marche.www.event.repository.NewsRepository
+import be.marche.www.model.News
 
 class NewsViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,

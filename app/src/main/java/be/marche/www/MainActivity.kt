@@ -68,7 +68,6 @@ fun Launch(newsViewModel: NewsViewModel, eventViewModel: EventViewModel) {
                 "$NewsShow/{$newsId}",
                 arguments = listOf(navArgument(newsId) { type = NavType.IntType })
             ) { backStackEntry ->
-                Timber.w("id news " +  backStackEntry.arguments?.getInt(newsId))
                 NewsShowComponent(
                     newsId = backStackEntry.arguments?.getInt(newsId) ?: 0,
                     //navigateUp = actions.navigateUp
