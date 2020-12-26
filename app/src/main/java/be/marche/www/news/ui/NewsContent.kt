@@ -35,6 +35,11 @@ import be.marche.www.model.News
 private val defaultSpacerSize = 16.dp
 
 @Composable
+fun NewsShowComponent(newsId: Int) {
+    Text("coucou id $newsId")
+}
+
+@Composable
 fun PostContent(post: News, modifier: Modifier = Modifier) {
     ScrollableColumn(
         modifier = modifier.padding(horizontal = defaultSpacerSize)

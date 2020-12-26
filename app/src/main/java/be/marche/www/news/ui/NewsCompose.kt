@@ -1,5 +1,6 @@
 package be.marche.www.news.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,23 +9,18 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ListItem
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LiveData
-import be.marche.www.event.fakeNews
 import be.marche.www.model.News
-import be.marche.www.news.NewsViewModel
 import be.marche.www.ui.NetworkImageComponentPicasso
 
 
@@ -33,7 +29,7 @@ import be.marche.www.ui.NetworkImageComponentPicasso
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun ListNewsComponent(personListLiveData: LiveData<List<News>>) {
+fun ListNewsComponent(personListLiveData: LiveData<List<News>>, onItemClick: (Int) -> Unit) {
     // Here we access the live data object and convert it to a form that Jetpack Compose
     // understands using the observeAsState method.
 
@@ -52,7 +48,7 @@ fun ListNewsComponent(personListLiveData: LiveData<List<News>>) {
     if (personList.isEmpty()) {
         LiveDataLoadingComponent2()
     } else {
-        LiveDataComponentList2(personList)
+        LiveDataComponentList2(personList, onItemClick)
     }
 }
 
@@ -62,7 +58,7 @@ fun ListNewsComponent(personListLiveData: LiveData<List<News>>) {
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun LiveDataComponentList2(personList: List<News>) {
+fun LiveDataComponentList2(personList: List<News>, onItemClick: (Int) -> Unit) {
     // LazyColumn is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
     // than the VerticalScroller.
@@ -79,6 +75,8 @@ fun LiveDataComponentList2(personList: List<News>) {
                 shape = RoundedCornerShape(4.dp),
                 backgroundColor = Color.White,
                 modifier = Modifier.fillParentMaxWidth().padding(8.dp)
+                    .clickable(onClick = { onItemClick(person.id) })
+
             ) {
                 // ListItem is a predefined composable that is a Material Design implementation of [list
                 // items](https://material.io/components/lists). This component can be used to achieve the
@@ -140,62 +138,4 @@ fun LiveDataLoadingComponent2() {
         // honors the Material Design specification.
         CircularProgressIndicator(modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
     }
-}
-
-// We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions. We should
-// think of composable functions to be similar to lego blocks - each composable function is in turn
-// built up of smaller composable functions.
-@Composable
-fun LaunchInCompositionComponent(viewModel: NewsViewModel) {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of whether the checkbox is checked. Any composable that reads the value of "personList"
-    // will be recomposed any time the value changes. This ensures that only the composables that
-    // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
-    // is a performance optimization. It is inspired from existing frameworks like React.
-    val personList = mutableStateListOf<News>()
-
-    // LaunchedEffect allows you to launch a suspendable function as soon as this composable
-    // is first committed i.e this tree node is first allowed to be rendered on the screen. It
-    // also takes care of automatically cancelling it when it is no longer in the composition.
-    LaunchedEffect(Unit) {
-        // This view model merely calls a suspendable function "loadSuperheroes" to get a list of
-        // "Person" objects
-        val list = viewModel.loadNews()
-        // We add it to our state object
-        personList.addAll(list)
-    }
-
-    // If the list is empty, it means that our coroutine has not completed yet and we just want
-    // to show our loading component and nothing else. So we return early.
-    if (personList.isEmpty()) {
-        LiveDataLoadingComponent2()
-        return
-    }
-
-    // If the personList is available, we will go ahead and show the list of superheroes. We
-    // reuse the same component that we created above to save time & space :)
-    LiveDataComponentList2(personList)
-}
-
-/**
- * Android Studio lets you preview your composable functions within the IDE itself, instead of
- * needing to download the app to an Android device or emulator. This is a fantastic feature as you
- * can preview all your custom components(read composable functions) from the comforts of the IDE.
- * The main restriction is, the composable function must not take any parameters. If your composable
- * function requires a parameter, you can simply wrap your component inside another composable
- * function that doesn't take any parameters and call your composable function with the appropriate
- * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
- */
-@Preview
-@Composable
-fun LiveDataComponentListPreview2() {
-    LiveDataComponentList2(fakeNews())
-}
-
-@Preview
-@Composable
-fun LiveDataLoadingComponentPreview2() {
-    LiveDataLoadingComponent2()
 }

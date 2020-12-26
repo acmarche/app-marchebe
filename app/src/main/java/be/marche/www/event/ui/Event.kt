@@ -33,7 +33,7 @@ import be.marche.www.ui.NetworkImageComponentPicasso
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun ListEventsComponent(personListLiveData: LiveData<List<Event>>) {
+fun ListEventsComponent(personListLiveData: LiveData<List<Event>>, onItemClick: (Int) -> Unit) {
     // Here we access the live data object and convert it to a form that Jetpack Compose
     // understands using the observeAsState method.
 
