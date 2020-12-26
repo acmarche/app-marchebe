@@ -30,7 +30,6 @@ fun HomeComponent() {
     // any time the value changes. This ensures that only the composables that depend on this
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
-    var counter by remember { mutableStateOf(0) }
     TitleComponent("L'application est en cours de rénovation. Merci pour votre compréhension")
     // Row is a composable that places its children in a horizontal sequence. You can think of it
     // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -49,7 +48,7 @@ fun HomeComponent() {
             elevation = ButtonDefaults.elevation(5.dp),
             // We increment the counter every time this button is clicked.
             onClick = {
-                counter++
+
             }) {
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen

@@ -4,19 +4,30 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
-import be.marche.www.news.ui.ListNewsComponent
+import be.marche.www.model.News
+import be.marche.www.news.ui.NewsShow
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NewsActivity : AppCompatActivity() {
+class NewsDetailActivity : AppCompatActivity() {
 
     private val newsViewModel: NewsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val news = News(
+            10,
+            "Iron Man",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        )
         setContent {
-            ListNewsComponent(newsViewModel.allNews)
+            NewsShow(news)
         }
     }
 }

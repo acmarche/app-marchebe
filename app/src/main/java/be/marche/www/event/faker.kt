@@ -13,6 +13,7 @@ fun fakeNews() = listOf(
         "",
         "",
         "",
+        ""
     )
 
 )

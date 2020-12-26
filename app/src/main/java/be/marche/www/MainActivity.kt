@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity() {
 
 
         setContent {
-            HomeNewComponent()
+            Column(modifier = Modifier.fillMaxWidth()) {
+                HomeComponent()
+            }
 
             /*
             Column(modifier = Modifier.fillMaxWidth()) {

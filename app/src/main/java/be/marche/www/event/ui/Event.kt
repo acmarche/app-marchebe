@@ -1,4 +1,4 @@
-package be.marche.www.ui
+package be.marche.www.event.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,6 +25,7 @@ import androidx.lifecycle.LiveData
 import be.marche.www.event.EventViewModel
 import be.marche.www.event.fakeEvents
 import be.marche.www.model.Event
+import be.marche.www.ui.NetworkImageComponentPicasso
 
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable

@@ -15,4 +15,5 @@ data class News(
     val extrait: String,
     val url: String,
     val thumbnail: String,
+    val image: String,
 )
