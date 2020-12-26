@@ -11,8 +11,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat.startActivity
-import be.marche.www.activity.EventActivity
+import be.marche.www.event.EventActivity
+import be.marche.www.news.NewsActivity
 
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -60,7 +60,7 @@ fun HomeComponent() {
             modifier = Modifier.padding(16.dp).weight(1f),
             elevation = ButtonDefaults.elevation(5.dp),
             onClick = {
-                context.startActivity(Intent(context, EventActivity::class.java))
+                context.startActivity(Intent(context, NewsActivity::class.java))
             }) {
             Text(text = "Actus", modifier = Modifier.padding(16.dp))
         }
@@ -69,7 +69,7 @@ fun HomeComponent() {
             modifier = Modifier.padding(16.dp).weight(1f),
             elevation = ButtonDefaults.elevation(5.dp),
             onClick = {
-                counter = 0
+                context.startActivity(Intent(context, EventActivity::class.java))
             }) {
             Text(text = "Agenda", modifier = Modifier.padding(16.dp))
         }
