@@ -1,21 +1,15 @@
 package be.marche.www.ui
 
 import android.content.Intent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.imageFromResource
 import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
-import be.marche.www.event.EventActivity
 import be.marche.www.news.NewsActivity
 
 @Composable

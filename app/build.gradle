@@ -94,6 +94,11 @@ dependencies {
     kapt deps.hiltdi.hiltcompiler
 
     /**
+     * Navigation
+     */
+    implementation deps.navigation.compose
+
+    /**
      * Room
      */
     implementation deps.room.runtime
