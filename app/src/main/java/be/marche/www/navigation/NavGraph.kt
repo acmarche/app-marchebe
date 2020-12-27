@@ -9,7 +9,7 @@ import be.marche.www.event.EventViewModel
 import be.marche.www.event.ui.EventShowScreen
 import be.marche.www.event.ui.ListEventsComponent
 import be.marche.www.news.NewsViewModel
-import be.marche.www.news.ui.ListNewsComponent
+import be.marche.www.news.ui.ListNewsScreen
 import be.marche.www.news.ui.NewsShowComponent
 import be.marche.www.ui.HomeComponent
 
@@ -57,7 +57,7 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
             )
         }
         composable(Routes.News) {
-            ListNewsComponent(
+            ListNewsScreen(
                 newsViewModel.allNews,
                 onItemClick = navigateTo.newsShow
             )
