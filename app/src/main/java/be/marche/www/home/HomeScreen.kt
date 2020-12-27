@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.loadImageResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
 
@@ -61,7 +62,7 @@ fun HomeScreen(
                 }
 
                 Row(modifier = Modifier.fillMaxWidth()) {
-                    RoundedIconButton(R.drawable.accueil, listNews, "Accueil")
+                    RoundedIconButton(R.drawable.accueil, listNews, stringResource(id = R.string.contact))
                     RoundedIconButton(R.drawable.actus, listNews, "Actus")
                     RoundedIconButton(R.drawable.agenda, listEvents, "Agenda")
                 }
