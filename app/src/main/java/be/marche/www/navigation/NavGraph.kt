@@ -8,6 +8,7 @@ import androidx.navigation.compose.*
 import be.marche.www.event.EventViewModel
 import be.marche.www.event.ui.EventShowScreen
 import be.marche.www.event.ui.ListEventsComponent
+import be.marche.www.home.HomeScreen
 import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.ListNewsScreen
 import be.marche.www.news.ui.NewsShowComponent
@@ -51,7 +52,7 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
 
     NavHost(navController = navController, startDestination = Routes.Home) {
         composable(Routes.Home) {
-            HomeComponent(
+            HomeScreen(
                 listNews = navigateTo.listNews,
                 listEvents = navigateTo.listEvents
             )
