@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import be.marche.www.event.EventViewModel
+import be.marche.www.event.ui.EventShowScreen
 import be.marche.www.event.ui.ListEventsComponent
 import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.ListNewsComponent
@@ -16,8 +17,13 @@ object Routes {
     const val Home = "home"
     const val News = "listNews"
     const val Agenda = "listEvents"
-    const val EventShow = "eventShow/{eventId}"
+    const val EventShow = "eventShow/{eventId}"///{eventId}
     const val NewsShow = "newsShow/{newsId}"
+
+    object routeArgs {
+        const val eventId = "eventId"
+        const val newsId = "newsId"
+    }
 }
 
 class Actions(navController: NavHostController) {
@@ -58,24 +64,30 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
         }
         composable(
             route = Routes.NewsShow,
-            arguments = listOf(navArgument("newsId") {
+            arguments = listOf(navArgument(Routes.routeArgs.newsId) {
                 type = NavType.IntType
             })
         ) { backStackEntry ->
             NewsShowComponent(
-                newsId = backStackEntry.arguments?.getInt("newsId") ?: 0,
+                newsId = backStackEntry.arguments?.getInt(Routes.routeArgs.newsId) ?: 0,
                 //navigateUp = actions.navigateUp
-            )
-        }
-        composable(Routes.EventShow) {
-            NewsShowComponent(
-                2
             )
         }
         composable(Routes.Agenda) {
             ListEventsComponent(
                 eventViewModel.allEvents,
                 onItemClick = navigateTo.eventShow
+            )
+        }
+        composable(
+            route = Routes.EventShow,
+            arguments = listOf(navArgument(Routes.routeArgs.eventId) {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
+            EventShowScreen(
+                eventId = backStackEntry.arguments?.getInt(Routes.routeArgs.eventId) ?: 0,
+                //navigateUp = actions.navigateUp
             )
         }
     }
