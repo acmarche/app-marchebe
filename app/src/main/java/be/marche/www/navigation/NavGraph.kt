@@ -12,7 +12,6 @@ import be.marche.www.home.HomeScreen
 import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.ListNewsScreen
 import be.marche.www.news.ui.NewsShowComponent
-import be.marche.www.ui.HomeComponent
 
 object Routes {
     const val Home = "home"
@@ -54,7 +53,8 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
         composable(Routes.Home) {
             HomeScreen(
                 listNews = navigateTo.listNews,
-                listEvents = navigateTo.listEvents
+                listEvents = navigateTo.listEvents,
+                navigateUp = navigateTo.navigateUp
             )
         }
         composable(Routes.News) {

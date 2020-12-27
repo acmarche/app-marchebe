@@ -4,8 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.Surface
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,43 +21,59 @@ import be.marche.www.R
 fun HomeScreen(
     listNews: () -> Unit,
     listEvents: () -> Unit,
+    navigateUp: () -> Unit
 ) {
+
     Surface(
-        color = Color.LightGray,
         elevation = 10.dp,
         shape = RectangleShape
     ) {
-
-        Column(
-            modifier = Modifier.clip(RoundedCornerShape(8.dp)).padding(16.dp).fillMaxWidth()
-                .fillMaxHeight(),
-        //    verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Accueil") },
+                    navigationIcon = {
+                        IconButton(onClick = navigateUp) {
+                            Icon(Icons.Rounded.ArrowBack)
+                            //Icon(imageResource(id = R.drawable.marche__logo))
+                        }
+                    },
+                )
+            },
+            contentColor = Color.Red,
         ) {
 
-            val image = loadImageResource(R.drawable.gout_vivre)
+            Column(
+                modifier = Modifier.clip(RoundedCornerShape(8.dp)).padding(16.dp).fillMaxWidth()
+                    .fillMaxHeight(),
+                //    verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
-            image.resource.resource?.let {
-                Image(
-                    bitmap = it,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+                val image = loadImageResource(R.drawable.gout_vivre)
 
-            Divider(modifier = Modifier.padding(12.dp))
+                image.resource.resource?.let {
+                    Image(
+                        bitmap = it,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
 
-            Row(modifier = Modifier.fillMaxWidth()) {
-                ImageHome(R.drawable.accueil, listNews)
-                ImageHome(R.drawable.actus, listNews)
-                ImageHome(R.drawable.agenda, listEvents)
-            }
+                Divider(modifier = Modifier.padding(12.dp))
 
-            Divider(modifier = Modifier.padding(12.dp))
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    ImageHome(R.drawable.accueil, listNews)
+                    ImageHome(R.drawable.actus, listNews)
+                    ImageHome(R.drawable.agenda, listEvents)
+                }
 
-            Row(modifier = Modifier.padding(0.dp).fillMaxWidth()) {
-                ImageHome(R.drawable.services_communaux, listNews)
-                ImageHome(R.drawable.enfance, listNews)
-                ImageHome(R.drawable.loisirs, listNews)
+                Divider(modifier = Modifier.padding(12.dp))
+
+                Row(modifier = Modifier.padding(0.dp).fillMaxWidth()) {
+                    ImageHome(R.drawable.services_communaux, listNews)
+                    ImageHome(R.drawable.enfance, listNews)
+                    ImageHome(R.drawable.loisirs, listNews)
+                }
             }
         }
     }
