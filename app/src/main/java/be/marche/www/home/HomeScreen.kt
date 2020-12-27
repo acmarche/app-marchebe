@@ -1,12 +1,12 @@
 package be.marche.www.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,7 +41,6 @@ fun HomeScreen(
                     },
                 )
             },
-            contentColor = Color.Red,
         ) {
 
             Column(
@@ -51,7 +50,7 @@ fun HomeScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                
+
                 val image = loadImageResource(R.drawable.gout_vivre)
 
                 image.resource.resource?.let {
@@ -62,18 +61,53 @@ fun HomeScreen(
                 }
 
                 Row(modifier = Modifier.fillMaxWidth()) {
-                    ImageHome(R.drawable.accueil, listNews)
-                    ImageHome(R.drawable.actus, listNews)
-                    ImageHome(R.drawable.agenda, listEvents)
+                    RoundedIconButton(R.drawable.accueil, listNews, "Accueil")
+                    RoundedIconButton(R.drawable.actus, listNews, "Actus")
+                    RoundedIconButton(R.drawable.agenda, listEvents, "Agenda")
                 }
 
                 Row(modifier = Modifier.fillMaxWidth()) {
-                    ImageHome(R.drawable.services_communaux, listNews)
-                    ImageHome(R.drawable.enfance, listNews)
-                    ImageHome(R.drawable.loisirs, listNews)
+                    RoundedIconButton(R.drawable.services_communaux, listNews, "Services communaux")
+                    RoundedIconButton(R.drawable.enfance, listNews, "Enfance")
+                    RoundedIconButton(R.drawable.loisirs, listNews, "Loisirs")
                 }
             }
         }
+    }
+}
+
+@Composable
+fun RoundedIconButton(
+    imageId: Int, onClick: () -> Unit,
+    text: String,
+    background: Color = Color.Red
+) {
+    Column(
+        modifier = Modifier.clickable(onClick = onClick).background(Color.LightGray),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        val modifier = Modifier
+            // .preferredSizeIn(minHeight = 120.dp, maxWidth = 130.dp)
+            //   .clickable(onClick = onClick)
+            .height(120.dp)
+            .width(120.dp)
+        //  .padding(20.dp)
+
+
+        val image = loadImageResource(imageId)
+        image.resource.resource?.let {
+            Image(
+                bitmap = it,
+                modifier = modifier
+            )
+        }
+        Text(
+            //  modifier = Modifier.padding(top = 2.dp),
+            style = MaterialTheme.typography.body2,
+            color = Color.Gray,
+            text = text
+        )
     }
 }
 
@@ -82,7 +116,7 @@ fun ImageHome(imageId: Int, onClick: () -> Unit) {
 
     val image = loadImageResource(imageId)
     val modifier = Modifier
-       // .preferredSizeIn(minHeight = 120.dp, maxWidth = 130.dp)
+        // .preferredSizeIn(minHeight = 120.dp, maxWidth = 130.dp)
         .clickable(onClick = onClick)
         .height(120.dp)
         .width(120.dp)
