@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +35,7 @@ fun HomeScreen(
                     title = { Text("Accueil") },
                     navigationIcon = {
                         IconButton(onClick = navigateUp) {
-                            Icon(Icons.Rounded.ArrowBack)
+                            Icon(Icons.Rounded.Home)
                             //Icon(imageResource(id = R.drawable.marche__logo))
                         }
                     },
@@ -46,10 +47,11 @@ fun HomeScreen(
             Column(
                 modifier = Modifier.clip(RoundedCornerShape(8.dp)).padding(16.dp).fillMaxWidth()
                     .fillMaxHeight(),
-                //    verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
+                
                 val image = loadImageResource(R.drawable.gout_vivre)
 
                 image.resource.resource?.let {
@@ -59,17 +61,13 @@ fun HomeScreen(
                     )
                 }
 
-                Divider(modifier = Modifier.padding(12.dp))
-
                 Row(modifier = Modifier.fillMaxWidth()) {
                     ImageHome(R.drawable.accueil, listNews)
                     ImageHome(R.drawable.actus, listNews)
                     ImageHome(R.drawable.agenda, listEvents)
                 }
 
-                Divider(modifier = Modifier.padding(12.dp))
-
-                Row(modifier = Modifier.padding(0.dp).fillMaxWidth()) {
+                Row(modifier = Modifier.fillMaxWidth()) {
                     ImageHome(R.drawable.services_communaux, listNews)
                     ImageHome(R.drawable.enfance, listNews)
                     ImageHome(R.drawable.loisirs, listNews)
@@ -84,8 +82,10 @@ fun ImageHome(imageId: Int, onClick: () -> Unit) {
 
     val image = loadImageResource(imageId)
     val modifier = Modifier
-        .preferredSizeIn(maxHeight = 120.dp, maxWidth = 130.dp)
+       // .preferredSizeIn(minHeight = 120.dp, maxWidth = 130.dp)
         .clickable(onClick = onClick)
+        .height(120.dp)
+        .width(120.dp)
 
     image.resource.resource?.let {
         Image(
