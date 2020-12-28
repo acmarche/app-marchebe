@@ -71,6 +71,7 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
         ) { backStackEntry ->
             NewsShowComponent(
                 newsId = backStackEntry.arguments?.getInt(Routes.routeArgs.newsId) ?: 0,
+                newsViewModel
                 //navigateUp = actions.navigateUp
             )
         }

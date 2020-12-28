@@ -24,6 +24,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Providers
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
@@ -31,12 +33,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import be.marche.www.model.News
+import be.marche.www.news.NewsViewModel
 
 private val defaultSpacerSize = 16.dp
 
+
 @Composable
-fun NewsShowComponent(newsId: Int) {
-    Text("coucou id $newsId")
+fun NewsShowComponent(newsId: Int, newsViewModel: NewsViewModel) {
+
+    val news by newsViewModel.findById(newsId).observeAsState(initial = null)
+
+    Text("coucou id ${news?.intitule}")
+
 }
 
 @Composable

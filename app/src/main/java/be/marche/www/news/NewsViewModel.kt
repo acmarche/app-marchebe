@@ -34,4 +34,8 @@ class NewsViewModel @ViewModelInject constructor(
 
     }
 
+    fun findById(newsId: Int): LiveData<News> = liveData {
+        emit(newsRepository.findById(newsId))
+    }
+
 }

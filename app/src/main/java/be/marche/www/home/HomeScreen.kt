@@ -1,6 +1,7 @@
 package be.marche.www.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -48,7 +49,7 @@ fun HomeScreen(
             },
         ) {
 
-            Column(
+            ScrollableColumn(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),

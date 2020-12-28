@@ -13,7 +13,7 @@ interface NewsDao {
     fun findAllNews(): List<News>
 
     @Query("SELECT * FROM news WHERE id = :newsId")
-    fun findNewsById(newsId: Int): News
+  suspend fun findNewsById(newsId: Int): News
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNews(news: List<News>)
