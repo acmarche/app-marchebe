@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.loadImageResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
@@ -91,7 +92,7 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     RoundedIconButton(R.drawable.services_communaux, listNews, "Services communaux")
-                    RoundedIconButton(R.drawable.enfance, listNews, "Enfance")
+                    RoundedIconButton(R.drawable.enfance, listNews, "Enfance-Jeunesse")
                     RoundedIconButton(R.drawable.loisirs, listNews, "Loisirs")
                 }
             }
@@ -114,8 +115,8 @@ fun RoundedIconButton(
         val modifier = Modifier
             // .preferredSizeIn(minHeight = 120.dp, maxWidth = 130.dp)
             //   .clickable(onClick = onClick)
-            .height(80.dp)
-            .width(80.dp)
+            .height(90.dp)
+            .width(90.dp)
         //  .padding(20.dp)
 
 
@@ -127,10 +128,11 @@ fun RoundedIconButton(
             )
         }
         Text(
-            //  modifier = Modifier.padding(top = 2.dp),
+            modifier = Modifier.width(90.dp),
             style = MaterialTheme.typography.body2,
             color = Color.Gray,
-            text = text
+            text = text,
+            textAlign = TextAlign.Justify
         )
     }
 }
