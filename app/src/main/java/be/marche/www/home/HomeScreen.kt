@@ -51,8 +51,7 @@ fun HomeScreen(
             Column(
                 modifier = Modifier
                     .padding(16.dp)
-                    .fillMaxWidth()
-                ,
+                    .fillMaxWidth(),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -78,17 +77,37 @@ fun HomeScreen(
                         listNews,
                         stringResource(id = R.string.contact)
                     )
-                    RoundedIconButton(R.drawable.actus, listNews, "Actus")
-                    RoundedIconButton(R.drawable.agenda, listEvents, "Agenda")
+                    RoundedIconButton(
+                        R.drawable.actus,
+                        listNews,
+                        stringResource(id = R.string.actus)
+                    )
+                    RoundedIconButton(
+                        R.drawable.agenda,
+                        listEvents,
+                        stringResource(id = R.string.agenda)
+                    )
                 }
 
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    RoundedIconButton(R.drawable.services_communaux, listNews, "Services communaux")
-                    RoundedIconButton(R.drawable.enfance, listNews, "Enfance-Jeunesse")
-                    RoundedIconButton(R.drawable.loisirs, listNews, "Loisirs")
+                    RoundedIconButton(
+                        R.drawable.services_communaux,
+                        listNews,
+                        stringResource(id = R.string.services_communaux)
+                    )
+                    RoundedIconButton(
+                        R.drawable.enfance,
+                        listNews,
+                        stringResource(id = R.string.enfance)
+                    )
+                    RoundedIconButton(
+                        R.drawable.loisirs,
+                        listNews,
+                        stringResource(id = R.string.loisirs)
+                    )
                 }
             }
         }
