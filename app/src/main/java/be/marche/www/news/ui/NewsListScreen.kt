@@ -1,5 +1,6 @@
 package be.marche.www.news.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,6 +51,7 @@ fun LiveDataComponentNewsList(newsList: List<News>, onItemClick: (Int) -> Unit) 
                 shape = RoundedCornerShape(4.dp),
                 backgroundColor = Color.White,
                 modifier = Modifier.fillParentMaxWidth().padding(8.dp)
+                    .clickable(onClick = { onItemClick(news.id) })
             ) {
                 // ListItem is a predefined composable that is a Material Design implementation of [list
                 // items](https://material.io/components/lists). This component can be used to achieve the

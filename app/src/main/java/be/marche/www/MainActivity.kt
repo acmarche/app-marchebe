@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
+import androidx.lifecycle.Observer
 import be.marche.www.event.EventViewModel
 import be.marche.www.navigation.RegisterRoutes
 import be.marche.www.news.NewsViewModel
 import be.marche.www.ui.MarcheComposeTheme
+import be.marche.www.utils.ConnectivityLiveData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +20,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        ConnectivityLiveData(application).observe(this, Observer { connected ->
+
+        })
 
         setContent {
             MarcheComposeTheme {
