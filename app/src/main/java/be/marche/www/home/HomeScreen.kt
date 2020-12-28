@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContactPhone
@@ -20,7 +19,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.loadImageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
 import be.marche.www.ui.MaterialColors
@@ -54,13 +52,10 @@ fun HomeScreen(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth()
-
-                //    .fillMaxHeight()
                 ,
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
 
                 val image = loadImageResource(R.drawable.gout_vivre)
 
@@ -71,7 +66,7 @@ fun HomeScreen(
                     )
                 }
 
-                Divider()
+                Divider(Modifier.padding(vertical = 5.dp))
 
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -117,7 +112,6 @@ fun RoundedIconButton(
             //   .clickable(onClick = onClick)
             .height(90.dp)
             .width(90.dp)
-        //  .padding(20.dp)
 
         val image = loadImageResource(imageId)
         image.resource.resource?.let {
@@ -141,7 +135,6 @@ fun ImageHome(imageId: Int, onClick: () -> Unit) {
 
     val image = loadImageResource(imageId)
     val modifier = Modifier
-        // .preferredSizeIn(minHeight = 120.dp, maxWidth = 130.dp)
         .clickable(onClick = onClick)
         .height(120.dp)
         .width(120.dp)
@@ -157,7 +150,6 @@ fun ImageHome(imageId: Int, onClick: () -> Unit) {
 @Composable
 fun TestIconAndroid() {
     Column(
-
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 

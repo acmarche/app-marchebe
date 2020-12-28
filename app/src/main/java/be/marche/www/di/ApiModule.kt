@@ -1,7 +1,8 @@
-package be.marche.www.api
+package be.marche.www.di
 
 import be.marche.www.BuildConfig
 import be.marche.www.Constants
+import be.marche.www.api.MarcheBeService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule{
+object ApiModule{
 
     @Provides
     fun provideBaseUrl() = Constants.BASE_URL

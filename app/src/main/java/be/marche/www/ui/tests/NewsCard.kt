@@ -86,11 +86,13 @@ fun NewsCard(news: News) {
             // Look at the implementation of this composable in ImageActivity to learn
             // more about its implementation. It uses Picasso to load the imageUrl passed
             // to it.
-            NetworkImageComponentPicasso(
-                url = imageUrl,
-                //modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
-                modifier = Modifier.fillMaxWidth()
-            )
+            if (imageUrl != null) {
+                NetworkImageComponentPicasso(
+                    url = imageUrl,
+                    //modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
 
         Spacer(Modifier.preferredHeight(16.dp))
