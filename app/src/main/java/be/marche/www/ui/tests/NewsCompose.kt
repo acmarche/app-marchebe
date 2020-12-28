@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LiveData
 import be.marche.www.model.News
-import be.marche.www.ui.NetworkImageComponentPicasso
+import be.marche.www.ui.components.NetworkImageComponentPicasso
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
 // functions can only be called from within the scope of other composable functions. We should

@@ -25,7 +25,7 @@ import androidx.lifecycle.LiveData
 import be.marche.www.event.EventViewModel
 import be.marche.www.event.fakeEvents
 import be.marche.www.model.Event
-import be.marche.www.ui.NetworkImageComponentPicasso
+import be.marche.www.ui.components.NetworkImageComponentPicasso
 
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable

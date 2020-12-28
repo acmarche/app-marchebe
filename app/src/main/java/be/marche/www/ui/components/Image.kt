@@ -1,4 +1,4 @@
-package be.marche.www.ui
+package be.marche.www.ui.components
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable

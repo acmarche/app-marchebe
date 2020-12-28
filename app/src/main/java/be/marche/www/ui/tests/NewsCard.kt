@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
 import be.marche.www.model.News
-import be.marche.www.ui.NetworkImageComponentPicasso
+import be.marche.www.ui.components.NetworkImageComponentPicasso
 
 @Composable
 fun NewsShow(news: News) {

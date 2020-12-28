@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
-import be.marche.www.ui.MaterialColors
+import be.marche.www.ui.components.MaterialColors
 
 @Composable
 fun ToDometerTopBar() {

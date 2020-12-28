@@ -1,4 +1,4 @@
-package be.marche.www.ui
+package be.marche.www.ui.components
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.graphics.Color

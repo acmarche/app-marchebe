@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LiveData
 import be.marche.www.model.News
-import be.marche.www.ui.NetworkImageComponentPicasso
+import be.marche.www.ui.components.NetworkImageComponentPicasso
 
 @Composable
 fun ListNewsScreen(newsListLiveData: LiveData<List<News>>, onItemClick: (Int) -> Unit) {

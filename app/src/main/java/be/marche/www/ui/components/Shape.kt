@@ -1,4 +1,4 @@
-package be.marche.www.ui
+package be.marche.www.ui.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
