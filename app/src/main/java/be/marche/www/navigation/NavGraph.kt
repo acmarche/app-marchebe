@@ -60,7 +60,7 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
         }
         composable(Routes.News) {
             ListNewsScreen(
-                newsViewModel.allNews,
+                newsViewModel.loadNews(),
                 onItemClick = navigateTo.newsShow
             )
         }

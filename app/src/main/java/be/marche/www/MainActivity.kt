@@ -22,7 +22,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         ConnectivityLiveData(application).observe(this, Observer { connected ->
-
+            if (connected == true) {
+                newsViewModel.allNews
+                    .observe(this, Observer { news ->
+                        newsViewModel.insertNews(news)
+                    })
+            }
         })
 
         setContent {
