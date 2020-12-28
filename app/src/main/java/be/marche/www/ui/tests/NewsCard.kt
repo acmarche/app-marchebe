@@ -1,4 +1,4 @@
-package be.marche.www.news.ui
+package be.marche.www.news.ui.tests
 
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.*

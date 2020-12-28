@@ -45,7 +45,7 @@ fun ToDometerTopBar() {
 @Composable
 fun ToDometerTitle(modifier: Modifier = Modifier) {
 
-    val image = loadImageResource(R.drawable.marche__logo)
+    val image = loadImageResource(R.drawable.marche_logo)
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically

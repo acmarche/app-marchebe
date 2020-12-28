@@ -5,20 +5,25 @@ import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import be.marche.www.R
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
@@ -103,4 +108,36 @@ fun NetworkImageComponentPicasso(
             }
         }
     }
+}
+
+@Composable
+fun DrawableImage() {
+    val imageModifier = Modifier
+        .preferredHeightIn(max = 180.dp)
+        .padding(16.dp)
+        .fillMaxWidth()
+        .clip(shape = RoundedCornerShape(8.dp))
+    val image = imageResource(R.drawable.header)
+    Image(image, modifier = imageModifier, contentScale = ContentScale.Crop)
+}
+
+@Preview
+@Composable
+fun DrawableImagePreview() {
+    MarcheComposeTheme() {
+        DrawableImage()
+    }
+}
+
+/**
+ * Material icon
+ */
+@Composable
+fun IconImage() {
+    Image(
+        Icons.Filled.Face,  // material icon
+        modifier = Modifier.preferredSize(40.dp),
+        colorFilter = ColorFilter.tint(Color.Black),
+        contentScale = ContentScale.Fit
+    )
 }

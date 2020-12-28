@@ -28,7 +28,7 @@ val typography = Typography(
 
     h3 = TextStyle(
         fontFamily = Montserrat,
-        fontSize = 20.sp,
+        fontSize = 15.sp,
         fontWeight = FontWeight.Bold,
         color = Color(0xFFff7200)
     )
