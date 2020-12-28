@@ -22,6 +22,9 @@ class EventViewModel @ViewModelInject constructor(
         return eventRepository.loadAllEventsFromRemote()
     }
 
+    fun findAllEventList(): List<Event> =
+        eventRepository.findAllEvents()
+
     fun findAllEvent(): LiveData<List<Event>> =
         liveData(Dispatchers.IO) {
             emit(eventRepository.findAllEvents())

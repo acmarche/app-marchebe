@@ -12,7 +12,7 @@ interface EventDao {
     @Query("SELECT * FROM event")
     fun findAllEvents(): List<Event>
 
-    @Query("SELECT * FROM news WHERE id = :eventId")
+    @Query("SELECT * FROM event WHERE id = :eventId")
     fun findEventById(eventId: Int): Event
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
