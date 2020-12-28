@@ -26,6 +26,7 @@ import be.marche.www.event.EventViewModel
 import be.marche.www.event.fakeEvents
 import be.marche.www.model.Event
 import be.marche.www.ui.components.NetworkImageComponentPicasso
+import timber.log.Timber
 
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -33,7 +34,7 @@ import be.marche.www.ui.components.NetworkImageComponentPicasso
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun ListEventsComponent(personListLiveData: LiveData<List<Event>>, onItemClick: (Int) -> Unit) {
+fun ListEventsComponent(eventListLiveData: LiveData<List<Event>>, onItemClick: (Int) -> Unit) {
     // Here we access the live data object and convert it to a form that Jetpack Compose
     // understands using the observeAsState method.
 
@@ -43,16 +44,16 @@ fun ListEventsComponent(personListLiveData: LiveData<List<Event>>, onItemClick: 
     // any time the value changes. This ensures that only the composables that depend on this
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
-    val personList by personListLiveData.observeAsState(initial = emptyList())
+    val eventList by eventListLiveData.observeAsState(initial = emptyList())
     // Since Jetpack Compose uses the declarative way of programming, we can easily decide what
     // needs to shows vs hidden based on which branch of code is being executed. In this example,
-    // if the personList returned by the live data is empty, we want to show a loading indicator,
+    // if the eventList returned by the live data is empty, we want to show a loading indicator,
     // otherwise we want show the appropriate list. So we run the appropriate composable based on
     // the branch of code executed and that takes care of rendering the right views.
-    if (personList.isEmpty()) {
+    if (eventList.isEmpty()) {
         LiveDataLoadingComponent()
     } else {
-        LiveDataComponentList(personList)
+        LiveDataComponentList(eventList)
     }
 }
 
@@ -62,12 +63,12 @@ fun ListEventsComponent(personListLiveData: LiveData<List<Event>>, onItemClick: 
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun LiveDataComponentList(personList: List<Event>) {
+fun LiveDataComponentList(eventList: List<Event>) {
     // LazyColumn is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
     // than the VerticalScroller.
     LazyColumn {
-        items(items = personList, itemContent = { person ->
+        items(items = eventList, itemContent = { event ->
             // Card composable is a predefined composable that is meant to represent the
             // card surface as specified by the Material Design specification. We also
             // configure it to have rounded corners and apply a modifier.
@@ -87,7 +88,7 @@ fun LiveDataComponentList(personList: List<Event>) {
                     // The Text composable is pre-defined by the Compose UI library; you can use this
                     // composable to render text on the screen
                     Text(
-                        text = person.titre,
+                        text = event.titre,
                         style = TextStyle(
                             fontFamily = FontFamily.Serif, fontSize = 25.sp,
                             fontWeight = FontWeight.Bold
@@ -95,19 +96,20 @@ fun LiveDataComponentList(personList: List<Event>) {
                     )
                 }, secondaryText = {
                     Text(
-                        text = "Age: ${person.date_debut}",
+                        text = "Age: ${event.date_debut}",
                         style = TextStyle(
                             fontFamily = FontFamily.Serif, fontSize = 15.sp,
                             fontWeight = FontWeight.Light, color = Color.DarkGray
                         )
                     )
                 }, icon = {
-                    person.photo?.let { imageUrl ->
+                    event.photo?.let { imageUrl ->
+                        val newUrl = imageUrl.replace("http", "https")
                         // Look at the implementation of this composable in ImageActivity to learn
                         // more about its implementation. It uses Picasso to load the imageUrl passed
                         // to it.
                         NetworkImageComponentPicasso(
-                            url = imageUrl,
+                            url = newUrl,
                             modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
                         )
                     }
@@ -150,11 +152,11 @@ fun LiveDataLoadingComponent() {
 fun LaunchInCompositionComponent(viewModel: EventViewModel) {
     // Reacting to state changes is the core behavior of Compose. We use the state composable
     // that is used for holding a state value in this composable for representing the current
-    // value of whether the checkbox is checked. Any composable that reads the value of "personList"
+    // value of whether the checkbox is checked. Any composable that reads the value of "eventList"
     // will be recomposed any time the value changes. This ensures that only the composables that
     // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
     // is a performance optimization. It is inspired from existing frameworks like React.
-    val personList = mutableStateListOf<Event>()
+    val eventList = mutableStateListOf<Event>()
 
     // LaunchedEffect allows you to launch a suspendable function as soon as this composable
     // is first committed i.e this tree node is first allowed to be rendered on the screen. It
@@ -164,19 +166,19 @@ fun LaunchInCompositionComponent(viewModel: EventViewModel) {
         // "Person" objects
         val list = viewModel.findAllEventList()
         // We add it to our state object
-        personList.addAll(list)
+        eventList.addAll(list)
     }
 
     // If the list is empty, it means that our coroutine has not completed yet and we just want
     // to show our loading component and nothing else. So we return early.
-    if (personList.isEmpty()) {
+    if (eventList.isEmpty()) {
         LiveDataLoadingComponent()
         return
     }
 
-    // If the personList is available, we will go ahead and show the list of superheroes. We
+    // If the eventList is available, we will go ahead and show the list of superheroes. We
     // reuse the same component that we created above to save time & space :)
-    LiveDataComponentList(personList)
+    LiveDataComponentList(eventList)
 }
 
 /**

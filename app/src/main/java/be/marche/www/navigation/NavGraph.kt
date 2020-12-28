@@ -76,7 +76,7 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
         }
         composable(Routes.Agenda) {
             ListEventsComponent(
-                eventViewModel.allEventFromRemote,
+                eventViewModel.findAllEvent(),
                 onItemClick = navigateTo.eventShow
             )
         }
