@@ -13,16 +13,16 @@ class NewsViewModel @ViewModelInject constructor(
     private val newsRepository: NewsRepository,
 ) : ViewModel() {
 
-    val allNews: LiveData<List<News>> = liveData {
+    val allNewsFromRemote: LiveData<List<News>> = liveData {
         val newsList = loadNewsFromRemote()
         emit(newsList)
     }
 
-    suspend fun loadNewsFromRemote(): List<News> {
-        return newsRepository.findAllNewsFromRemote()
+    suspend private fun loadNewsFromRemote(): List<News> {
+        return newsRepository.loadAllNewsFromRemote()
     }
 
-    fun loadNews(): LiveData<List<News>> =
+    fun findAllNews(): LiveData<List<News>> =
         liveData(Dispatchers.IO) {
             emit(newsRepository.findAllNews())
         }

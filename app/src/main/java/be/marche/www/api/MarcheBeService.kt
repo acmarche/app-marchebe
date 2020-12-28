@@ -11,7 +11,7 @@ import retrofit2.http.Path
 interface MarcheBeService {
 
     @GET("marchebe/actualites")
-    suspend fun findAllNews(
+    suspend fun loadAllNews(
     ): List<News>
 
     @GET("agenda/evenements")

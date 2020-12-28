@@ -8,7 +8,6 @@ import androidx.navigation.compose.*
 import be.marche.www.event.EventViewModel
 import be.marche.www.event.ui.EventShowScreen
 import be.marche.www.event.ui.ListEventsComponent
-import be.marche.www.home.HomeScreen
 import be.marche.www.home.MainScreen
 import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.ListNewsScreen
@@ -60,7 +59,7 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
         }
         composable(Routes.News) {
             ListNewsScreen(
-                newsViewModel.loadNews(),
+                newsViewModel.findAllNews(),
                 onItemClick = navigateTo.newsShow
             )
         }
@@ -77,7 +76,7 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
         }
         composable(Routes.Agenda) {
             ListEventsComponent(
-                eventViewModel.allEvents,
+                eventViewModel.allEventsFromRemote,
                 onItemClick = navigateTo.eventShow
             )
         }

@@ -23,9 +23,14 @@ class MainActivity : AppCompatActivity() {
 
         ConnectivityLiveData(application).observe(this, Observer { connected ->
             if (connected == true) {
-                newsViewModel.allNews
+                newsViewModel.allNewsFromRemote
                     .observe(this, Observer { news ->
                         newsViewModel.insertNews(news)
+                    })
+
+                eventViewModel.allEventFromRemote
+                    .observe(this, Observer { event ->
+                        eventViewModel.insertEvent(event)
                     })
             }
         })

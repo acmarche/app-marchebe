@@ -162,7 +162,7 @@ fun LaunchInCompositionComponent(viewModel: EventViewModel) {
     LaunchedEffect(Unit) {
         // This view model merely calls a suspendable function "loadSuperheroes" to get a list of
         // "Person" objects
-        val list = viewModel.loadSuperheroes()
+        val list = viewModel.loadAllEvents()
         // We add it to our state object
         personList.addAll(list)
     }
