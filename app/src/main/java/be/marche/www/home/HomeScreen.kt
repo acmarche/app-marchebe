@@ -119,7 +119,6 @@ fun RoundedIconButton(
             .width(90.dp)
         //  .padding(20.dp)
 
-
         val image = loadImageResource(imageId)
         image.resource.resource?.let {
             Image(
@@ -132,7 +131,7 @@ fun RoundedIconButton(
             style = MaterialTheme.typography.body2,
             color = Color.Gray,
             text = text,
-            textAlign = TextAlign.Justify
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -174,7 +173,6 @@ fun TestIconAndroid() {
             )
         }
 
-
         Text(
             //  modifier = Modifier.padding(top = 2.dp),
             style = MaterialTheme.typography.body2,
@@ -182,13 +180,4 @@ fun TestIconAndroid() {
             text = "Coucou"
         )
     }
-}
-
-@Preview
-@Composable
-fun HomePreview() {
-    fun a(): Unit {
-
-    }
-    HomeScreen({ a() }, { a() }, { a() })
 }

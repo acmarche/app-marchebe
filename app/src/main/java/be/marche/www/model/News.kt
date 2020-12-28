@@ -12,6 +12,6 @@ data class News(
     val content: String,
     val extrait: String,
     val url: String,
-    val thumbnail: String,
-    val image: String,
+    val thumbnail: String?,
+    val image: String?,
 )

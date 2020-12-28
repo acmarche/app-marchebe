@@ -54,32 +54,30 @@ fun LiveDataComponentNewsList(newsList: List<News>, onItemClick: (Int) -> Unit) 
                 // ListItem is a predefined composable that is a Material Design implementation of [list
                 // items](https://material.io/components/lists). This component can be used to achieve the
                 // list item templates existing in the spec
-                ListItem(text = {
-                    // The Text composable is pre-defined by the Compose UI library; you can use this
-                    // composable to render text on the screen
-                    Text(
-                        text = news.intitule,
-                        style = typography.h3
-                    )
-                }, secondaryText = {
-                    Text(
-                        text = "Age: ${news.extrait}",
-                        style = TextStyle(
-                            fontFamily = FontFamily.Serif, fontSize = 15.sp,
-                            fontWeight = FontWeight.Light, color = Color.DarkGray
+                ListItem(
+                    text = {
+                        // The Text composable is pre-defined by the Compose UI library; you can use this
+                        // composable to render text on the screen
+                        Text(
+                            text = news.intitule,
+                            style = typography.h3
                         )
-                    )
-                }, icon = {
-                    news.image?.let { imageUrl ->
-                        // Look at the implementation of this composable in ImageActivity to learn
-                        // more about its implementation. It uses Picasso to load the imageUrl passed
-                        // to it.
-                        NetworkImageComponentPicasso(
-                            url = imageUrl,
-                            modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
+                    }, secondaryText = {
+                        Text(
+                            text = news.extrait,
+                            style = TextStyle(
+                                fontFamily = FontFamily.Serif, fontSize = 15.sp,
+                                fontWeight = FontWeight.Light, color = Color.DarkGray
+                            )
                         )
-                    }
-                })
+                    }, icon = {
+                        news.image?.let {
+                            NetworkImageComponentPicasso(
+                                url = it,
+                                modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
+                            )
+                        }
+                    })
             }
         })
     }
