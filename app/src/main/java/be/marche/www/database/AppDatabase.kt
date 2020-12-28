@@ -14,12 +14,16 @@ const val DATABASE_NAME = "marchebe"
     entities = [News::class, Event::class],
     version = 1
 )
+
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun newsDao(): NewsDao
     abstract fun eventDao(): EventDao
 
     companion object {
+
+        val DATABASE_NAME = "marchebe"
+
         fun buildDatabase(context: Context) =
             Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
                 .fallbackToDestructiveMigration()
