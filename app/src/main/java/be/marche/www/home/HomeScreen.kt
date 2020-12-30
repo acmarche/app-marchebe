@@ -30,7 +30,6 @@ fun HomeScreen(
     listEvents: () -> Unit,
     navigateUp: () -> Unit
 ) {
-
     Surface(
         elevation = 10.dp,
         shape = RectangleShape
@@ -48,7 +47,6 @@ fun HomeScreen(
                 )
             },
         ) {
-
             ScrollableColumn(
                 modifier = Modifier
                     .padding(16.dp)

@@ -15,8 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.loadImageResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -131,13 +133,30 @@ fun DrawableImagePreview() {
 
 /**
  * Material icon
+ * Ex: Icons.Filled.Face // material icon
  */
 @Composable
-fun IconImage() {
+fun IconImage(imageVector: ImageVector= Icons.Filled.Face) {
     Image(
-        Icons.Filled.Face,  // material icon
+        imageVector,
         modifier = Modifier.preferredSize(40.dp),
         colorFilter = ColorFilter.tint(Color.Black),
         contentScale = ContentScale.Fit
     )
+}
+
+@Composable
+fun LoadImage(
+    imageResId: Int,
+    tint: Color? = null,
+    opacity: Float = 1.0f
+) {
+    loadImageResource(imageResId).resource.resource?.let {
+        Image(
+            it,  // material icon
+            modifier = Modifier.preferredSize(40.dp),
+            colorFilter = tint?.let { it1 -> ColorFilter.tint(it1) },
+            contentScale = ContentScale.Fit,
+        )
+    }
 }
