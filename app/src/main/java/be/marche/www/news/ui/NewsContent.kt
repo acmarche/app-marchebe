@@ -32,7 +32,9 @@ import androidx.core.text.HtmlCompat
 import be.marche.www.R
 import be.marche.www.model.News
 import be.marche.www.news.NewsViewModel
+import be.marche.www.ui.components.MarcheComposeTheme
 import be.marche.www.ui.components.NetworkImageComponentPicasso
+import be.marche.www.ui.components.blue1
 import be.marche.www.utils.fakeNews
 
 private val defaultSpacerSize = 16.dp
@@ -61,19 +63,17 @@ fun PostContent(news: News) {
     ScrollableColumn(
         modifier = Modifier.padding(horizontal = defaultSpacerSize)
     ) {
-        Card(
-            shape = RoundedCornerShape(3.dp),
-            backgroundColor = Color.LightGray,
-            contentColor = Color.Black
-        ) {
             Spacer(Modifier.preferredHeight(defaultSpacerSize))
             PostHeaderImage(news)
-            Text(text = news.intitule, style = MaterialTheme.typography.h4)
+            Text(
+                text = news.intitule,
+                style = MaterialTheme.typography.h2
+                )
             Spacer(Modifier.preferredHeight(8.dp))
 
             news.content?.let { content ->
                 Providers(AmbientContentAlpha provides ContentAlpha.medium) {
-                    PlantDescription(news.content)
+                    TextHtml(news.content)
                     /*     Text(
                          text = PlantDescription(news.content),
                          style = MaterialTheme.typography.body2,
@@ -86,7 +86,6 @@ fun PostContent(news: News) {
             //   PostContents(post.content)
             Spacer(Modifier.preferredHeight(48.dp))
         }
-    }
 }
 
 
@@ -129,20 +128,6 @@ private fun PostHeaderImage2(post: News) {
 }
 
 @Composable
-private fun PostMetadata(metadata: Metadata) {
-    val typography = MaterialTheme.typography
-    Row {
-        Image(
-            imageVector = Icons.Filled.AccountCircle,
-            modifier = Modifier.preferredSize(40.dp),
-            colorFilter = ColorFilter.tint(AmbientContentColor.current),
-            contentScale = ContentScale.Fit
-        )
-        Spacer(Modifier.preferredWidth(8.dp))
-    }
-}
-
-@Composable
 private fun rememberTextView(): TextView {
     val context = AmbientContext.current
     return remember {
@@ -153,18 +138,18 @@ private fun rememberTextView(): TextView {
 }
 
 @Composable
-private fun PlantDescription(description: String) {
+private fun TextHtml(description: String) {
     val textView = rememberTextView()
 
     val htmlDescription = remember(description) {
         HtmlCompat.fromHtml(description, HtmlCompat.FROM_HTML_MODE_COMPACT)
     }
 
-    textView.lineHeight = 20
-    val body2 = MaterialTheme.typography.body2
-
-    textView.textSize = 25.0F
-    textView.setTextColor(ColorBase.parseColor("#FF3700B3"))
+    textView.apply {
+        lineHeight = 60
+        textSize = 18.0F
+        setTextColor(ColorBase.parseColor("#FF82786f"))
+    }
 
     AndroidView({ textView }) {
         it.text = htmlDescription
@@ -188,14 +173,12 @@ private fun PlantDescription(description: String) {
                    text = htmlDescription
                }
            })*/
-
-
 }
 
 @Preview
 @Composable
 private fun PlantDescriptionPreview() {
-    MaterialTheme {
+    MarcheComposeTheme() {
         PostContent(fakeNews())
     }
 }

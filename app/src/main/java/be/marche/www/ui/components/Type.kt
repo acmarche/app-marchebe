@@ -17,13 +17,22 @@ private val Montserrat = fontFamily(
     font(R.font.montserrat_semibold, FontWeight.SemiBold)
 )
 
+private val defaultTypography = Typography()
 
 // Set of Material typography styles to start with
 val typography = Typography(
     body1 = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = 13.sp,
+        color = blue2
+    ),
+
+    h2 = TextStyle(
+        fontFamily = Montserrat,
+        fontSize = 17.sp,
+        fontWeight = FontWeight.Bold,
+        color = orange
     ),
 
     h3 = TextStyle(
@@ -34,11 +43,18 @@ val typography = Typography(
     ),
     h4 = TextStyle(
         fontFamily = Montserrat,
-        fontSize = 12.sp,
-      //  fontWeight = FontWeight.Bold,
-        color = Color.LightGray
-    )
+        fontSize = 34.sp,
+        //  fontWeight = FontWeight.Bold,
+        color = Color.Green
+    ),
 
+    h6 = defaultTypography.h6.copy(fontFamily = Montserrat),
+    subtitle1 = defaultTypography.subtitle1.copy(fontFamily = Montserrat),
+    subtitle2 = defaultTypography.subtitle2.copy(fontFamily = Montserrat),
+    body2 = defaultTypography.body2.copy(fontFamily = Montserrat),
+    button = defaultTypography.button.copy(fontFamily = Montserrat),
+    caption = defaultTypography.caption.copy(fontFamily = Montserrat),
+    overline = defaultTypography.overline.copy(fontFamily = Montserrat)
 
     /* Other default text styles to override
 button = TextStyle(
