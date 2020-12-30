@@ -31,7 +31,6 @@ class NewsViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             newsRepository.insertNews(news)
         }
-
     }
 
     fun findById(newsId: Int): LiveData<News> = liveData {
