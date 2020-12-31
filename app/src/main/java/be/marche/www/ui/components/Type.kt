@@ -21,6 +21,7 @@ private val defaultTypography = Typography()
 
 // Set of Material typography styles to start with
 val typography = Typography(
+
     body1 = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Normal,
@@ -30,7 +31,7 @@ val typography = Typography(
 
     h2 = TextStyle(
         fontFamily = Montserrat,
-        fontSize = 17.sp,
+        fontSize = 20.sp,
         fontWeight = FontWeight.Bold,
         color = orange
     ),

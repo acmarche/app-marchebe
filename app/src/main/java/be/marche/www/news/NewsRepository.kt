@@ -18,7 +18,7 @@ class NewsRepository @Inject constructor(
         newsDao.insertNews(news)
     }
 
-  suspend  fun findById(newsId: Int): News {
-        return newsDao.findNewsById(newsId)
+    suspend fun findById(newsId: Int): News {
+        return newsDao.findById(newsId)
     }
 }

@@ -17,4 +17,8 @@ class EventRepository @Inject constructor(
     suspend fun insertEvent(events: List<Event>) {
         eventDao.insertEvents(events)
     }
+
+    suspend fun findById(eventId: Int): Event {
+        return eventDao.findById(eventId)
+    }
 }

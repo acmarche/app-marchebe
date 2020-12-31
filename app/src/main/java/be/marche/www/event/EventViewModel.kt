@@ -3,8 +3,8 @@ package be.marche.www.event
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import be.marche.www.model.Event
 import be.marche.www.event.repository.EventRepository
+import be.marche.www.model.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -34,8 +34,10 @@ class EventViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             eventRepository.insertEvent(events)
         }
-
     }
 
+    fun findById(newsId: Int): LiveData<Event> = liveData {
+        emit(eventRepository.findById(newsId))
+    }
 
 }

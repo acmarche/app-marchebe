@@ -24,10 +24,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LiveData
 import be.marche.www.event.EventViewModel
-import be.marche.www.event.fakeEvents
 import be.marche.www.model.Event
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.ui.components.typography
+import be.marche.www.utils.fakeEvents
 import timber.log.Timber
 
 

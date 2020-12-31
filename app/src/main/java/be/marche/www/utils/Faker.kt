@@ -1,5 +1,6 @@
 package be.marche.www.utils
 
+import be.marche.www.model.Event
 import be.marche.www.model.News
 
 
@@ -19,3 +20,74 @@ fun fakeNews(): News {
         url = ""
     )
 }
+
+fun fakeEvent(): Event{
+    return     Event(
+        10,
+        "Iron Man",
+        "blablabla",
+        "",
+        "",
+        "le 10 11 2020",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "https://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55.jpg"
+    )
+
+}
+
+
+fun fakeEvents() = listOf(
+    Event(
+        10,
+        "Iron Man",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "https://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55.jpg"
+    )
+
+)
+
+
+fun fakeListNews() = listOf(
+    News(
+        10,
+        "Iron Man",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    )
+
+)
+
