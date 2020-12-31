@@ -42,11 +42,12 @@ val typography = Typography(
         fontWeight = FontWeight.Bold,
         color = Color(0xFFff7200)
     ),
+
     h4 = TextStyle(
         fontFamily = Montserrat,
-        fontSize = 34.sp,
-        //  fontWeight = FontWeight.Bold,
-        color = Color.Green
+        fontSize = 15.sp,
+        fontWeight = FontWeight.Light,
+        color = Color.DarkGray,
     ),
 
     h6 = defaultTypography.h6.copy(fontFamily = Montserrat),

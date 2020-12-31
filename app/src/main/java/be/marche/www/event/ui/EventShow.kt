@@ -28,7 +28,6 @@ import be.marche.www.utils.fakeEvent
 
 private val defaultSpacerSize = 16.dp
 
-
 @Composable
 fun EventShowScreen(eventId: Int, eventViewModel: EventViewModel) {
     val event by eventViewModel.findById(eventId).observeAsState(initial = null)
