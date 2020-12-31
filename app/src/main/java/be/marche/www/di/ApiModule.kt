@@ -2,6 +2,7 @@ package be.marche.www.di
 
 import be.marche.www.BuildConfig
 import be.marche.www.Constants
+import be.marche.www.api.BasicAuthInterceptor
 import be.marche.www.api.MarcheBeService
 import dagger.Module
 import dagger.Provides
@@ -22,17 +23,14 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+    fun provideOkHttpClient() =
         OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level =
+                    if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+            })
+            .addInterceptor(BasicAuthInterceptor("**", "**"))
             .build()
-    } else {
-        OkHttpClient
-            .Builder()
-            .build()
-    }
 
     @Singleton
     @Provides
