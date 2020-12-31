@@ -15,7 +15,7 @@ interface MarcheBeService {
     ): List<News>
 
     @GET("agenda/evenements")
-    suspend fun findAllEvents(
+    suspend fun loadAllEvents(
     ): List<Event>
 
 }

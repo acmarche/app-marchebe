@@ -1,4 +1,26 @@
 package be.marche.www.bottin.model
 
-class Classement {
-}
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(
+   /* foreignKeys = [
+        ForeignKey(
+            entity = Fiche::class,
+            parentColumns = ["id"],
+            childColumns = ["fiche_id"]
+        ),
+        ForeignKey(
+            entity = Categorie::class,
+            parentColumns = ["id"],
+            childColumns = ["category_id"]
+        )
+    ]*/
+)
+data class Classement(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val fiche_id: Int,
+    val category_id: Int,
+    val principal: Boolean
+)

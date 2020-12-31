@@ -1,8 +1,11 @@
 package be.marche.bottin.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity()
 data class Fiche(
-
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val societe: String,
     val rue: String?,
