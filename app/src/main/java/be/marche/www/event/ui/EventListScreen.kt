@@ -1,5 +1,6 @@
 package be.marche.www.event.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +27,7 @@ import be.marche.www.event.EventViewModel
 import be.marche.www.event.fakeEvents
 import be.marche.www.model.Event
 import be.marche.www.ui.components.NetworkImageComponentPicasso
+import be.marche.www.ui.components.typography
 import timber.log.Timber
 
 
@@ -51,9 +53,9 @@ fun ListEventsComponent(eventListLiveData: LiveData<List<Event>>, onItemClick: (
     // otherwise we want show the appropriate list. So we run the appropriate composable based on
     // the branch of code executed and that takes care of rendering the right views.
     if (eventList.isEmpty()) {
-        LiveDataLoadingComponent()
+        LiveDataLoadingEventsComponent()
     } else {
-        LiveDataComponentList(eventList)
+        LiveDataComponentListEvents(eventList, onItemClick)
     }
 }
 
@@ -63,7 +65,7 @@ fun ListEventsComponent(eventListLiveData: LiveData<List<Event>>, onItemClick: (
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun LiveDataComponentList(eventList: List<Event>) {
+fun LiveDataComponentListEvents(eventList: List<Event>, onItemClick: (Int) -> Unit) {
     // LazyColumn is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
     // than the VerticalScroller.
@@ -80,6 +82,7 @@ fun LiveDataComponentList(eventList: List<Event>) {
                 shape = RoundedCornerShape(4.dp),
                 backgroundColor = Color.White,
                 modifier = Modifier.fillParentMaxWidth().padding(8.dp)
+                    .clickable(onClick = { onItemClick(event.id) })
             ) {
                 // ListItem is a predefined composable that is a Material Design implementation of [list
                 // items](https://material.io/components/lists). This component can be used to achieve the
@@ -89,14 +92,11 @@ fun LiveDataComponentList(eventList: List<Event>) {
                     // composable to render text on the screen
                     Text(
                         text = event.titre,
-                        style = TextStyle(
-                            fontFamily = FontFamily.Serif, fontSize = 25.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+                        style = typography.h3
                     )
                 }, secondaryText = {
                     Text(
-                        text = "Age: ${event.date_debut}",
+                        text = event.date_debut,
                         style = TextStyle(
                             fontFamily = FontFamily.Serif, fontSize = 15.sp,
                             fontWeight = FontWeight.Light, color = Color.DarkGray
@@ -124,7 +124,7 @@ fun LiveDataComponentList(eventList: List<Event>) {
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun LiveDataLoadingComponent() {
+fun LiveDataLoadingEventsComponent() {
     // Column is a composable that places its children in a vertical sequence. You
     // can think of it similar to a LinearLayout with the vertical orientation.
     // In addition we also pass a few modifiers to it.
@@ -172,13 +172,13 @@ fun LaunchInCompositionComponent(viewModel: EventViewModel) {
     // If the list is empty, it means that our coroutine has not completed yet and we just want
     // to show our loading component and nothing else. So we return early.
     if (eventList.isEmpty()) {
-        LiveDataLoadingComponent()
+        LiveDataLoadingEventsComponent()
         return
     }
 
     // If the eventList is available, we will go ahead and show the list of superheroes. We
     // reuse the same component that we created above to save time & space :)
-    LiveDataComponentList(eventList)
+    LiveDataComponentListEvents(eventList, {})
 }
 
 /**
@@ -193,11 +193,11 @@ fun LaunchInCompositionComponent(viewModel: EventViewModel) {
 @Preview
 @Composable
 fun LiveDataComponentListPreview() {
-    LiveDataComponentList(fakeEvents())
+    LiveDataComponentListEvents(fakeEvents(), {})
 }
 
 @Preview
 @Composable
 fun LiveDataLoadingComponentPreview() {
-    LiveDataLoadingComponent()
+    LiveDataLoadingEventsComponent()
 }

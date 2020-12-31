@@ -79,7 +79,8 @@ fun LiveDataComponentNewsList(newsList: List<News>, onItemClick: (Int) -> Unit) 
                                 modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
                             )
                         }
-                    })
+                    }
+                )
             }
         })
     }
