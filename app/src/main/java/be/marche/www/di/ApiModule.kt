@@ -5,6 +5,7 @@ import be.marche.www.Constants
 import be.marche.www.api.BasicAuthInterceptor
 import be.marche.www.api.BottinService
 import be.marche.www.api.MarcheBeService
+import be.marche.www.bottin.model.BottinSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,7 +31,7 @@ object ApiModule {
                 level =
                     if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
             })
-            .addInterceptor(BasicAuthInterceptor("**", "**"))
+            .addInterceptor(BasicAuthInterceptor(BottinSettings.USER, BottinSettings.PASSWORD))
             .build()
 
     @Singleton
