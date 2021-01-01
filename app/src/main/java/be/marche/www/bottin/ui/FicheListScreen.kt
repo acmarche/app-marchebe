@@ -15,17 +15,15 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.marche.bottin.model.Category
 import be.marche.bottin.model.Fiche
-import be.marche.www.R
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
 import be.marche.www.ui.components.NetworkImageComponentPicasso
+import be.marche.www.utils.fakeCategory
 import be.marche.www.utils.fakeFiches
-import timber.log.Timber
 
 @Composable
 fun ListFichesScreen(
@@ -44,19 +42,15 @@ fun ListFichesScreen(
     val category by categoryViewModel.findById(categoryId).observeAsState(initial = null)
     category?.let {
 
-        val fiches by ficheViewModel.findFichesByCategory(categoryId).observeAsState(initial = null)
+        val fiches by ficheViewModel.findFichesByCategory(categoryId)
+            .observeAsState(initial = emptyList())
 
-        fiches.let { fiches ->
-            if (fiches != null) {
-                fiches.forEach {
-                    Timber.w("fiche: " + it)
-                }
-            }
+        if (fiches.isEmpty()) {
+            //Todo
+        } else {
+            LiveDataComponentListFiches(it, fiches, onItemClick)
         }
-        CategoryContent(it)
-
     }
-
 
     /*  if (category == null) {
           //show error
@@ -68,33 +62,7 @@ fun ListFichesScreen(
               val fiches = ficheViewModel.findByCategory(categoryId)
           }
       }
-
-
-      val newsList by newsListLiveData.observeAsState(initial = emptyList())
-      if (newsList.isEmpty()) {
-          LiveDataLoadingComponentListNews()
-      } else {
-          LiveDataComponentListFiches(newsList, onItemClick)
-      }*/
-}
-
-@Composable
-fun CategoryContent(category: Category) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(category.name) },
-                navigationIcon = {
-                    IconButton(onClick = {}) {
-                        Icon(Icons.Rounded.ArrowLeft)
-                        //Icon(imageResource(id = R.drawable.marche_logo))
-                    }
-                },
-            )
-        },
-    ) {
-        Text(category.name)
-    }
+*/
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -102,7 +70,11 @@ fun CategoryContent(category: Category) {
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun LiveDataComponentListFiches(ficheList: List<Fiche>, onItemClick: (Int) -> Unit) {
+fun LiveDataComponentListFiches(
+    category: Category,
+    ficheList: List<Fiche>,
+    onItemClick: (Int) -> Unit
+) {
     // LazyColumn is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
     // than the VerticalScroller.
@@ -112,7 +84,7 @@ fun LiveDataComponentListFiches(ficheList: List<Fiche>, onItemClick: (Int) -> Un
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(id = R.string.agenda)) },
+                title = { Text(category.name) },
                 navigationIcon = {
                     IconButton(onClick = {}) {
                         Icon(Icons.Rounded.ArrowLeft)
@@ -202,7 +174,7 @@ fun LiveDataLoadingFichesComponent() {
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun LaunchInCompositionComponent(viewModel: FicheViewModel) {
+fun LaunchInCompositionComponent(category: Category, viewModel: FicheViewModel) {
     // Reacting to state changes is the core behavior of Compose. We use the state composable
     // that is used for holding a state value in this composable for representing the current
     // value of whether the checkbox is checked. Any composable that reads the value of "ficheList"
@@ -231,7 +203,7 @@ fun LaunchInCompositionComponent(viewModel: FicheViewModel) {
 
     // If the ficheList is available, we will go ahead and show the list of superheroes. We
     // reuse the same component that we created above to save time & space :)
-    LiveDataComponentListFiches(ficheList, {})
+    LiveDataComponentListFiches(category, ficheList, {})
 }
 
 /**
@@ -246,7 +218,7 @@ fun LaunchInCompositionComponent(viewModel: FicheViewModel) {
 @Preview
 @Composable
 fun LiveDataComponentListPreview() {
-    LiveDataComponentListFiches(fakeFiches(), {})
+    LiveDataComponentListFiches(fakeCategory(), fakeFiches(), {})
 }
 
 @Preview
