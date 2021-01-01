@@ -11,14 +11,14 @@ interface BottinService {
     /**
      * Category
      */
-    @GET("rubriques")
+    @GET("bottin/rubriques")
     suspend fun loadAllCategories(
     ): List<Category>
 
     /**
      * Fiches
      */
-    @GET("fiches")
+    @GET("bottin/fiches")
     suspend fun loadAllFiches(
     ): List<Fiche>
 

@@ -14,8 +14,12 @@ class FicheViewModel @ViewModelInject constructor(
     private val ficheRepository: FicheRepository,
 ) : ViewModel() {
 
-    val fiches: LiveData<List<Fiche>> = liveData {
-        emit(ficheRepository.findAllFiches()) //is a suspend function.
+    val allFiches: LiveData<List<Fiche>> = liveData {
+        emit(findAllFiches()) //is a suspend function.
+    }
+
+    fun findAllFiches(): List<Fiche> {
+        return ficheRepository.findAllFiches()
     }
 
     fun getFichesByCategory(categoryId: Int): LiveData<Fiche> {

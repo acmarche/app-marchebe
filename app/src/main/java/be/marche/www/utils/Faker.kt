@@ -1,8 +1,30 @@
 package be.marche.www.utils
 
+import be.marche.bottin.model.Fiche
 import be.marche.www.model.Event
 import be.marche.www.model.News
 
+fun fakeFiches(): List<Fiche> {
+    return listOf(
+        Fiche(
+            id = 5,
+            societe = "Societe de jf",
+            midi = false,
+            pmr = false,
+            centreville = false
+        )
+    )
+}
+
+fun Fiche(id: Int, societe: String, midi: Boolean, pmr: Boolean, centreville: Boolean): Fiche {
+    return Fiche(
+        id = id,
+        societe = societe,
+        midi = midi,
+        pmr = pmr,
+        centreville = centreville
+    )
+}
 
 fun fakeNews(): News {
     return News(
@@ -21,8 +43,8 @@ fun fakeNews(): News {
     )
 }
 
-fun fakeEvent(): Event{
-    return     Event(
+fun fakeEvent(): Event {
+    return Event(
         10,
         "Iron Man",
         "blablabla",

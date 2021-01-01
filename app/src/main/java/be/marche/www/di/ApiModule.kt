@@ -20,7 +20,7 @@ import javax.inject.Singleton
 object ApiModule {
 
     @Provides
-    fun provideBaseUrl() = Constants.BASE_URL
+    fun provideBaseUrl() = Constants.MARCHE_BASE_URL
 
     @Singleton
     @Provides
