@@ -2,24 +2,29 @@ package be.marche.www.bottin
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import be.marche.www.bottin.model.Classement
 import be.marche.www.bottin.repository.ClassementRepository
+import kotlinx.coroutines.launch
 
 class ClassementViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val classementRepository: ClassementRepository,
 ) : ViewModel() {
 
+    val allClassementsFromRemote: LiveData<List<Classement>> = liveData {
+        emit(loadAllClassementsFromRemote())
+    }
 
-    fun getFichesByCategoryId(categoryId: Int): LiveData<List<Classement>> {
-        return liveData {
-            emit(classementRepository.findByCategoryId(categoryId))
+    suspend fun loadAllClassementsFromRemote(): List<Classement> =
+        classementRepository.loadAllFromRemote()
+
+    fun insertClassements(classements: List<Classement>) {
+        viewModelScope.launch {
+            classementRepository.insertAll(classements)
         }
     }
+
 
     fun getCategoriesByFicheId(categoryId: Int): LiveData<List<Classement>> {
         return liveData {

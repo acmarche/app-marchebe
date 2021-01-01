@@ -26,11 +26,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        syncContent()
+   //     syncContent()
 
         setContent {
             MarcheComposeTheme {
-                RegisterRoutes(newsViewModel, eventViewModel, ficheViewModel, categoryViewModel, classementViewModel)
+                RegisterRoutes(
+                    newsViewModel,
+                    eventViewModel,
+                    ficheViewModel,
+                    categoryViewModel,
+                    classementViewModel
+                )
             }
         }
     }
@@ -46,6 +52,21 @@ class MainActivity : AppCompatActivity() {
                 eventViewModel.allEventFromRemote
                     .observe(this, { event ->
                         eventViewModel.insertEvent(event)
+                    })
+
+                ficheViewModel.allFichesFromRemote
+                    .observe(this, { fiches ->
+                        ficheViewModel.insertFiches(fiches)
+                    })
+
+                categoryViewModel.allCategoriesFromRemote
+                    .observe(this, { categories ->
+                        categoryViewModel.insertCategories(categories)
+                    })
+
+                classementViewModel.allClassementsFromRemote
+                    .observe(this, { classements ->
+                        classementViewModel.insertClassements(classements)
                     })
             }
         })

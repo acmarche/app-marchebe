@@ -10,24 +10,26 @@ class CategoryRepository @Inject constructor(
     private val bottinDao: BottinDao
 ) {
 
-    suspend fun loadAllCategoriesFromRemote() = bottinService.loadAllCategories()
+    suspend fun loadAllFromRemote() = bottinService.loadAllCategories()
 
     fun findAll() = bottinDao.findAllCategories()
 
-    suspend fun insertCategories(categories: List<Category>) {
-        bottinDao.insertCategories(categories)
-    }
-
     suspend fun findById(categoryId: Int): Category {
-        return bottinDao.findCagorieById(categoryId)
+        return bottinDao.findCategoryById(categoryId)
     }
 
     fun findRootsCategories(): List<Category> {
         return bottinDao.findRootsCategories()
     }
 
-    fun findChilds(categorie: Category): List<Category> {
-        return bottinDao.findChilds(categorie.id)
+    fun findChildren(categoryId: Int): List<Category> {
+        return bottinDao.findChildren(categoryId)
     }
+
+    suspend fun insertAll(categories: List<Category>) {
+        bottinDao.insertCategories(categories)
+    }
+
+
 }
 

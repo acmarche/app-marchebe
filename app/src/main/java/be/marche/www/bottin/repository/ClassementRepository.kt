@@ -23,13 +23,8 @@ class ClassementRepository @Inject constructor(
         return bottinDao.findClassmentsByFicheId(ficheId)
     }
 
-    fun findByCategoryId(categorieId: Int): List<Classement> {
+    suspend fun findByCategoryId(categorieId: Int): List<Classement> {
         return bottinDao.getFichesByCategoryId(categorieId)
     }
 
-    suspend fun insertClassements(classements: List<Classement>) {
-        withContext(Dispatchers.IO) {
-            bottinDao.insertClassements(classements)
-        }
-    }
 }

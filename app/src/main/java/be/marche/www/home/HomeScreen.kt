@@ -22,12 +22,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
+import be.marche.www.bottin.model.Bottin
 import be.marche.www.ui.components.MaterialColors
 
 @Composable
 fun HomeScreen(
     listNews: () -> Unit,
     listEvents: () -> Unit,
+    listFiches: (Int) -> Unit,
     navigateUp: () -> Unit
 ) {
     Surface(
@@ -94,7 +96,7 @@ fun HomeScreen(
                 ) {
                     RoundedIconButton(
                         R.drawable.services_communaux,
-                        listNews,
+                        { listFiches(Bottin.SERVICES_COMMUNAUX) },
                         stringResource(id = R.string.services_communaux)
                     )
                     RoundedIconButton(
@@ -106,6 +108,27 @@ fun HomeScreen(
                         R.drawable.loisirs,
                         listNews,
                         stringResource(id = R.string.loisirs)
+                    )
+                }
+
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    RoundedIconButton(
+                        R.drawable.commerces,
+                        { listFiches(Bottin.COMMERCES) },
+                        stringResource(id = R.string.commerce)
+                    )
+                    RoundedIconButton(
+                        R.drawable.fetes,
+                        listNews,
+                        stringResource(id = R.string.marchefete)
+                    )
+                    RoundedIconButton(
+                        R.drawable.jour_marche,
+                        listNews,
+                        stringResource(id = R.string.jour_marche)
                     )
                 }
             }

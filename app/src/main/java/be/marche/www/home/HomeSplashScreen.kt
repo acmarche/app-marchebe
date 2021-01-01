@@ -33,6 +33,7 @@ private const val SplashWaitTime: Long = 2000
 fun MainScreen(
     listNews: () -> Unit,
     listEvents: () -> Unit,
+    listFiches: (Int) -> Unit,
     navigateUp: () -> Unit
 ) {
     CraneScaffold {
@@ -44,7 +45,7 @@ fun MainScreen(
                 onTimeout = { splashShown = SplashState.Completed }
             )
             HomeScreen(
-                listNews, listEvents, navigateUp
+                listNews, listEvents, listFiches, navigateUp
             )
         }
     }
@@ -64,7 +65,6 @@ fun LandingScreen(modifier: Modifier = Modifier, onTimeout: () -> Unit) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         // Adds composition consistency. Use the value when LaunchedEffect is first called
         val currentOnTimeout by rememberUpdatedState(onTimeout)
-
         LaunchedEffect(Unit) {
             delay(SplashWaitTime)
             currentOnTimeout()

@@ -16,6 +16,7 @@ import be.marche.www.home.MainScreen
 import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.ListNewsScreen
 import be.marche.www.news.ui.NewsShowComponent
+import timber.log.Timber
 
 object Routes {
     const val Home = "home"
@@ -23,12 +24,13 @@ object Routes {
     const val Agenda = "listEvents"
     const val EventShow = "eventShow/{eventId}"///{eventId}
     const val NewsShow = "newsShow/{newsId}"
-    const val Fiches = "listFiches"
+    const val Fiches = "listFiches/{categoryId}"
 
     object routeArgs {
         const val eventId = "eventId"
         const val newsId = "newsId"
         const val ficheId = "ficheId"
+        const val categoryId = "categoryId"
     }
 }
 
@@ -45,8 +47,8 @@ class Actions(navController: NavHostController) {
     val eventShow: (Int) -> Unit = { eventId ->
         navController.navigate("eventShow/$eventId")
     }
-    val listFiches: () -> Unit = {
-        navController.navigate(Routes.Fiches)
+    val listFiches: (Int) -> Unit = { categoryId ->
+        navController.navigate("listFiches/$categoryId")
     }
     val ficheShow: (Int) -> Unit = { ficheId ->
         navController.navigate("ficheShow/$ficheId")
@@ -72,6 +74,7 @@ fun RegisterRoutes(
             MainScreen(
                 listNews = navigateTo.listNews,
                 listEvents = navigateTo.listEvents,
+                listFiches = navigateTo.listFiches,
                 navigateUp = navigateTo.navigateUp
             )
         }
@@ -111,10 +114,18 @@ fun RegisterRoutes(
                 //navigateUp = actions.navigateUp
             )
         }
-        composable(Routes.Fiches) {
+        composable(
+            route = Routes.Fiches,
+            arguments = listOf(navArgument(Routes.routeArgs.categoryId) {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
             ListFichesScreen(
-                ficheViewModel.allFiches,
-                onItemClick = navigateTo.ficheShow
+                categoryId = backStackEntry.arguments?.getInt(Routes.routeArgs.categoryId) ?: 0,
+                categoryViewModel = categoryViewModel,
+                ficheViewModel = ficheViewModel,
+                onItemClick = navigateTo.eventShow
+                //navigateUp = actions.navigateUp
             )
         }
     }

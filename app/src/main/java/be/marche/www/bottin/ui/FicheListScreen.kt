@@ -18,23 +18,82 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
+import be.marche.bottin.model.Category
 import be.marche.bottin.model.Fiche
 import be.marche.www.R
+import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
-import be.marche.www.model.News
-import be.marche.www.news.ui.LiveDataComponentNewsList
-import be.marche.www.news.ui.LiveDataLoadingComponentListNews
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.utils.fakeFiches
+import timber.log.Timber
 
 @Composable
-fun ListFichesScreen(newsListLiveData: LiveData<List<Fiche>>, onItemClick: (Int) -> Unit) {
-    val newsList by newsListLiveData.observeAsState(initial = emptyList())
-    if (newsList.isEmpty()) {
-        LiveDataLoadingComponentListNews()
-    } else {
-        LiveDataComponentListFiches(newsList, onItemClick)
+fun ListFichesScreen(
+    categoryId: Int,
+    categoryViewModel: CategoryViewModel,
+    ficheViewModel: FicheViewModel,
+    onItemClick: (Int) -> Unit
+) {
+
+    /**
+     * get info category
+     * if no error
+     * get childs
+     *
+     */
+    val category by categoryViewModel.findById(categoryId).observeAsState(initial = null)
+    category?.let {
+
+        val fiches by ficheViewModel.findFichesByCategory(categoryId).observeAsState(initial = null)
+
+        fiches.let { fiches ->
+            if (fiches != null) {
+                fiches.forEach {
+                    Timber.w("fiche: " + it)
+                }
+            }
+        }
+        CategoryContent(it)
+
+    }
+
+
+    /*  if (category == null) {
+          //show error
+      } else {
+          val children = categoryViewModel.findChildren(categoryId)
+          if (children.count() > 0) {
+              //show children
+          } else {
+              val fiches = ficheViewModel.findByCategory(categoryId)
+          }
+      }
+
+
+      val newsList by newsListLiveData.observeAsState(initial = emptyList())
+      if (newsList.isEmpty()) {
+          LiveDataLoadingComponentListNews()
+      } else {
+          LiveDataComponentListFiches(newsList, onItemClick)
+      }*/
+}
+
+@Composable
+fun CategoryContent(category: Category) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(category.name) },
+                navigationIcon = {
+                    IconButton(onClick = {}) {
+                        Icon(Icons.Rounded.ArrowLeft)
+                        //Icon(imageResource(id = R.drawable.marche_logo))
+                    }
+                },
+            )
+        },
+    ) {
+        Text(category.name)
     }
 }
 

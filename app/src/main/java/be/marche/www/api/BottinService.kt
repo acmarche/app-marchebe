@@ -11,7 +11,7 @@ interface BottinService {
     /**
      * Category
      */
-    @GET("bottin/rubriques")
+    @GET("bottin/categories")
     suspend fun loadAllCategories(
     ): List<Category>
 
@@ -27,7 +27,7 @@ interface BottinService {
         @Path("id") categoryId: Int
     ): List<Fiche>
 
-    @GET("allclassements")
+    @GET("bottin/classements")
     suspend fun loadAllClassements(
     ): List<Classement>
 
