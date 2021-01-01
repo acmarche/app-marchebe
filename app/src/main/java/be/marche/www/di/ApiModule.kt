@@ -3,6 +3,7 @@ package be.marche.www.di
 import be.marche.www.BuildConfig
 import be.marche.www.Constants
 import be.marche.www.api.BasicAuthInterceptor
+import be.marche.www.api.BottinService
 import be.marche.www.api.MarcheBeService
 import dagger.Module
 import dagger.Provides
@@ -43,6 +44,10 @@ object ApiModule {
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit) = retrofit.create(MarcheBeService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideBottinService(retrofit: Retrofit) = retrofit.create(BottinService::class.java)
 
     /*   @Provides
        @Singleton

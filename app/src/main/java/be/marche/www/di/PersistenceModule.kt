@@ -30,4 +30,8 @@ class PersistenceModule {
     @Singleton
     fun provideNewsDao(appDatabase: AppDatabase) = appDatabase.newsDao()
 
+    @Provides
+    @Singleton
+    fun provideBottinDao(appDatabase: AppDatabase) = appDatabase.bottinDao()
+
 }

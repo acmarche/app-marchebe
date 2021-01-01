@@ -5,20 +5,24 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import be.marche.bottin.model.Category
+import be.marche.bottin.model.Fiche
+import be.marche.www.bottin.model.Classement
 import be.marche.www.model.Event
 import be.marche.www.model.News
 
 const val DATABASE_NAME = "marchebe"
 
 @Database(
-    entities = [News::class, Event::class],
-    version = 1
+    entities = [News::class, Event::class, Fiche::class, Category::class, Classement::class],
+    version = 3
 )
 
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun newsDao(): NewsDao
     abstract fun eventDao(): EventDao
+    abstract fun bottinDao(): BottinDao
 
     companion object {
 

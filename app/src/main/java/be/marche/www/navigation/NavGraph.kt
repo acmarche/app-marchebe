@@ -5,6 +5,10 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
+import be.marche.www.bottin.CategoryViewModel
+import be.marche.www.bottin.ClassementViewModel
+import be.marche.www.bottin.FicheViewModel
+import be.marche.www.bottin.ui.ListFichesScreen
 import be.marche.www.event.EventViewModel
 import be.marche.www.event.ui.EventShowScreen
 import be.marche.www.event.ui.ListEventsComponent
@@ -19,10 +23,12 @@ object Routes {
     const val Agenda = "listEvents"
     const val EventShow = "eventShow/{eventId}"///{eventId}
     const val NewsShow = "newsShow/{newsId}"
+    const val Fiches = "listFiches"
 
     object routeArgs {
         const val eventId = "eventId"
         const val newsId = "newsId"
+        const val ficheId = "ficheId"
     }
 }
 
@@ -39,13 +45,25 @@ class Actions(navController: NavHostController) {
     val eventShow: (Int) -> Unit = { eventId ->
         navController.navigate("eventShow/$eventId")
     }
+    val listFiches: () -> Unit = {
+        navController.navigate(Routes.Fiches)
+    }
+    val ficheShow: (Int) -> Unit = { ficheId ->
+        navController.navigate("ficheShow/$ficheId")
+    }
     val navigateUp: () -> Unit = {
         navController.popBackStack()
     }
 }
 
 @Composable
-fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel) {
+fun RegisterRoutes(
+    newsViewModel: NewsViewModel,
+    eventViewModel: EventViewModel,
+    ficheViewModel: FicheViewModel,
+    categoryViewModel: CategoryViewModel,
+    classementViewModel: ClassementViewModel
+) {
     val navController = rememberNavController()
     val navigateTo = remember(navController) { Actions(navController) }
 
@@ -91,6 +109,12 @@ fun RegisterRoutes(newsViewModel: NewsViewModel, eventViewModel: EventViewModel)
                 eventId = backStackEntry.arguments?.getInt(Routes.routeArgs.eventId) ?: 0,
                 eventViewModel = eventViewModel
                 //navigateUp = actions.navigateUp
+            )
+        }
+        composable(Routes.Fiches) {
+            ListFichesScreen(
+                ficheViewModel.allFiches,
+                onItemClick = navigateTo.ficheShow
             )
         }
     }

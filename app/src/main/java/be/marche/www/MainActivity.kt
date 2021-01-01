@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
+import be.marche.www.bottin.CategoryViewModel
+import be.marche.www.bottin.ClassementViewModel
+import be.marche.www.bottin.FicheViewModel
 import be.marche.www.event.EventViewModel
 import be.marche.www.navigation.RegisterRoutes
 import be.marche.www.news.NewsViewModel
@@ -16,6 +19,9 @@ class MainActivity : AppCompatActivity() {
 
     private val newsViewModel: NewsViewModel by viewModels()
     private val eventViewModel: EventViewModel by viewModels()
+    private val ficheViewModel: FicheViewModel by viewModels()
+    private val categoryViewModel: CategoryViewModel by viewModels()
+    private val classementViewModel: ClassementViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             MarcheComposeTheme {
-                RegisterRoutes(newsViewModel, eventViewModel)
+                RegisterRoutes(newsViewModel, eventViewModel, ficheViewModel, categoryViewModel, classementViewModel)
             }
         }
     }
