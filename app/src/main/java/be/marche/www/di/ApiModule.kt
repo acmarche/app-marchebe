@@ -50,9 +50,4 @@ object ApiModule {
     @Singleton
     fun provideBottinService(retrofit: Retrofit) = retrofit.create(BottinService::class.java)
 
-    /*   @Provides
-       @Singleton
-       fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
-       */
-
 }
