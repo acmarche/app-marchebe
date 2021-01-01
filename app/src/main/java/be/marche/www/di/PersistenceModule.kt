@@ -1,7 +1,6 @@
 package be.marche.www.di
 
 import android.app.Application
-import androidx.room.Room
 import be.marche.www.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -15,12 +14,7 @@ class PersistenceModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(application: Application) =
-        Room.databaseBuilder(
-            application,
-            AppDatabase::class.java,
-            AppDatabase.DATABASE_NAME
-        ).build()
+    fun provideDatabase(application: Application) = AppDatabase.buildDatabase(application)
 
     @Provides
     @Singleton

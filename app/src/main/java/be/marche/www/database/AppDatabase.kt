@@ -11,8 +11,6 @@ import be.marche.www.bottin.model.Classement
 import be.marche.www.model.Event
 import be.marche.www.model.News
 
-const val DATABASE_NAME = "marchebe"
-
 @Database(
     entities = [News::class, Event::class, Fiche::class, Category::class, Classement::class],
     version = 3
@@ -26,7 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
 
-        val DATABASE_NAME = "marchebe"
+        const val DATABASE_NAME = "marchebe"
 
         fun buildDatabase(context: Context) =
             Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
