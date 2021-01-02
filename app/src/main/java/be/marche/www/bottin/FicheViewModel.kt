@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.repository.ClassementRepository
 import be.marche.www.bottin.repository.FicheRepository
+import be.marche.www.model.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -48,4 +49,9 @@ class FicheViewModel @ViewModelInject constructor(
             ficheRepository.insertAll(fiches)
         }
     }
+
+    fun findByIdAsLive(ficheId: Int): LiveData<Fiche> = liveData {
+        emit(ficheRepository.findById(ficheId))
+    }
+
 }

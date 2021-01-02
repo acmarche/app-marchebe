@@ -25,7 +25,7 @@ fun ListFichesScreen(
     categoryId: Int,
     categoryViewModel: CategoryViewModel,
     ficheViewModel: FicheViewModel,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int, Int) -> Unit
 ) {
     val category by categoryViewModel.findById(categoryId).observeAsState(initial = null)
     category?.let {
@@ -57,7 +57,7 @@ fun ListFichesScreen(
 fun LiveDataComponentListFiches(
     category: Category,
     ficheList: List<Fiche>,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int, Int) -> Unit
 ) {
 
     val typography = MaterialTheme.typography
@@ -80,7 +80,7 @@ fun LiveDataComponentListFiches(
                     shape = RoundedCornerShape(4.dp),
                     backgroundColor = Color.White,
                     modifier = Modifier.fillParentMaxWidth().padding(8.dp)
-                        .clickable(onClick = { onItemClick(fiche.id) })
+                        .clickable(onClick = { onItemClick(category.id, fiche.id) })
                 ) {
                     ListItem(text = {
                         Text(

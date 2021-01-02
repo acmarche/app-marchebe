@@ -1,5 +1,6 @@
 package be.marche.www.navigation
 
+import android.app.ProgressDialog.show
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -8,6 +9,7 @@ import androidx.navigation.compose.*
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.ClassementViewModel
 import be.marche.www.bottin.FicheViewModel
+import be.marche.www.bottin.ui.FicheUi
 import be.marche.www.bottin.ui.ListFichesScreen
 import be.marche.www.event.EventViewModel
 import be.marche.www.event.ui.EventShowScreen
@@ -22,9 +24,10 @@ object Routes {
     const val Home = "home"
     const val News = "listNews"
     const val Agenda = "listEvents"
-    const val EventShow = "eventShow/{eventId}"///{eventId}
+    const val EventShow = "eventShow/{eventId}"
     const val NewsShow = "newsShow/{newsId}"
     const val Fiches = "listFiches/{categoryId}"
+    const val FicheShow = "ficheShow/{categoryId}/{ficheId}"
 
     object routeArgs {
         const val eventId = "eventId"
@@ -50,8 +53,8 @@ class Actions(navController: NavHostController) {
     val listFiches: (Int) -> Unit = { categoryId ->
         navController.navigate("listFiches/$categoryId")
     }
-    val ficheShow: (Int) -> Unit = { ficheId ->
-        navController.navigate("ficheShow/$ficheId")
+    val ficheShow: (categoryId: Int, ficheId: Int) -> Unit = { categoryId, ficheId ->
+        navController.navigate("ficheShow/$categoryId/$ficheId")
     }
     val navigateUp: () -> Unit = {
         navController.popBackStack()
@@ -126,8 +129,27 @@ fun RegisterRoutes(
                 categoryId = backStackEntry.arguments?.getInt(Routes.routeArgs.categoryId) ?: 0,
                 categoryViewModel = categoryViewModel,
                 ficheViewModel = ficheViewModel,
-                onItemClick = navigateTo.eventShow
+                onItemClick = navigateTo.ficheShow
                 //navigateUp = actions.navigateUp
+            )
+        }
+        composable(
+            route = Routes.FicheShow,
+            arguments = listOf(
+                navArgument(Routes.routeArgs.categoryId) {
+                    type = NavType.IntType
+                },
+                navArgument(Routes.routeArgs.ficheId) {
+                    type = NavType.IntType
+                })
+        ) { backStackEntry ->
+            val ficheUi = FicheUi()
+            ficheUi.ShowScreen(
+                categoryId = backStackEntry.arguments?.getInt(Routes.routeArgs.categoryId) ?: 0,
+                ficheId = backStackEntry.arguments?.getInt(Routes.routeArgs.ficheId) ?: 0,
+                categoryViewModel = categoryViewModel,
+                ficheViewModel = ficheViewModel
+                //navigateUp = navigateTo.categoryShow
             )
         }
     }
