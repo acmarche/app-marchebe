@@ -25,26 +25,27 @@ import androidx.compose.runtime.Composable
  *  On Error color of text and icons displayed on top of the error color.
  */
 private val DarkColorPalette = darkColors(
-    primary = blue3,
+    primary = blue1,
     primaryVariant = white,
-    secondary = orange
+    secondary = orange,
+    background = white,
+    surface = white,
+    onSurface = white,
+    onPrimary = white,
+    onSecondary = rouge,
+    onBackground = white,
 )
 
 private val LightColorPalette = lightColors(
-
-    primary = blue3,
-    primaryVariant = blue1,
+    primary = blue1,
+    primaryVariant = white,
     secondary = orange,
-    onSecondary = rouge
-
-    /* Other default colors to override
-background = Color.White,
-surface = Color.White,
-onPrimary = Color.White,
-onSecondary = Color.Black,
-onBackground = Color.Black,
-onSurface = Color.Black,
-*/
+    background = white,
+    surface = white,
+    onSurface = white,
+    onPrimary = white,
+    onSecondary = rouge,
+    onBackground = white,
 )
 
 @Composable

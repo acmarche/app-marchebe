@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowLeft
+import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,12 +27,11 @@ import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.utils.fakeEvents
 
 
-// We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions. We should
-// think of composable functions to be similar to lego blocks - each composable function is in turn
-// built up of smaller composable functions.
 @Composable
-fun ListEventsComponent(eventListLiveData: LiveData<List<Event>>, onItemClick: (Int) -> Unit) {
+fun ListEventsComponent(
+    eventListLiveData: LiveData<List<Event>>, onItemClick: (Int) -> Unit,
+    navigateUp: () -> Unit
+) {
     // Here we access the live data object and convert it to a form that Jetpack Compose
     // understands using the observeAsState method.
 
@@ -50,20 +50,15 @@ fun ListEventsComponent(eventListLiveData: LiveData<List<Event>>, onItemClick: (
     if (eventList.isEmpty()) {
         LiveDataLoadingEventsComponent()
     } else {
-        LiveDataComponentListEvents(eventList, onItemClick)
+        LiveDataComponentListEvents(eventList, onItemClick, navigateUp)
     }
 }
 
-
-// We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions. We should
-// think of composable functions to be similar to lego blocks - each composable function is in turn
-// built up of smaller composable functions.
 @Composable
-fun LiveDataComponentListEvents(eventList: List<Event>, onItemClick: (Int) -> Unit) {
-    // LazyColumn is a vertically scrolling list that only composes and lays out the currently
-    // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
-    // than the VerticalScroller.
+fun LiveDataComponentListEvents(
+    eventList: List<Event>, onItemClick: (Int) -> Unit,
+    navigateUp: () -> Unit
+) {
 
     val typography = MaterialTheme.typography
 
@@ -72,7 +67,7 @@ fun LiveDataComponentListEvents(eventList: List<Event>, onItemClick: (Int) -> Un
             TopAppBar(
                 title = { Text(stringResource(id = R.string.agenda)) },
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = navigateUp) {
                         Icon(Icons.Rounded.ArrowLeft)
                         //Icon(imageResource(id = R.drawable.marche_logo))
                     }
@@ -151,62 +146,4 @@ fun LiveDataLoadingEventsComponent() {
         // honors the Material Design specification.
         CircularProgressIndicator(modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
     }
-}
-
-// We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions. We should
-// think of composable functions to be similar to lego blocks - each composable function is in turn
-// built up of smaller composable functions.
-@Composable
-fun LaunchInCompositionComponent(viewModel: EventViewModel) {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of whether the checkbox is checked. Any composable that reads the value of "eventList"
-    // will be recomposed any time the value changes. This ensures that only the composables that
-    // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
-    // is a performance optimization. It is inspired from existing frameworks like React.
-    val eventList = mutableStateListOf<Event>()
-
-    // LaunchedEffect allows you to launch a suspendable function as soon as this composable
-    // is first committed i.e this tree node is first allowed to be rendered on the screen. It
-    // also takes care of automatically cancelling it when it is no longer in the composition.
-    LaunchedEffect(Unit) {
-        // This view model merely calls a suspendable function "loadSuperheroes" to get a list of
-        // "Person" objects
-        val list = viewModel.findAllEventList()
-        // We add it to our state object
-        eventList.addAll(list)
-    }
-
-    // If the list is empty, it means that our coroutine has not completed yet and we just want
-    // to show our loading component and nothing else. So we return early.
-    if (eventList.isEmpty()) {
-        LiveDataLoadingEventsComponent()
-        return
-    }
-
-    // If the eventList is available, we will go ahead and show the list of superheroes. We
-    // reuse the same component that we created above to save time & space :)
-    LiveDataComponentListEvents(eventList, {})
-}
-
-/**
- * Android Studio lets you preview your composable functions within the IDE itself, instead of
- * needing to download the app to an Android device or emulator. This is a fantastic feature as you
- * can preview all your custom components(read composable functions) from the comforts of the IDE.
- * The main restriction is, the composable function must not take any parameters. If your composable
- * function requires a parameter, you can simply wrap your component inside another composable
- * function that doesn't take any parameters and call your composable function with the appropriate
- * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
- */
-@Preview
-@Composable
-fun LiveDataComponentListPreview() {
-    LiveDataComponentListEvents(fakeEvents(), {})
-}
-
-@Preview
-@Composable
-fun LiveDataLoadingComponentPreview() {
-    LiveDataLoadingEventsComponent()
 }

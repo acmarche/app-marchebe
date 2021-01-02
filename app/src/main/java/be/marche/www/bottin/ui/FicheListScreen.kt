@@ -8,22 +8,17 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowLeft
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.marche.bottin.model.Category
 import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
 import be.marche.www.ui.components.NetworkImageComponentPicasso
-import be.marche.www.utils.fakeCategory
-import be.marche.www.utils.fakeFiches
 
 @Composable
 fun ListFichesScreen(
@@ -32,13 +27,6 @@ fun ListFichesScreen(
     ficheViewModel: FicheViewModel,
     onItemClick: (Int) -> Unit
 ) {
-
-    /**
-     * get info category
-     * if no error
-     * get childs
-     *
-     */
     val category by categoryViewModel.findById(categoryId).observeAsState(initial = null)
     category?.let {
 
@@ -130,20 +118,4 @@ fun LiveDataLoadingFichesComponent() {
     ) {
         CircularProgressIndicator(modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
     }
-}
-
-@Composable
-fun LaunchInCompositionComponent(category: Category, viewModel: FicheViewModel) {
-    val ficheList = mutableStateListOf<Fiche>()
-    LaunchedEffect(Unit) {
-        val list = viewModel.findAllFiches()
-        ficheList.addAll(list)
-    }
-
-    if (ficheList.isEmpty()) {
-        LiveDataLoadingFichesComponent()
-        return
-    }
-
-    LiveDataComponentListFiches(category, ficheList, {})
 }

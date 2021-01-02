@@ -25,8 +25,7 @@ val typography = Typography(
     body1 = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Normal,
-        fontSize = 13.sp,
-        color = blue2
+        fontSize = 13.sp
     ),
 
     h2 = TextStyle(
@@ -40,14 +39,14 @@ val typography = Typography(
         fontFamily = Montserrat,
         fontSize = 15.sp,
         fontWeight = FontWeight.Bold,
-        color = Color(0xFFff7200)
+        color = orange
     ),
 
     h4 = TextStyle(
         fontFamily = Montserrat,
         fontSize = 15.sp,
         fontWeight = FontWeight.Light,
-        color = Color.DarkGray,
+        color = gris,
     ),
 
     h6 = defaultTypography.h6.copy(fontFamily = Montserrat),

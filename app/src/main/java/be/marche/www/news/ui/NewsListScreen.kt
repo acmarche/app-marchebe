@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowLeft
+import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -21,20 +22,25 @@ import be.marche.www.model.News
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 
 @Composable
-fun ListNewsScreen(newsListLiveData: LiveData<List<News>>, onItemClick: (Int) -> Unit) {
+fun ListNewsScreen(
+    newsListLiveData: LiveData<List<News>>,
+    onItemClick: (Int) -> Unit,
+    navigateUp: () -> Unit
+) {
     val newsList by newsListLiveData.observeAsState(initial = emptyList())
     if (newsList.isEmpty()) {
         LiveDataLoadingComponentListNews()
     } else {
-        LiveDataComponentNewsList(newsList, onItemClick)
+        LiveDataComponentNewsList(newsList, onItemClick, navigateUp)
     }
 }
 
 @Composable
-fun LiveDataComponentNewsList(newsList: List<News>, onItemClick: (Int) -> Unit) {
-    // LazyColumn is a vertically scrolling list that only composes and lays out the currently
-    // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
-    // than the VerticalScroller.
+fun LiveDataComponentNewsList(
+    newsList: List<News>,
+    onItemClick: (Int) -> Unit,
+    navigateUp: () -> Unit
+) {
 
     val typography = MaterialTheme.typography
 
@@ -43,7 +49,7 @@ fun LiveDataComponentNewsList(newsList: List<News>, onItemClick: (Int) -> Unit) 
             TopAppBar(
                 title = { Text(stringResource(id = R.string.actus)) },
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = navigateUp) {
                         Icon(Icons.Rounded.ArrowLeft)
                         //Icon(imageResource(id = R.drawable.marche_logo))
                     }

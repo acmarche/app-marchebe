@@ -81,7 +81,8 @@ fun RegisterRoutes(
         composable(Routes.News) {
             ListNewsScreen(
                 newsViewModel.findAllNews(),
-                onItemClick = navigateTo.newsShow
+                onItemClick = navigateTo.newsShow,
+                navigateUp = navigateTo.navigateUp
             )
         }
         composable(
@@ -92,14 +93,15 @@ fun RegisterRoutes(
         ) { backStackEntry ->
             NewsShowComponent(
                 newsId = backStackEntry.arguments?.getInt(Routes.routeArgs.newsId) ?: 0,
-                newsViewModel
-                //navigateUp = actions.navigateUp
+                newsViewModel,
+                navigateUp = navigateTo.listNews
             )
         }
         composable(Routes.Agenda) {
             ListEventsComponent(
                 eventViewModel.findAllEvent(),
-                onItemClick = navigateTo.eventShow
+                onItemClick = navigateTo.eventShow,
+                navigateUp = navigateTo.navigateUp
             )
         }
         composable(
@@ -110,8 +112,8 @@ fun RegisterRoutes(
         ) { backStackEntry ->
             EventShowScreen(
                 eventId = backStackEntry.arguments?.getInt(Routes.routeArgs.eventId) ?: 0,
-                eventViewModel = eventViewModel
-                //navigateUp = actions.navigateUp
+                eventViewModel = eventViewModel,
+                navigateUp = navigateTo.listEvents
             )
         }
         composable(

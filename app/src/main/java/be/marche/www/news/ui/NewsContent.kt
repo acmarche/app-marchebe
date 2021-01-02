@@ -30,21 +30,27 @@ private val defaultSpacerSize = 16.dp
 
 
 @Composable
-fun NewsShowComponent(newsId: Int, newsViewModel: NewsViewModel) {
+fun NewsShowComponent(
+    newsId: Int, newsViewModel: NewsViewModel,
+    navigateUp: () -> Unit
+) {
     val news by newsViewModel.findById(newsId).observeAsState(initial = null)
-    news?.let { NewsContent(it) }
+    news?.let { NewsContent(it, navigateUp) }
 
 }
 
 @Composable
-fun NewsContent(news: News) {
+fun NewsContent(
+    news: News,
+    navigateUp: () -> Unit
+) {
     TopAppBar(
         title = { },
         backgroundColor = Color.Transparent,
         elevation = 0.dp,
         navigationIcon = {
             Box {
-                IconButton(onClick = {}) {
+                IconButton(onClick = navigateUp) {
                     Icon(Icons.Filled.ArrowLeft, tint = Color.White)
                     //Icon(imageResource(id = R.drawable.marche_logo))
                 }
@@ -119,6 +125,6 @@ private fun PostHeaderImage2(post: News) {
 @Composable
 private fun PlantDescriptionPreview() {
     MarcheComposeTheme() {
-        NewsContent(fakeNews())
+        NewsContent(fakeNews(), {})
     }
 }

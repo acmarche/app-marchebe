@@ -31,20 +31,26 @@ import be.marche.www.utils.fakeEvent
 private val defaultSpacerSize = 16.dp
 
 @Composable
-fun EventShowScreen(eventId: Int, eventViewModel: EventViewModel) {
+fun EventShowScreen(
+    eventId: Int, eventViewModel: EventViewModel,
+    navigateUp: () -> Unit
+) {
     val event by eventViewModel.findById(eventId).observeAsState(initial = null)
-    event?.let { EventContent(it) }
+    event?.let { EventContent(it, navigateUp) }
 }
 
 @Composable
-fun EventContent(event: Event) {
+fun EventContent(
+    event: Event,
+    navigateUp: () -> Unit
+) {
     TopAppBar(
         title = { },
         backgroundColor = Color.Transparent,
         elevation = 0.dp,
         navigationIcon = {
             Box {
-                IconButton(onClick = {}) {
+                IconButton(onClick = navigateUp) {
                     Icon(Icons.Filled.ArrowLeft, tint = Color.White)
                     //Icon(imageResource(id = R.drawable.marche_logo))
                 }
@@ -119,6 +125,6 @@ private fun PostHeaderImage2(post: Event) {
 @Composable
 private fun PlantDescriptionPreview() {
     MarcheComposeTheme() {
-        EventContent(fakeEvent())
+        EventContent(fakeEvent(),{})
     }
 }
