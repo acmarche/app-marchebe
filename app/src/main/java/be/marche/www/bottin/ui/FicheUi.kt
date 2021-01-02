@@ -86,6 +86,7 @@ class FicheUi {
                     //   Spacer(Modifier.preferredHeight(8.dp).clip(shape = RoundedCornerShape(8.dp)))
                     Coordonnees(fiche)
                     Social(fiche)
+                    Contact(fiche)
                     Comments(fiche)
                 }
             }
@@ -93,17 +94,25 @@ class FicheUi {
     }
 
     @Composable
-    private fun Coordonnees(fiche: Fiche) {
-        IconeAndText(texte = "Téléphone", value = fiche.telephone, Icons.Filled.Phone)
-        IconeAndText(texte = "Gsm", value = fiche.gsm, Icons.Filled.Smartphone)
-        IconeAndText(texte = "Fax", value = fiche.fax, Icons.Filled.SpeakerPhone)
+    private fun Coordonnees(fiche: Fiche, isContact: Boolean = false) {
+
+        val website = if (isContact) null else fiche.website
+        val email = if (isContact) fiche.contact_email else fiche.email
+        val telephone = if (isContact) fiche.contact_telephone else fiche.telephone
+        val telephoneAutre = if (isContact) fiche.contact_telephone_autre else fiche.telephone_autre
+        val gsm = if (isContact) fiche.contact_gsm else fiche.gsm
+        val fax = if (isContact) fiche.contact_fax else fiche.fax
+
+        IconeAndText(texte = "Site", value = website, Icons.Filled.Public)
+        IconeAndText(texte = "Email", value = email, Icons.Filled.Email)
+        IconeAndText(texte = "Téléphone", value = telephone, Icons.Filled.Phone)
+        IconeAndText(texte = "Téléphone", value = telephoneAutre, Icons.Filled.Phone)
+        IconeAndText(texte = "Gsm", value = gsm, Icons.Filled.Smartphone)
+        IconeAndText(texte = "Fax", value = fax, Icons.Filled.SpeakerPhone)
     }
 
     @Composable
     private fun Social(fiche: Fiche) {
-        IconeAndText(texte = "Site", value = fiche.website, Icons.Filled.Public)
-        IconeAndText(texte = "Email", value = fiche.email, Icons.Filled.Email)
-
         IconeAndText(texte = "Facebook", value = fiche.facebook, Icons.Filled.Facebook)
         IconeAndText(texte = "Twitter", value = fiche.twitter, Icons.Outlined.Facebook)
         IconeAndText(
@@ -133,19 +142,32 @@ class FicheUi {
     }
 
     @Composable
+    private fun Contact(fiche: Fiche) {
+        fiche.nom?.let {
+            Text("$it ${fiche.prenom} ")
+        }
+        fiche.contact_rue?.let {
+            val adresse =
+                "${fiche.contact_rue} ${fiche.contact_num} \n${fiche.contact_cp} ${fiche.contact_localite}"
+            IconeAndText(texte = null, value = adresse, Icons.Filled.Map)
+        }
+        Coordonnees(fiche, true)
+    }
+
+    @Composable
     private fun IconeAndText(texte: String?, value: String?, icon: ImageVector) {
         if (value !== null) {
-            IconButton(onClick = {}) {
-                Icon(icon, tint = blue3)
+            Row() {
+                IconButton(onClick = {}) {
+                    Icon(icon, tint = blue3)
+                }
+                val content = StringBuilder()
+                if (texte != null) {
+                    content.append("$texte: \n")
+                }
+                content.append(value)
+                Text(text = content.toString())
             }
-            val content = StringBuilder()
-
-            if (texte != null) {
-                content.append("$texte: \n")
-            }
-
-            content.append(value)
-            Text(text = content.toString())
         }
     }
 
@@ -162,4 +184,3 @@ class FicheUi {
         }
     }
 }
-
