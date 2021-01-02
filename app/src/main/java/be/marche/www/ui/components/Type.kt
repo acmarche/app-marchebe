@@ -28,6 +28,8 @@ val typography = Typography(
         fontSize = 13.sp
     ),
 
+    body2 = defaultTypography.body2.copy(fontFamily = Montserrat),
+
     h2 = TextStyle(
         fontFamily = Montserrat,
         fontSize = 20.sp,
@@ -52,7 +54,6 @@ val typography = Typography(
     h6 = defaultTypography.h6.copy(fontFamily = Montserrat),
     subtitle1 = defaultTypography.subtitle1.copy(fontFamily = Montserrat),
     subtitle2 = defaultTypography.subtitle2.copy(fontFamily = Montserrat),
-    body2 = defaultTypography.body2.copy(fontFamily = Montserrat),
     button = defaultTypography.button.copy(fontFamily = Montserrat),
     caption = defaultTypography.caption.copy(fontFamily = Montserrat),
     overline = defaultTypography.overline.copy(fontFamily = Montserrat)

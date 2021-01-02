@@ -38,14 +38,14 @@ private val DarkColorPalette = darkColors(
 
 private val LightColorPalette = lightColors(
     primary = blue1,
-    primaryVariant = white,
+    primaryVariant = rouge,
     secondary = orange,
     background = white,
-    surface = white,
-    onSurface = white,
-    onPrimary = white,
+    surface = rouge,
+    onSurface = rouge,
+    onPrimary = white,//color on top bar
     onSecondary = rouge,
-    onBackground = white,
+    onBackground = blue3,//color texte
 )
 
 @Composable

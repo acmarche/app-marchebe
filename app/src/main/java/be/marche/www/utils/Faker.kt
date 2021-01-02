@@ -7,14 +7,53 @@ import be.marche.www.model.News
 
 fun fakeFiches(): List<Fiche> {
     return listOf(
-        Fiche(
-            id = 5,
-            societe = "Societe de jf",
-            midi = false,
-            pmr = false,
-            centreville = false
-        )
+        fakeFiche()
     )
+}
+
+fun fakeFiche(): Fiche {
+    val fiche =
+    Fiche(
+        id = 5,
+        societe = "Societe de jf",
+        midi = false,
+        pmr = false,
+        centreville = false,
+        telephone = "084 32 51 22",
+        rue = "Rue des jolis bois",
+        numero = "12",
+        cp = "6900",
+        localite = "Aye",
+        website = "https://cst.marche.be",
+        email = "cst@marche.be",
+        telephone_autre = "045 22 33 66",
+        fax = "081 22 55 88",
+        gsm = "0475 66 89 52",
+        fonction = "Webmaster",
+        civilite = "Monsieur",
+        nom = "Dupont",
+        prenom = "Jean",
+        contact_rue = "Rue des carmes",
+        contact_num = "22",
+        contact_cp = "6900",
+        contact_localite = "Marche",
+        contact_email = "info@marche.be",
+        contact_telephone = "085 66 99 23",
+        contact_telephone_autre = "041 22 55 66",
+        contact_fax = "042 44 66 99",
+        contact_gsm = "0475 88 99 66",
+        comment1 = "ma description 1",
+        comment2 = "ma descrition 2",
+        comment3 = "ma description 3",
+        facebook = "https://facebook.cm",
+        image = "https://bottin.marche.be/bottin/fiches/898/947408814a3e396b6fb2a55035291240.jpg",
+        instagram = "https://instagram.com",
+        twitter = "https://twitter.com",
+        logo = "https://bottin.marche.be/bottin/fiches/898/bf3017ff8bdb7b1f9927d9629c138379.png",
+        longitude = "50.22",
+        latitude = "5.23"
+    )
+    return fiche
 }
 
 fun fakeCategory(): Category {
@@ -25,15 +64,6 @@ fun Category(name: String): Category {
     return Category(name = "Category test")
 }
 
-fun Fiche(id: Int, societe: String, midi: Boolean, pmr: Boolean, centreville: Boolean): Fiche {
-    return Fiche(
-        id = id,
-        societe = societe,
-        midi = midi,
-        pmr = pmr,
-        centreville = centreville
-    )
-}
 
 fun fakeNews(): News {
     return News(
