@@ -7,6 +7,7 @@ import androidx.room.Query
 import be.marche.bottin.model.Category
 import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.model.Classement
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BottinDao {
@@ -22,6 +23,9 @@ interface BottinDao {
 
     @Query("SELECT * FROM category WHERE parent_id = 0 OR parent_id IS NULL ORDER BY name")
     fun findRootsCategories(): List<Category>
+
+    @Query("SELECT * FROM category WHERE parent_id = 0 OR parent_id IS NULL ORDER BY name")
+    fun findRootsCategoriesFlow(): Flow<List<Category>>
 
     @Query("SELECT * FROM category WHERE parent_id = :categoryId ORDER BY name")
     fun findChildren(categoryId: Int): List<Category>

@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
  */
 private val DarkColorPalette = darkColors(
     primary = blue3,
-    primaryVariant = blue1,
+    primaryVariant = white,
     secondary = orange
 )
 
@@ -65,7 +65,6 @@ fun MarcheComposeTheme(
         content = content
     )
 }
-
 
 @Composable
 val MaterialColors: Colors

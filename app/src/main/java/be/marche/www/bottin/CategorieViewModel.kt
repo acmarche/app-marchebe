@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import be.marche.bottin.model.Category
 import be.marche.www.bottin.repository.CategoryRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class CategoryViewModel @ViewModelInject constructor(
@@ -19,6 +20,8 @@ class CategoryViewModel @ViewModelInject constructor(
 
     suspend fun loadAllCategoriesFromRemote(): List<Category> =
         categoryRepository.loadAllFromRemote()
+
+    val allRootsFlow: LiveData<List<Category>> = categoryRepository.categoriesFlow.asLiveData()
 
     fun findAllAsList(): List<Category> =
         categoryRepository.findAll()
