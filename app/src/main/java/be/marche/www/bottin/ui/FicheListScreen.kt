@@ -178,7 +178,7 @@ fun LiveDataComponentListFiches(
                             )
                         }
                     }, icon = {
-                        fiche.image?.let { imageUrl ->
+                        fiche.logo?.let { imageUrl ->
                             NetworkImageComponentPicasso(
                                 url = imageUrl,
                                 modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)

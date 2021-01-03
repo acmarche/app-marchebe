@@ -51,7 +51,8 @@ fun fakeFiche(): Fiche {
         twitter = "https://twitter.com",
         logo = "https://bottin.marche.be/bottin/fiches/898/bf3017ff8bdb7b1f9927d9629c138379.png",
         longitude = "50.22",
-        latitude = "5.23"
+        latitude = "5.23",
+        photos = emptyList()
     )
     return fiche
 }

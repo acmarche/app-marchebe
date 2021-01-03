@@ -39,6 +39,7 @@ data class Fiche(
     val centreville: Boolean,
     val facebook: String?,
     val image: String?,
+    val photos: List<String>?,
     val instagram: String?,
     val twitter: String?,
     val logo: String?,
