@@ -129,8 +129,9 @@ fun RegisterRoutes(
                 categoryId = backStackEntry.arguments?.getInt(Routes.routeArgs.categoryId) ?: 0,
                 categoryViewModel = categoryViewModel,
                 ficheViewModel = ficheViewModel,
-                onItemClick = navigateTo.ficheShow
-                //navigateUp = actions.navigateUp
+                onCategoryClick = navigateTo.listFiches,
+                onFicheItemClick = navigateTo.ficheShow,
+                navigateUp = navigateTo.listFiches
             )
         }
         composable(

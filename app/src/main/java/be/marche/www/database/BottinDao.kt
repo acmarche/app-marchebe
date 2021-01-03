@@ -28,7 +28,7 @@ interface BottinDao {
     fun findRootsCategoriesFlow(): Flow<List<Category>>
 
     @Query("SELECT * FROM category WHERE parent_id = :categoryId ORDER BY name")
-    fun findChildren(categoryId: Int): List<Category>
+    suspend fun findChildren(categoryId: Int): List<Category>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategories(categories: List<Category>)

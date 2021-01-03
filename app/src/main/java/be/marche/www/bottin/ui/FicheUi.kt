@@ -2,16 +2,17 @@ package be.marche.www.bottin.ui
 
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.Facebook
 import androidx.compose.material.icons.rounded.List
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,7 +39,7 @@ class FicheUi {
 
         }
         val fiche by ficheViewModel.findByIdAsLive(ficheId).observeAsState(initial = null)
-//let renvoie quelque chose
+
         fiche.let {
             if (it != null) {
                 Content(it)
@@ -76,6 +77,7 @@ class FicheUi {
                         bottom = 10.dp
                     )
                 ) {
+                    Spacer(Modifier.preferredHeight(8.dp).clip(shape = RoundedCornerShape(8.dp)))
                     Row(
                         horizontalArrangement = Arrangement.Start,
                         verticalAlignment = Alignment.CenterVertically,
@@ -83,7 +85,6 @@ class FicheUi {
                         val adresse = "${fiche.rue} ${fiche.numero} \n${fiche.cp} ${fiche.localite}"
                         IconeAndText(texte = null, value = adresse, Icons.Filled.Map)
                     }
-                    //   Spacer(Modifier.preferredHeight(8.dp).clip(shape = RoundedCornerShape(8.dp)))
                     Coordonnees(fiche)
                     Social(fiche)
                     Contact(fiche)
@@ -114,12 +115,19 @@ class FicheUi {
     @Composable
     private fun Social(fiche: Fiche) {
         IconeAndText(texte = "Facebook", value = fiche.facebook, Icons.Filled.Facebook)
-        IconeAndText(texte = "Twitter", value = fiche.twitter, Icons.Outlined.Facebook)
+        IconeAndText(texte = "Twitter", value = fiche.twitter, Icons.Filled.Facebook)
         IconeAndText(
             texte = "Instagram",
             value = fiche.instagram,
             Icons.Filled.SportsSoccer
         )
+    }
+
+    @Composable
+    private fun Accessibility(fiche: Fiche) {
+        IconeAndText(texte = "Pmr", value = fiche.facebook, Icons.Filled.Accessibility)
+        IconeAndText(texte = "Centre", value = fiche.twitter, Icons.Filled.Construction)
+        IconeAndText(texte = "Midi", value = fiche.instagram, Icons.Filled.Fastfood)
     }
 
     @Composable

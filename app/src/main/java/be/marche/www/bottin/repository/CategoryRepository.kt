@@ -24,7 +24,7 @@ class CategoryRepository @Inject constructor(
         return bottinDao.findRootsCategories()
     }
 
-    fun findChildren(categoryId: Int): List<Category> {
+    suspend fun findChildren(categoryId: Int): List<Category> {
         return bottinDao.findChildren(categoryId)
     }
 
@@ -32,7 +32,7 @@ class CategoryRepository @Inject constructor(
         bottinDao.insertCategories(categories)
     }
 
-    val categoriesFlow: Flow<List<Category>> = bottinDao.findRootsCategoriesFlow()
+   val categoriesFlow: Flow<List<Category>> = bottinDao.findRootsCategoriesFlow()
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
