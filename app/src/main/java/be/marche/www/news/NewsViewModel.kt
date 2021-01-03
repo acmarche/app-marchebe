@@ -40,6 +40,29 @@ class NewsViewModel @ViewModelInject constructor(
     }
 
 
+    /**
+     *
+     */
+
+    fun uiState(): LiveData<UiState> = uiState
+    protected val uiState: MutableLiveData<UiState> = MutableLiveData()
+
+    fun performSingleNetworkRequest() {
+        uiState.value = UiState.Loading
+        viewModelScope.launch {
+            Timber.w("zeze launch")
+            try {
+                val recentAndroidVersions = newsRepository.loadAllNewsFromRemote()
+                uiState.value = UiState.Success(recentAndroidVersions)
+                Timber.w("zeze success")
+
+            } catch (exception: Exception) {
+                Timber.w("zeze error " + exception)
+                uiState.value = UiState.Error("Network Request failed! : " + exception.message)
+            }
+        }
+    }
+
 
 }
 

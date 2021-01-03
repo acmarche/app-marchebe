@@ -40,10 +40,10 @@ fun MainScreen(
         var splashShown by remember { mutableStateOf(SplashState.Shown) }
         val transition = transition(splashTransitionDefinition, splashShown)
         Box {
-            LandingScreen(
+         /*  LandingScreen(
                 modifier = Modifier.alpha(transition[splashAlphaKey]),
                 onTimeout = { splashShown = SplashState.Completed }
-            )
+            )*/
             HomeScreen(
                 listNews, listEvents, listFiches, navigateUp
             )

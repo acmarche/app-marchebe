@@ -1,11 +1,12 @@
 package be.marche.www.navigation
 
-import android.app.ProgressDialog.show
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.navigation.NavHostController
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.rememberNavController
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.ClassementViewModel
 import be.marche.www.bottin.FicheViewModel
@@ -18,7 +19,6 @@ import be.marche.www.home.MainScreen
 import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.ListNewsScreen
 import be.marche.www.news.ui.NewsShowComponent
-import timber.log.Timber
 
 object Routes {
     const val Home = "home"
@@ -37,29 +37,6 @@ object Routes {
     }
 }
 
-class Actions(navController: NavHostController) {
-    val listNews: () -> Unit = {
-        navController.navigate(Routes.News)
-    }
-    val newsShow: (Int) -> Unit = { newsId ->
-        navController.navigate("newsShow/$newsId")
-    }
-    val listEvents: () -> Unit = {
-        navController.navigate(Routes.Agenda)
-    }
-    val eventShow: (Int) -> Unit = { eventId ->
-        navController.navigate("eventShow/$eventId")
-    }
-    val listFiches: (categoryId: Int) -> Unit = { categoryId ->
-        navController.navigate("listFiches/$categoryId")
-    }
-    val ficheShow: (categoryId: Int, ficheId: Int) -> Unit = { categoryId, ficheId ->
-        navController.navigate("ficheShow/$categoryId/$ficheId")
-    }
-    val navigateUp: () -> Unit = {
-        navController.popBackStack()
-    }
-}
 
 @Composable
 fun RegisterRoutes(

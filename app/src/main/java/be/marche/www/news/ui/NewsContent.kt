@@ -19,22 +19,49 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
+import be.marche.www.api.UiState
 import be.marche.www.model.News
 import be.marche.www.news.NewsViewModel
 import be.marche.www.ui.components.MarcheComposeTheme
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.ui.components.TextHtml
 import be.marche.www.utils.fakeNews
+import timber.log.Timber
 
 private val defaultSpacerSize = 16.dp
 
 
 @Composable
 fun NewsShowComponent(
-    newsId: Int, newsViewModel: NewsViewModel,
+    newsId: Int,
+    newsViewModel: NewsViewModel,
     navigateUp: () -> Unit
 ) {
     val news by newsViewModel.findById(newsId).observeAsState(initial = null)
+
+    val uiState by newsViewModel.uiState().observeAsState(initial = null)
+  //  newsViewModel.performSingleNetworkRequest()
+
+    if (uiState != null) {
+
+        when (uiState) {
+            is UiState.Loading -> {
+                Text("loadin")
+                Timber.w("zeze loading")
+            }
+            is UiState.Success -> {
+                Text("zeze success")
+                Timber.w("zeze success")
+            }
+            is UiState.Error -> {
+                Timber.w("zeze error")
+                Text("Error ${(uiState as UiState.Error).message}")
+            }
+            else -> Text("default")
+
+        }
+    }
+
     news?.let { NewsContent(it, navigateUp) }
 
 }

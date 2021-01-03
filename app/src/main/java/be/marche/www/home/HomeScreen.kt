@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import be.marche.www.R
 import be.marche.www.bottin.model.Bottin
 import be.marche.www.ui.components.MaterialColors
+import timber.log.Timber
 
 @Composable
 fun HomeScreen(

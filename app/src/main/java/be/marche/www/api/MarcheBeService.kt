@@ -10,7 +10,7 @@ import retrofit2.http.Path
  */
 interface MarcheBeService {
 
-    @GET("marchebe/actualites")
+    @GET("marchebe/actualiites")
     suspend fun loadAllNews(
     ): List<News>
 
