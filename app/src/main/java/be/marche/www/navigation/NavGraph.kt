@@ -20,23 +20,6 @@ import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.ListNewsScreen
 import be.marche.www.news.ui.NewsShowComponent
 
-object Routes {
-    const val Home = "home"
-    const val News = "listNews"
-    const val Agenda = "listEvents"
-    const val EventShow = "eventShow/{eventId}"
-    const val NewsShow = "newsShow/{newsId}"
-    const val Fiches = "listFiches/{categoryId}"
-    const val FicheShow = "ficheShow/{categoryId}/{ficheId}"
-
-    object routeArgs {
-        const val eventId = "eventId"
-        const val newsId = "newsId"
-        const val ficheId = "ficheId"
-        const val categoryId = "categoryId"
-    }
-}
-
 
 @Composable
 fun RegisterRoutes(
@@ -49,8 +32,8 @@ fun RegisterRoutes(
     val navController = rememberNavController()
     val navigateTo = remember(navController) { Actions(navController) }
 
-    NavHost(navController = navController, startDestination = Routes.Home) {
-        composable(Routes.Home) {
+    NavHost(navController = navController, startDestination = Router.Routes.Home) {
+        composable(Router.Routes.Home) {
             MainScreen(
                 listNews = navigateTo.listNews,
                 listEvents = navigateTo.listEvents,
@@ -58,7 +41,7 @@ fun RegisterRoutes(
                 navigateUp = navigateTo.navigateUp
             )
         }
-        composable(Routes.News) {
+        composable(Router.Routes.News) {
             ListNewsScreen(
                 newsViewModel.findAllNews(),
                 onItemClick = navigateTo.newsShow,
@@ -66,18 +49,18 @@ fun RegisterRoutes(
             )
         }
         composable(
-            route = Routes.NewsShow,
-            arguments = listOf(navArgument(Routes.routeArgs.newsId) {
+            route = Router.Routes.NewsShow,
+            arguments = listOf(navArgument(Router.Routes.routeArgs.newsId) {
                 type = NavType.IntType
             })
         ) { backStackEntry ->
             NewsShowComponent(
-                newsId = backStackEntry.arguments?.getInt(Routes.routeArgs.newsId) ?: 0,
+                newsId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.newsId) ?: 0,
                 newsViewModel,
                 navigateUp = navigateTo.listNews
             )
         }
-        composable(Routes.Agenda) {
+        composable(Router.Routes.Agenda) {
             ListEventsComponent(
                 eventViewModel.findAllEvent(),
                 onItemClick = navigateTo.eventShow,
@@ -85,25 +68,25 @@ fun RegisterRoutes(
             )
         }
         composable(
-            route = Routes.EventShow,
-            arguments = listOf(navArgument(Routes.routeArgs.eventId) {
+            route = Router.Routes.EventShow,
+            arguments = listOf(navArgument(Router.Routes.routeArgs.eventId) {
                 type = NavType.IntType
             })
         ) { backStackEntry ->
             EventShowScreen(
-                eventId = backStackEntry.arguments?.getInt(Routes.routeArgs.eventId) ?: 0,
+                eventId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.eventId) ?: 0,
                 eventViewModel = eventViewModel,
                 navigateUp = navigateTo.listEvents
             )
         }
         composable(
-            route = Routes.Fiches,
-            arguments = listOf(navArgument(Routes.routeArgs.categoryId) {
+            route = Router.Routes.Fiches,
+            arguments = listOf(navArgument(Router.Routes.routeArgs.categoryId) {
                 type = NavType.IntType
             })
         ) { backStackEntry ->
             ListFichesScreen(
-                categoryId = backStackEntry.arguments?.getInt(Routes.routeArgs.categoryId) ?: 0,
+                categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId) ?: 0,
                 categoryViewModel = categoryViewModel,
                 ficheViewModel = ficheViewModel,
                 onCategoryClick = navigateTo.listFiches,
@@ -112,19 +95,19 @@ fun RegisterRoutes(
             )
         }
         composable(
-            route = Routes.FicheShow,
+            route = Router.Routes.FicheShow,
             arguments = listOf(
-                navArgument(Routes.routeArgs.categoryId) {
+                navArgument(Router.Routes.routeArgs.categoryId) {
                     type = NavType.IntType
                 },
-                navArgument(Routes.routeArgs.ficheId) {
+                navArgument(Router.Routes.routeArgs.ficheId) {
                     type = NavType.IntType
                 })
         ) { backStackEntry ->
             val ficheUi = FicheUi()
             ficheUi.ShowScreen(
-                categoryId = backStackEntry.arguments?.getInt(Routes.routeArgs.categoryId) ?: 0,
-                ficheId = backStackEntry.arguments?.getInt(Routes.routeArgs.ficheId) ?: 0,
+                categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId) ?: 0,
+                ficheId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.ficheId) ?: 0,
                 categoryViewModel = categoryViewModel,
                 ficheViewModel = ficheViewModel,
                 navigateUp = navigateTo.navigateUp

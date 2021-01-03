@@ -8,13 +8,13 @@ import androidx.navigation.compose.navigate
  */
 class Actions(navController: NavHostController) {
     val listNews: () -> Unit = {
-        navController.navigate(Routes.News)
+        navController.navigate(Router.Routes.News)
     }
     val newsShow: (newsId: Int) -> Unit = { newsId ->
         navController.navigate("newsShow/$newsId")
     }
     val listEvents: () -> Unit = {
-        navController.navigate(Routes.Agenda)
+        navController.navigate(Router.Routes.Agenda)
     }
     val eventShow: (eventId: Int) -> Unit = { eventId ->
         navController.navigate("eventShow/$eventId")
