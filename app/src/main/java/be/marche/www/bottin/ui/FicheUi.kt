@@ -22,6 +22,7 @@ import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
 import be.marche.www.ui.components.MarcheComposeTheme
+import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.ui.components.blue3
 import be.marche.www.utils.fakeFiche
 
@@ -77,6 +78,8 @@ class FicheUi {
                         bottom = 10.dp
                     )
                 ) {
+                    Spacer(Modifier.preferredHeight(8.dp).clip(shape = RoundedCornerShape(8.dp)))
+                    HeaderImage(fiche)
                     Spacer(Modifier.preferredHeight(8.dp).clip(shape = RoundedCornerShape(8.dp)))
                     Row(
                         horizontalArrangement = Arrangement.Start,
@@ -160,6 +163,22 @@ class FicheUi {
             IconeAndText(texte = null, value = adresse, Icons.Filled.Map)
         }
         Coordonnees(fiche, true)
+    }
+
+
+    @Composable
+    private fun HeaderImage(fiche: Fiche) {
+        fiche.logo?.let { image ->
+            val imageModifier = Modifier
+                .heightIn(min = 180.dp)
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(8.dp))
+                .clip(shape = MaterialTheme.shapes.medium)
+            NetworkImageComponentPicasso(
+                url = image,
+                modifier = imageModifier
+            )
+        }
     }
 
     @Composable
