@@ -6,7 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.rounded.List
+import androidx.compose.material.icons.rounded.ArrowLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -24,6 +24,7 @@ import be.marche.www.bottin.FicheViewModel
 import be.marche.www.ui.components.MarcheComposeTheme
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.ui.components.blue3
+import be.marche.www.utils.fakeCategory
 import be.marche.www.utils.fakeFiche
 
 class FicheUi {
@@ -33,7 +34,8 @@ class FicheUi {
         categoryId: Int,
         ficheId: Int,
         categoryViewModel: CategoryViewModel,
-        ficheViewModel: FicheViewModel
+        ficheViewModel: FicheViewModel,
+        navigateUp: () -> Unit
     ) {
         val category by categoryViewModel.findById(categoryId).observeAsState(initial = null)
         category?.let {
@@ -43,7 +45,7 @@ class FicheUi {
 
         fiche.let {
             if (it != null) {
-                Content(it)
+                Content(it, categoryId, navigateUp)
             } else {
                 NotFound()
             }
@@ -51,7 +53,7 @@ class FicheUi {
     }
 
     @Composable
-    private fun Content(fiche: Fiche) {
+    private fun Content(fiche: Fiche, categoryId: Int, navigateUp: () -> Unit) {
         Surface(
             elevation = 10.dp,
             shape = RectangleShape
@@ -61,9 +63,8 @@ class FicheUi {
                     TopAppBar(
                         title = { Text(fiche.societe) },
                         navigationIcon = {
-                            IconButton(onClick = {}) {
-                                Icon(Icons.Rounded.List)
-                                //Icon(imageResource(id = R.drawable.marche_logo))
+                            IconButton(onClick = { navigateUp() }) {
+                                Icon(Icons.Rounded.ArrowLeft)
                             }
                         },
                     )
@@ -207,7 +208,7 @@ class FicheUi {
     @Composable
     fun PreviewFiche() {
         MarcheComposeTheme {
-            Content(fakeFiche())
+            Content(fakeFiche(), fakeCategory().id, {})
         }
     }
 }

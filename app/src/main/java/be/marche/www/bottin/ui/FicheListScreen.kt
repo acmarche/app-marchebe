@@ -30,7 +30,7 @@ fun ListFichesScreen(
     ficheViewModel: FicheViewModel,
     onCategoryClick: (categoryId: Int) -> Unit,
     onFicheItemClick: (categoryId: Int, ficheId: Int) -> Unit,
-    navigateUp: (Int) -> Unit
+    navigateUp: () -> Unit
 ) {
     val categoryLive by categoryViewModel.findById(categoryId).observeAsState(initial = null)
     categoryLive?.let { category ->
@@ -49,7 +49,7 @@ fun ListFichesScreen(
                 if (fiches.isEmpty()) {
                     //Todo
                 } else {
-                    LiveDataComponentListFiches(category, fiches, onFicheItemClick)
+                    LiveDataComponentListFiches(category, fiches, onFicheItemClick, onCategoryClick)
                 }
             }
         }
@@ -74,7 +74,7 @@ fun CategoryChildrenComponent(
     currentCategory: Category,
     categories: List<Category>,
     onCategoryClick: (categoryId: Int) -> Unit,
-    navigateUp: (Int) -> Unit
+    navigateUp: () -> Unit
 ) {
 
     val typography = MaterialTheme.typography
@@ -139,8 +139,9 @@ fun CategoryChildrenComponent(
 fun LiveDataComponentListFiches(
     category: Category,
     ficheList: List<Fiche>,
-    onItemClick: (Int, Int) -> Unit
-) {
+    onItemClick: (Int, Int) -> Unit    ,
+    onCategoryClick: (categoryId: Int) -> Unit,
+    ) {
 
     val typography = MaterialTheme.typography
 

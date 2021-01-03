@@ -50,7 +50,7 @@ class Actions(navController: NavHostController) {
     val eventShow: (Int) -> Unit = { eventId ->
         navController.navigate("eventShow/$eventId")
     }
-    val listFiches: (Int) -> Unit = { categoryId ->
+    val listFiches: (categoryId: Int) -> Unit = { categoryId ->
         navController.navigate("listFiches/$categoryId")
     }
     val ficheShow: (categoryId: Int, ficheId: Int) -> Unit = { categoryId, ficheId ->
@@ -131,7 +131,7 @@ fun RegisterRoutes(
                 ficheViewModel = ficheViewModel,
                 onCategoryClick = navigateTo.listFiches,
                 onFicheItemClick = navigateTo.ficheShow,
-                navigateUp = navigateTo.listFiches
+                navigateUp = navigateTo.navigateUp
             )
         }
         composable(
@@ -149,8 +149,8 @@ fun RegisterRoutes(
                 categoryId = backStackEntry.arguments?.getInt(Routes.routeArgs.categoryId) ?: 0,
                 ficheId = backStackEntry.arguments?.getInt(Routes.routeArgs.ficheId) ?: 0,
                 categoryViewModel = categoryViewModel,
-                ficheViewModel = ficheViewModel
-                //navigateUp = navigateTo.categoryShow
+                ficheViewModel = ficheViewModel,
+                navigateUp = navigateTo.navigateUp
             )
         }
     }
