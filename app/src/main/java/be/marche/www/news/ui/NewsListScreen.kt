@@ -28,6 +28,7 @@ fun ListNewsScreen(
 ) {
     val newsList by newsListLiveData.observeAsState(initial = emptyList())
     if (newsList.isEmpty()) {
+        //todo try to fetch if error set to user
         LiveDataLoadingComponentListNews()
     } else {
         LiveDataComponentNewsList(newsList, onItemClick, navigateUp)
@@ -122,4 +123,3 @@ fun LiveDataLoadingComponentListNews() {
         CircularProgressIndicator(modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
     }
 }
-

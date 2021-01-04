@@ -3,12 +3,10 @@ package be.marche.www.news
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import be.marche.www.api.UiState
 import be.marche.www.event.repository.NewsRepository
 import be.marche.www.model.News
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class NewsViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
@@ -21,7 +19,7 @@ class NewsViewModel @ViewModelInject constructor(
     }
 
     suspend private fun loadNewsFromRemote(): List<News> {
-        return newsRepository.loadAllNewsFromRemote()
+        return newsRepository.loadAllFromRemote()
     }
 
     fun findAllNews(): LiveData<List<News>> =
@@ -33,9 +31,9 @@ class NewsViewModel @ViewModelInject constructor(
         emit(newsRepository.findById(newsId))
     }
 
-    fun insertNews(news: List<News>) {
+    fun insertAll(news: List<News>) {
         viewModelScope.launch {
-            newsRepository.insertNews(news)
+            newsRepository.insertAll(news)
         }
     }
 

@@ -10,11 +10,11 @@ class NewsRepository @Inject constructor(
     private val newsDao: NewsDao
 ) {
 
-    suspend fun loadAllNewsFromRemote() = apiService.loadAllNews()
+    suspend fun loadAllFromRemote() = apiService.loadAllNews()
 
     fun findAllNews() = newsDao.findAllNews()
 
-    suspend fun insertNews(news: List<News>) {
+    suspend fun insertAll(news: List<News>) {
         newsDao.insertNews(news)
     }
 

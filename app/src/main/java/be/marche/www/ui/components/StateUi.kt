@@ -20,7 +20,7 @@ fun CheckSync(syncViewModel: SyncViewModel) {
                 //                Timber.w("zeze loading")
             }
             is UiState.Success -> {
-                val news = (uiState as UiState.Success).recentVersions
+                val news = (uiState as UiState.Success).value
                 //  newsViewModel.insertNews(news)
             }
             is UiState.Error -> {

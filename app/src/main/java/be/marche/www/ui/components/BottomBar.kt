@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import be.marche.www.R
 import be.marche.www.model.Event
 
-
+//https://developer.android.com/jetpack/compose/navigation#bottom-nav
 @Composable
 fun BottomBar(state: ScaffoldState) {
     BottomAppBar(backgroundColor = Color.Green) {

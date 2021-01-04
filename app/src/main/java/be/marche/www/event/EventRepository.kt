@@ -10,11 +10,11 @@ class EventRepository @Inject constructor(
     private val eventDao: EventDao
 ) {
 
-    suspend fun loadAllEventsFromRemote() = apiService.loadAllEvents()
+    suspend fun loadAllFromRemote() = apiService.loadAllEvents()
 
-    fun findAllEvents() = eventDao.findAllEvents()
+    fun findAll() = eventDao.findAllEvents()
 
-    suspend fun insertEvent(events: List<Event>) {
+    suspend fun insertAll(events: List<Event>) {
         eventDao.insertEvents(events)
     }
 

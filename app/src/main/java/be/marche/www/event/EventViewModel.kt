@@ -19,25 +19,25 @@ class EventViewModel @ViewModelInject constructor(
     }
 
     suspend private fun loadEventFromRemote(): List<Event> {
-        return eventRepository.loadAllEventsFromRemote()
+        return eventRepository.loadAllFromRemote()
     }
 
     fun findAllEventList(): List<Event> =
-        eventRepository.findAllEvents()
+        eventRepository.findAll()
 
     fun findAllEvent(): LiveData<List<Event>> =
         liveData(Dispatchers.IO) {
-            emit(eventRepository.findAllEvents())
+            emit(eventRepository.findAll())
         }
-
-    fun insertEvent(events: List<Event>) {
-        viewModelScope.launch {
-            eventRepository.insertEvent(events)
-        }
-    }
 
     fun findById(newsId: Int): LiveData<Event> = liveData {
         emit(eventRepository.findById(newsId))
+    }
+
+    fun insertAll(events: List<Event>) {
+        viewModelScope.launch {
+            eventRepository.insertAll(events)
+        }
     }
 
 }

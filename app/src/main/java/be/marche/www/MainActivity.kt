@@ -50,6 +50,10 @@ class MainActivity : AppCompatActivity() {
                     .show()
                 true -> {
                     syncViewModel.syncNews()
+                    syncViewModel.syncEvents()
+                    syncViewModel.syncFiches()
+                    syncViewModel.syncCategories()
+                    syncViewModel.syncClassements()
                 }
             }
         })
