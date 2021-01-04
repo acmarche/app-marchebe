@@ -9,8 +9,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContactPhone
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Streetview
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,13 +27,53 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
 import be.marche.www.bottin.model.Bottin
+import be.marche.www.ui.components.BottomBar
 import be.marche.www.ui.components.BottomHome
 import be.marche.www.ui.components.MaterialColors
 
 
-
 @Composable
 fun HomeScreen(
+    listNews: () -> Unit,
+    listEvents: () -> Unit,
+    listFiches: (Int) -> Unit,
+    navigateUp: () -> Unit,
+//    scaffoldState: ScaffoldState = remember { ScaffoldState() }
+) {
+
+    val scaffoldState2 = rememberDrawerState(DrawerValue.Closed)
+    val scaffoldState = rememberScaffoldState(
+        drawerState = rememberDrawerState(DrawerValue.Closed)
+    )
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        drawerContent = {
+            Column() {
+                IconButton(onClick = { scaffoldState.drawerState.open() }) {
+                    Icon(Icons.Filled.Menu)
+                }
+                // The actions should be at the end of the BottomAppBar
+                Spacer(Modifier.weight(1f, true))
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(Icons.Filled.Streetview)
+                }
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(Icons.Filled.Favorite)
+                }
+            }
+        },
+        bodyContent = {
+            HomeContent(listNews = listNews, listEvents = listEvents, listFiches = listFiches)
+            //  Content(scaffoldState = scaffoldState)
+        },
+        //  floatingActionButton = { Fab() },
+        bottomBar = { BottomBar(scaffoldState) }
+    )
+}
+
+@Composable
+fun HomeScreen2(
     listNews: () -> Unit,
     listEvents: () -> Unit,
     listFiches: (Int) -> Unit,
@@ -54,90 +98,101 @@ fun HomeScreen(
             bottomBar = {
                 BottomHome()
             }
+        )
+        {
+            HomeContent(listNews = listNews, listEvents = listEvents, listFiches = listFiches)
+        }
+    }
+}
+
+@Composable
+fun HomeContent(
+    listNews: () -> Unit,
+    listEvents: () -> Unit,
+    listFiches: (Int) -> Unit
+) {
+
+    ScrollableColumn(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        val image = loadImageResource(R.drawable.gout_vivre)
+
+        image.resource.resource?.let {
+            Image(
+                bitmap = it,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        Divider(Modifier.padding(vertical = 5.dp))
+
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        )
+        {
+            RoundedIconButton(
+                R.drawable.accueil,
+                listNews,
+                stringResource(id = R.string.contact)
+            )
+            RoundedIconButton(
+                R.drawable.actus,
+                listNews,
+                stringResource(id = R.string.actus)
+            )
+            RoundedIconButton(
+                R.drawable.agenda,
+                listEvents,
+                stringResource(id = R.string.agenda)
+            )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            ScrollableColumn(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            RoundedIconButton(
+                R.drawable.services_communaux,
+                { listFiches(Bottin.SERVICES_COMMUNAUX) },
+                stringResource(id = R.string.services_communaux)
+            )
+            RoundedIconButton(
+                R.drawable.enfance,
+                listNews,
+                stringResource(id = R.string.enfance)
+            )
+            RoundedIconButton(
+                R.drawable.loisirs,
+                listNews,
+                stringResource(id = R.string.loisirs)
+            )
+        }
 
-                val image = loadImageResource(R.drawable.gout_vivre)
-
-                image.resource.resource?.let {
-                    Image(
-                        bitmap = it,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-
-                Divider(Modifier.padding(vertical = 5.dp))
-
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                )
-                {
-                    RoundedIconButton(
-                        R.drawable.accueil,
-                        listNews,
-                        stringResource(id = R.string.contact)
-                    )
-                    RoundedIconButton(
-                        R.drawable.actus,
-                        listNews,
-                        stringResource(id = R.string.actus)
-                    )
-                    RoundedIconButton(
-                        R.drawable.agenda,
-                        listEvents,
-                        stringResource(id = R.string.agenda)
-                    )
-                }
-
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    RoundedIconButton(
-                        R.drawable.services_communaux,
-                        { listFiches(Bottin.SERVICES_COMMUNAUX) },
-                        stringResource(id = R.string.services_communaux)
-                    )
-                    RoundedIconButton(
-                        R.drawable.enfance,
-                        listNews,
-                        stringResource(id = R.string.enfance)
-                    )
-                    RoundedIconButton(
-                        R.drawable.loisirs,
-                        listNews,
-                        stringResource(id = R.string.loisirs)
-                    )
-                }
-
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    RoundedIconButton(
-                        R.drawable.commerces,
-                        { listFiches(Bottin.COMMERCES) },
-                        stringResource(id = R.string.commerce)
-                    )
-                    RoundedIconButton(
-                        R.drawable.fetes,
-                        listNews,
-                        stringResource(id = R.string.marchefete)
-                    )
-                    RoundedIconButton(
-                        R.drawable.jour_marche,
-                        listNews,
-                        stringResource(id = R.string.jour_marche)
-                    )
-                }
-            }
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            RoundedIconButton(
+                R.drawable.commerces,
+                { listFiches(Bottin.COMMERCES) },
+                stringResource(id = R.string.commerce)
+            )
+            RoundedIconButton(
+                R.drawable.fetes,
+                listNews,
+                stringResource(id = R.string.marchefete)
+            )
+            RoundedIconButton(
+                R.drawable.jour_marche,
+                listNews,
+                stringResource(id = R.string.jour_marche)
+            )
         }
     }
 }

@@ -1,6 +1,7 @@
 package be.marche.www.ui.components
 
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,9 +15,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import be.marche.www.R
 import be.marche.www.model.Event
+
+
+@Composable
+fun BottomBar(state: ScaffoldState) {
+    BottomAppBar(backgroundColor = Color.Green) {
+        Row(
+            modifier = Modifier.weight(1f),
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            BottomBarIcon(Icons.Filled.Menu, { state.drawerState.open() })
+            BottomBarIcon(Icons.Filled.Menu, {})
+            BottomBarIcon(Icons.Filled.Menu, {})
+            BottomBarIcon(Icons.Filled.Menu, {})
+        }
+    }
+}
+
+@Composable
+private fun BottomBarIcon(icon: ImageVector, click: () -> Unit) {
+    IconButton(onClick = click) {
+        Image(
+            icon,
+            modifier = Modifier.preferredSize(24.dp)
+        )
+    }
+}
 
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -88,7 +118,7 @@ fun ScaffoldWithBottomBarAndCutout() {
 @Composable
 fun BottomHome() {
     BottomAppBar {
-       // HomeDrawer()
+        // HomeDrawer()
         IconButton(onClick = { /* doSomething() */ }) {
             Icon(Icons.Filled.Menu)
         }
