@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Providers
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -40,7 +41,7 @@ fun NewsShowComponent(
     val news by newsViewModel.findById(newsId).observeAsState(initial = null)
 
     val uiState by newsViewModel.uiState().observeAsState(initial = null)
-  //  newsViewModel.performSingleNetworkRequest()
+    newsViewModel.performSingleNetworkRequest()
 
     if (uiState != null) {
 
@@ -50,6 +51,8 @@ fun NewsShowComponent(
                 Timber.w("zeze loading")
             }
             is UiState.Success -> {
+                val news = (uiState as UiState.Success).recentVersions
+
                 Text("zeze success")
                 Timber.w("zeze success")
             }
@@ -63,7 +66,6 @@ fun NewsShowComponent(
     }
 
     news?.let { NewsContent(it, navigateUp) }
-
 }
 
 @Composable
@@ -100,11 +102,6 @@ fun NewsContent(
             news.content?.let { content ->
                 Providers(AmbientContentAlpha provides ContentAlpha.medium) {
                     TextHtml(news.content)
-                    /*     Text(
-                     text = PlantDescription(news.content),
-                     style = MaterialTheme.typography.body2,
-                     lineHeight = 20.sp
-                 )*/
                 }
             }
         }

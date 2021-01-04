@@ -39,7 +39,6 @@ class NewsViewModel @ViewModelInject constructor(
         emit(newsRepository.findById(newsId))
     }
 
-
     /**
      *
      */
@@ -48,7 +47,7 @@ class NewsViewModel @ViewModelInject constructor(
     protected val uiState: MutableLiveData<UiState> = MutableLiveData()
 
     fun performSingleNetworkRequest() {
-        uiState.value = UiState.Loading
+     //   uiState.value = UiState.Loading
         viewModelScope.launch {
             Timber.w("zeze launch")
             try {

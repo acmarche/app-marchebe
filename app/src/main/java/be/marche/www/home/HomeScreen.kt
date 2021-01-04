@@ -49,6 +49,7 @@ fun HomeScreen(
                     },
                 )
             },
+            //bottomBar =
         ) {
             ScrollableColumn(
                 modifier = Modifier
