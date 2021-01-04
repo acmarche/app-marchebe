@@ -25,6 +25,7 @@ fun CheckSync(syncViewModel: SyncViewModel) {
             }
             is UiState.Error -> {
                 AlertMessage("Error ${(uiState as UiState.Error).message}")
+
                 Timber.w("zeze error")
             }
         }

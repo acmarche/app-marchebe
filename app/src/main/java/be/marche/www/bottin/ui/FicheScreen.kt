@@ -27,10 +27,19 @@ import be.marche.www.ui.components.blue3
 import be.marche.www.utils.fakeCategory
 import be.marche.www.utils.fakeFiche
 
-class FicheUi {
+
+@Preview
+@Composable
+fun PreviewFiche() {
+    MarcheComposeTheme {
+        FicheScreen.Content(fakeFiche(), fakeCategory().id, {})
+    }
+}
+
+object FicheScreen {
 
     @Composable
-    fun ShowScreen(
+    fun ShowComponent(
         categoryId: Int,
         ficheId: Int,
         categoryViewModel: CategoryViewModel,
@@ -53,7 +62,7 @@ class FicheUi {
     }
 
     @Composable
-    private fun Content(fiche: Fiche, categoryId: Int, navigateUp: () -> Unit) {
+    fun Content(fiche: Fiche, categoryId: Int, navigateUp: () -> Unit) {
         Surface(
             elevation = 10.dp,
             shape = RectangleShape
@@ -202,13 +211,5 @@ class FicheUi {
     private @Composable
     fun NotFound() {
         Text("Fiche non trouvée")
-    }
-
-    @Preview
-    @Composable
-    fun PreviewFiche() {
-        MarcheComposeTheme {
-            Content(fakeFiche(), fakeCategory().id, {})
-        }
     }
 }

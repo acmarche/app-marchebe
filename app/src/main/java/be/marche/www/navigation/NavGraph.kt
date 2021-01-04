@@ -9,16 +9,15 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
-import be.marche.www.bottin.ui.FicheUi
-import be.marche.www.bottin.ui.ListFichesScreen
+import be.marche.www.bottin.ui.FicheListScreen
+import be.marche.www.bottin.ui.FicheScreen
 import be.marche.www.event.EventViewModel
-import be.marche.www.event.ui.EventShowScreen
-import be.marche.www.event.ui.ListEventsComponent
-import be.marche.www.home.MainScreen
+import be.marche.www.event.ui.EventListScreen
+import be.marche.www.event.ui.EventScreen
+import be.marche.www.home.HomeScreen
 import be.marche.www.news.NewsViewModel
-import be.marche.www.news.ui.ListNewsScreen
-import be.marche.www.news.ui.NewsShowComponent
-
+import be.marche.www.news.ui.NewsListScreen
+import be.marche.www.news.ui.NewsScreen
 
 @Composable
 fun RegisterRoutes(
@@ -32,7 +31,7 @@ fun RegisterRoutes(
 
     NavHost(navController = navController, startDestination = Router.Routes.Home) {
         composable(Router.Routes.Home) {
-            MainScreen(
+            HomeScreen.HomeComponent(
                 listNews = navigateTo.listNews,
                 listEvents = navigateTo.listEvents,
                 listFiches = navigateTo.listFiches,
@@ -40,7 +39,7 @@ fun RegisterRoutes(
             )
         }
         composable(Router.Routes.News) {
-            ListNewsScreen(
+            NewsListScreen.ListComponent(
                 newsViewModel.findAllNews(),
                 onItemClick = navigateTo.newsShow,
                 navigateUp = navigateTo.navigateUp
@@ -52,14 +51,14 @@ fun RegisterRoutes(
                 type = NavType.IntType
             })
         ) { backStackEntry ->
-            NewsShowComponent(
+            NewsScreen.ShowComponent(
                 newsId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.newsId) ?: 0,
                 newsViewModel,
                 navigateUp = navigateTo.listNews
             )
         }
         composable(Router.Routes.Agenda) {
-            ListEventsComponent(
+            EventListScreen.ListComponent(
                 eventViewModel.findAllEvent(),
                 onItemClick = navigateTo.eventShow,
                 navigateUp = navigateTo.navigateUp
@@ -71,7 +70,7 @@ fun RegisterRoutes(
                 type = NavType.IntType
             })
         ) { backStackEntry ->
-            EventShowScreen(
+            EventScreen.ShowComponent(
                 eventId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.eventId) ?: 0,
                 eventViewModel = eventViewModel,
                 navigateUp = navigateTo.listEvents
@@ -83,7 +82,7 @@ fun RegisterRoutes(
                 type = NavType.IntType
             })
         ) { backStackEntry ->
-            ListFichesScreen(
+            FicheListScreen.NavigateCategoryComponent(
                 categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId)
                     ?: 0,
                 categoryViewModel = categoryViewModel,
@@ -103,8 +102,7 @@ fun RegisterRoutes(
                     type = NavType.IntType
                 })
         ) { backStackEntry ->
-            val ficheUi = FicheUi()
-            ficheUi.ShowScreen(
+            FicheScreen.ShowComponent(
                 categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId)
                     ?: 0,
                 ficheId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.ficheId) ?: 0,

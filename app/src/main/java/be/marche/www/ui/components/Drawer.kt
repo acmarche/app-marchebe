@@ -34,7 +34,7 @@ fun DrawerScreen(
             )
         },
         bodyContent = {
-            HomeScreen(
+            HomeScreen.HomeComponent(
                 listNews = listNews,
                 listEvents = listEvents,
                 listFiches = listFiches,
