@@ -33,15 +33,13 @@ import be.marche.www.ui.components.MaterialColors
 
 
 @Composable
-fun HomeScreen(
+fun HomeScreenWithDrawer(
     listNews: () -> Unit,
     listEvents: () -> Unit,
     listFiches: (Int) -> Unit,
     navigateUp: () -> Unit,
 //    scaffoldState: ScaffoldState = remember { ScaffoldState() }
 ) {
-
-    val scaffoldState2 = rememberDrawerState(DrawerValue.Closed)
     val scaffoldState = rememberScaffoldState(
         drawerState = rememberDrawerState(DrawerValue.Closed)
     )
@@ -73,7 +71,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeScreen2(
+fun HomeScreen(
     listNews: () -> Unit,
     listEvents: () -> Unit,
     listFiches: (Int) -> Unit,
