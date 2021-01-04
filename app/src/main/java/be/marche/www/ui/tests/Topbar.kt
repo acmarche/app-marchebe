@@ -1,4 +1,4 @@
-package be.marche.www.ui.components
+package be.marche.www.ui.tests
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

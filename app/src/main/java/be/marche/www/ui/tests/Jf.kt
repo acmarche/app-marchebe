@@ -1,4 +1,4 @@
-package be.marche.www.ui.components
+package be.marche.www.ui.tests
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
+import be.marche.www.ui.MaterialColors
 
 @Composable
 fun TestIconAndroid() {

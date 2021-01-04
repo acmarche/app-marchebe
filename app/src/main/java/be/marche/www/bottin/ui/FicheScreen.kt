@@ -21,9 +21,9 @@ import androidx.compose.ui.unit.sp
 import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
-import be.marche.www.ui.components.MarcheComposeTheme
+import be.marche.www.ui.MarcheComposeTheme
+import be.marche.www.ui.blue3
 import be.marche.www.ui.components.NetworkImageComponentPicasso
-import be.marche.www.ui.components.blue3
 import be.marche.www.utils.fakeCategory
 import be.marche.www.utils.fakeFiche
 

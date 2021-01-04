@@ -1,4 +1,4 @@
-package be.marche.www.ui.components
+package be.marche.www.ui.tests
 
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable

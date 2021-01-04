@@ -11,7 +11,7 @@ import be.marche.www.event.EventViewModel
 import be.marche.www.navigation.RegisterRoutes
 import be.marche.www.news.NewsViewModel
 import be.marche.www.sync.SyncViewModel
-import be.marche.www.ui.components.MarcheComposeTheme
+import be.marche.www.ui.MarcheComposeTheme
 import be.marche.www.utils.NetworkUtils
 import dagger.hilt.android.AndroidEntryPoint
 

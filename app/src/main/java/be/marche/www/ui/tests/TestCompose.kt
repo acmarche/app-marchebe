@@ -1,4 +1,4 @@
-package be.marche.www.ui.components
+package be.marche.www.ui.tests
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -10,6 +10,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.marche.www.model.News
+import be.marche.www.ui.components.NetworkImageComponentPicasso
 
 @Composable
 fun EventCardTop(news: News, modifier: Modifier = Modifier) {

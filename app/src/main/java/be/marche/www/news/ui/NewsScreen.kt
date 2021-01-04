@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.marche.www.model.News
 import be.marche.www.news.NewsViewModel
-import be.marche.www.ui.components.MarcheComposeTheme
+import be.marche.www.ui.MarcheComposeTheme
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.ui.components.TextHtml
 import be.marche.www.utils.fakeNews

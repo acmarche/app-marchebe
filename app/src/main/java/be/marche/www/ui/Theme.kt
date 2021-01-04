@@ -1,4 +1,4 @@
-package be.marche.www.ui.components
+package be.marche.www.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Colors
