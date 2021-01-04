@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
+import be.marche.www.sync.SyncViewModel
 import be.marche.www.ui.components.MarcheComposeTheme
 import kotlinx.coroutines.delay
 

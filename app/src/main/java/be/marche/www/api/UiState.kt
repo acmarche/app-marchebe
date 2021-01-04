@@ -8,3 +8,9 @@ sealed class UiState {
     data class Success(val recentVersions: List<News>) : UiState()
     data class Error(val message: String) : UiState()
 }
+
+class OddList<T>(val list: List<T>) {
+    fun oddItems(): List<T> {
+        return list.filterIndexed { index, _ -> index % 2 == 1 }
+    }
+}

@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import be.marche.www.home.HomeScreen
+import be.marche.www.sync.SyncViewModel
 
 
 @Composable
@@ -18,26 +19,30 @@ fun DrawerScreen(
     listNews: () -> Unit,
     listEvents: () -> Unit,
     listFiches: (Int) -> Unit,
-    navigateUp: () -> Unit) {
+    navigateUp: () -> Unit,
+    syncViewModel: SyncViewModel
+) {
     val state = rememberBottomDrawerState(BottomDrawerValue.Closed)
 
     BottomDrawerLayout(
         drawerState = state,
-        drawerContent = {  Button(
-            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 16.dp),
-            onClick = { state.close() },
-            content = { Text("Close Drawer") }
-        ) },
+        drawerContent = {
+            Button(
+                modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 16.dp),
+                onClick = { state.close() },
+                content = { Text("Close Drawer") }
+            )
+        },
         bodyContent = {
             HomeScreen(
                 listNews = listNews,
                 listEvents = listEvents,
                 listFiches = listFiches,
-                navigateUp = navigateUp)
+                navigateUp = navigateUp
+            )
         }
     )
 }
-
 
 @Composable
 fun HomeDrawer() {

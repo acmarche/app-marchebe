@@ -8,7 +8,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import be.marche.www.bottin.CategoryViewModel
-import be.marche.www.bottin.ClassementViewModel
 import be.marche.www.bottin.FicheViewModel
 import be.marche.www.bottin.ui.FicheUi
 import be.marche.www.bottin.ui.ListFichesScreen
@@ -26,8 +25,7 @@ fun RegisterRoutes(
     newsViewModel: NewsViewModel,
     eventViewModel: EventViewModel,
     ficheViewModel: FicheViewModel,
-    categoryViewModel: CategoryViewModel,
-    classementViewModel: ClassementViewModel
+    categoryViewModel: CategoryViewModel
 ) {
     val navController = rememberNavController()
     val navigateTo = remember(navController) { Actions(navController) }
@@ -86,7 +84,8 @@ fun RegisterRoutes(
             })
         ) { backStackEntry ->
             ListFichesScreen(
-                categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId) ?: 0,
+                categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId)
+                    ?: 0,
                 categoryViewModel = categoryViewModel,
                 ficheViewModel = ficheViewModel,
                 onCategoryClick = navigateTo.listFiches,
@@ -106,7 +105,8 @@ fun RegisterRoutes(
         ) { backStackEntry ->
             val ficheUi = FicheUi()
             ficheUi.ShowScreen(
-                categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId) ?: 0,
+                categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId)
+                    ?: 0,
                 ficheId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.ficheId) ?: 0,
                 categoryViewModel = categoryViewModel,
                 ficheViewModel = ficheViewModel,

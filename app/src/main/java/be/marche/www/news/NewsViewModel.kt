@@ -29,39 +29,15 @@ class NewsViewModel @ViewModelInject constructor(
             emit(newsRepository.findAllNews())
         }
 
+    fun findById(newsId: Int): LiveData<News> = liveData {
+        emit(newsRepository.findById(newsId))
+    }
+
     fun insertNews(news: List<News>) {
         viewModelScope.launch {
             newsRepository.insertNews(news)
         }
     }
-
-    fun findById(newsId: Int): LiveData<News> = liveData {
-        emit(newsRepository.findById(newsId))
-    }
-
-    /**
-     *
-     */
-
-    fun uiState(): LiveData<UiState> = uiState
-    protected val uiState: MutableLiveData<UiState> = MutableLiveData()
-
-    fun performSingleNetworkRequest() {
-     //   uiState.value = UiState.Loading
-        viewModelScope.launch {
-            Timber.w("zeze launch")
-            try {
-                val recentAndroidVersions = newsRepository.loadAllNewsFromRemote()
-                uiState.value = UiState.Success(recentAndroidVersions)
-                Timber.w("zeze success")
-
-            } catch (exception: Exception) {
-                Timber.w("zeze error " + exception)
-                uiState.value = UiState.Error("Network Request failed! : " + exception.message)
-            }
-        }
-    }
-
 
 }
 

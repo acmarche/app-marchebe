@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Streetview
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,10 +26,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
 import be.marche.www.bottin.model.Bottin
+import be.marche.www.sync.SyncViewModel
 import be.marche.www.ui.components.BottomBar
 import be.marche.www.ui.components.BottomHome
 import be.marche.www.ui.components.MaterialColors
-
 
 @Composable
 fun HomeScreenWithDrawer(
@@ -38,12 +37,12 @@ fun HomeScreenWithDrawer(
     listEvents: () -> Unit,
     listFiches: (Int) -> Unit,
     navigateUp: () -> Unit,
+    syncViewModel: SyncViewModel
 //    scaffoldState: ScaffoldState = remember { ScaffoldState() }
 ) {
     val scaffoldState = rememberScaffoldState(
         drawerState = rememberDrawerState(DrawerValue.Closed)
     )
-
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
@@ -62,7 +61,7 @@ fun HomeScreenWithDrawer(
             }
         },
         bodyContent = {
-            HomeContent(listNews = listNews, listEvents = listEvents, listFiches = listFiches)
+            HomeContent(listNews, listEvents, listFiches)
             //  Content(scaffoldState = scaffoldState)
         },
         //  floatingActionButton = { Fab() },
@@ -84,11 +83,10 @@ fun HomeScreen(
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("Accueil") },
+                    title = { Text(stringResource(R.string.welcome)) },
                     navigationIcon = {
                         IconButton(onClick = navigateUp) {
                             Icon(Icons.Rounded.Home)
-                            //Icon(imageResource(id = R.drawable.marche_logo))
                         }
                     },
                 )
@@ -98,7 +96,7 @@ fun HomeScreen(
             }
         )
         {
-            HomeContent(listNews = listNews, listEvents = listEvents, listFiches = listFiches)
+            HomeContent(listNews, listEvents, listFiches)
         }
     }
 }
@@ -109,7 +107,6 @@ fun HomeContent(
     listEvents: () -> Unit,
     listFiches: (Int) -> Unit
 ) {
-
     ScrollableColumn(
         modifier = Modifier
             .padding(16.dp)
@@ -117,7 +114,6 @@ fun HomeContent(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         val image = loadImageResource(R.drawable.gout_vivre)
 
         image.resource.resource?.let {
