@@ -1,7 +1,6 @@
 package be.marche.www.ui.components
 
 
-
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,7 +8,10 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Streetview
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -81,6 +83,24 @@ fun ScaffoldWithBottomBarAndCutout() {
             }
         }
     )
+}
+
+@Composable
+fun BottomHome() {
+    BottomAppBar {
+       // HomeDrawer()
+        IconButton(onClick = { /* doSomething() */ }) {
+            Icon(Icons.Filled.Menu)
+        }
+        // The actions should be at the end of the BottomAppBar
+        Spacer(Modifier.weight(1f, true))
+        IconButton(onClick = { /* doSomething() */ }) {
+            Icon(Icons.Filled.Streetview)
+        }
+        IconButton(onClick = { /* doSomething() */ }) {
+            Icon(Icons.Filled.Favorite)
+        }
+    }
 }
 
 /**

@@ -23,8 +23,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
 import be.marche.www.bottin.model.Bottin
+import be.marche.www.ui.components.BottomHome
 import be.marche.www.ui.components.MaterialColors
-import timber.log.Timber
+
+
 
 @Composable
 fun HomeScreen(
@@ -49,7 +51,9 @@ fun HomeScreen(
                     },
                 )
             },
-            //bottomBar =
+            bottomBar = {
+                BottomHome()
+            }
         ) {
             ScrollableColumn(
                 modifier = Modifier

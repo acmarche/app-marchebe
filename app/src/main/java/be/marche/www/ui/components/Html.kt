@@ -9,6 +9,9 @@ import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
 
+/***
+ * https://developer.android.com/codelabs/jetpack-compose-migration#8
+ */
 @Composable
 fun TextHtml(description: String) {
     val textView = rememberTextView()
