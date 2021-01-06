@@ -37,7 +37,7 @@ class RepositoryModule {
 
     @Provides
     @ActivityRetainedScoped
-    fun provideCtegoryRepository(apiService: BottinService, bottinDao: BottinDao) =
+    fun provideCategoryRepository(apiService: BottinService, bottinDao: BottinDao) =
         CategoryRepository(apiService, bottinDao)
 
     @Provides

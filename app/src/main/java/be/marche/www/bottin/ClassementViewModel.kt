@@ -19,13 +19,6 @@ class ClassementViewModel @ViewModelInject constructor(
     suspend fun loadAllClassementsFromRemote(): List<Classement> =
         classementRepository.loadAllFromRemote()
 
-    fun insertClassements(classements: List<Classement>) {
-        viewModelScope.launch {
-            classementRepository.insertAll(classements)
-        }
-    }
-
-
     fun getCategoriesByFicheId(categoryId: Int): LiveData<List<Classement>> {
         return liveData {
             emit(classementRepository.findByFicheId(categoryId))

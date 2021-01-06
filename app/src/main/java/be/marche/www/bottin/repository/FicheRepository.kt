@@ -21,9 +21,5 @@ class FicheRepository @Inject constructor(
     suspend fun findById(ficheId: Int): Fiche {
         return bottinDao.findFicheById(ficheId)
     }
-
-    suspend fun getFichesByCategory(categoryId: Int) =
-        bottinService.findFichesByCategory(categoryId)
-
 }
 

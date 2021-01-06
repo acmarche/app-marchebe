@@ -44,12 +44,6 @@ class FicheViewModel @ViewModelInject constructor(
         }
     }
 
-    fun insertFiches(fiches: List<Fiche>) {
-        viewModelScope.launch {
-            ficheRepository.insertAll(fiches)
-        }
-    }
-
     fun findByIdAsLive(ficheId: Int): LiveData<Fiche> = liveData {
         emit(ficheRepository.findById(ficheId))
     }

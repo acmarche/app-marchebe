@@ -3,7 +3,6 @@ package be.marche.www.bottin.repository
 import be.marche.bottin.model.Category
 import be.marche.www.api.BottinService
 import be.marche.www.database.BottinDao
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CategoryRepository @Inject constructor(
@@ -13,7 +12,11 @@ class CategoryRepository @Inject constructor(
 
     suspend fun loadAllFromRemote() = bottinService.loadAllCategories()
 
-    fun findAll() = bottinDao.findAllCategories()
+    fun findAllCategories() = bottinDao.findAllCategories()
+
+    suspend fun insertAll(categories: List<Category>) {
+        bottinDao.insertCategories(categories)
+    }
 
     suspend fun findById(categoryId: Int): Category {
         return bottinDao.findCategoryById(categoryId)
@@ -27,11 +30,7 @@ class CategoryRepository @Inject constructor(
         return bottinDao.findChildren(categoryId)
     }
 
-    suspend fun insertAll(categories: List<Category>) {
-        bottinDao.insertCategories(categories)
-    }
-
-    val categoriesFlow: Flow<List<Category>> = bottinDao.findRootsCategoriesFlow()
+    // val categoriesFlow: Flow<List<Category>> = bottinDao.findRootsCategoriesFlow()
 
 }
 

@@ -21,22 +21,8 @@ class CategoryViewModel @ViewModelInject constructor(
     suspend fun loadAllCategoriesFromRemote(): List<Category> =
         categoryRepository.loadAllFromRemote()
 
-    val allRootsFlow: LiveData<List<Category>> = categoryRepository.categoriesFlow.asLiveData()
-
-    fun findAllAsList(): List<Category> =
-        categoryRepository.findAll()
-
-    fun findAllAsLive(): LiveData<List<Category>> =
-        liveData(Dispatchers.IO) {
-            emit(categoryRepository.findAll())
-        }
-
     var categorieSelected: Category? = null
     var parentCategory: Category? = null
-
-    var categories: LiveData<List<Category>> = liveData {
-        emit(categoryRepository.findAll())
-    }
 
     fun findRootsCategorys(): LiveData<List<Category>> = liveData {
         emit(categoryRepository.findRootsCategories())
@@ -49,12 +35,5 @@ class CategoryViewModel @ViewModelInject constructor(
     fun findById(categoryId: Int): LiveData<Category> = liveData {
         emit(categoryRepository.findById(categoryId))
     }
-
-    fun insertCategories(categories: List<Category>) {
-        viewModelScope.launch {
-            categoryRepository.insertAll(categories)
-        }
-    }
-
 
 }
