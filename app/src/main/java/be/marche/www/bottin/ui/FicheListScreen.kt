@@ -34,20 +34,20 @@ class FicheListScreen {
         ficheViewModel: FicheViewModel,
         navigateTo: Actions
     ) {
-        Timber.w("category id" + categoryId)
+        Timber.w("zeze category id" + categoryId)
         val categoryLive by categoryViewModel.findById(categoryId).observeAsState(initial = null)
-        Timber.w("category live" + categoryLive)
+        Timber.w("zeze category live" + categoryLive)
 
         categoryLive?.let { category ->
 
-            Timber.w("category object " + category.name)
+            Timber.w("zeze category object " + category.name)
 
             val childrenLive by categoryViewModel.findChildren(categoryId)
                 .observeAsState(initial = emptyList())
 
             childrenLive.let { children ->
 
-                Timber.w("category children " + children)
+                Timber.w("zeze category children " + children)
 
                 when (children.count()) {
                     0 -> {
@@ -55,7 +55,7 @@ class FicheListScreen {
                             .observeAsState(initial = emptyList())
 
                         if (fiches.isEmpty()) {
-                            Timber.w("category fiches empty " + categoryId)
+                            Timber.w("zeze category fiches empty " + categoryId)
 
                             //Todo
                         } else {
