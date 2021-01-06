@@ -18,6 +18,7 @@ import be.marche.www.home.HomeScreen
 import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.NewsListScreen
 import be.marche.www.news.ui.NewsScreen
+import be.marche.www.pages.ui.UrgenceScreen
 
 @Composable
 fun RegisterRoutes(
@@ -32,17 +33,13 @@ fun RegisterRoutes(
     NavHost(navController = navController, startDestination = Router.Routes.Home) {
         composable(Router.Routes.Home) {
             HomeScreen.HomeComponent(
-                listNews = navigateTo.listNews,
-                listEvents = navigateTo.listEvents,
-                listFiches = navigateTo.listFiches,
-                navigateUp = navigateTo.navigateUp
+                navigateTo = navigateTo,
             )
         }
         composable(Router.Routes.News) {
             NewsListScreen.ListComponent(
                 newsViewModel.findAllNews(),
-                onItemClick = navigateTo.newsShow,
-                navigateUp = navigateTo.navigateUp
+                navigateTo = navigateTo,
             )
         }
         composable(
@@ -54,14 +51,13 @@ fun RegisterRoutes(
             NewsScreen.ShowComponent(
                 newsId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.newsId) ?: 0,
                 newsViewModel,
-                navigateUp = navigateTo.listNews
+                navigateTo = navigateTo,
             )
         }
         composable(Router.Routes.Agenda) {
             EventListScreen.ListComponent(
                 eventViewModel.findAllEvent(),
-                onItemClick = navigateTo.eventShow,
-                navigateUp = navigateTo.navigateUp
+                navigateTo = navigateTo,
             )
         }
         composable(
@@ -73,7 +69,7 @@ fun RegisterRoutes(
             EventScreen.ShowComponent(
                 eventId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.eventId) ?: 0,
                 eventViewModel = eventViewModel,
-                navigateUp = navigateTo.listEvents
+                navigateTo = navigateTo,
             )
         }
         composable(
@@ -87,9 +83,7 @@ fun RegisterRoutes(
                     ?: 0,
                 categoryViewModel = categoryViewModel,
                 ficheViewModel = ficheViewModel,
-                onCategoryClick = navigateTo.listFiches,
-                onFicheItemClick = navigateTo.ficheShow,
-                navigateUp = navigateTo.navigateUp
+                navigateTo = navigateTo,
             )
         }
         composable(
@@ -108,7 +102,12 @@ fun RegisterRoutes(
                 ficheId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.ficheId) ?: 0,
                 categoryViewModel = categoryViewModel,
                 ficheViewModel = ficheViewModel,
-                navigateUp = navigateTo.navigateUp
+                navigateTo = navigateTo,
+            )
+        }
+        composable(Router.Routes.Urgence) {
+            UrgenceScreen.ListComponent(
+                navigateTo = navigateTo,
             )
         }
     }

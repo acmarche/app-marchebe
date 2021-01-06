@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import be.marche.www.R
 import be.marche.www.model.News
+import be.marche.www.navigation.Actions
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 
 /**
@@ -28,23 +29,21 @@ object NewsListScreen {
     @Composable
     fun ListComponent(
         newsListLiveData: LiveData<List<News>>,
-        onItemClick: (Int) -> Unit,
-        navigateUp: () -> Unit
+        navigateTo: Actions
     ) {
         val newsList by newsListLiveData.observeAsState(initial = emptyList())
         if (newsList.isEmpty()) {
             //todo try to fetch if error set to user
             LoadingComponent()
         } else {
-            LiveDataComponentNewsList(newsList, onItemClick, navigateUp)
+            LiveDataComponentNewsList(newsList, navigateTo)
         }
     }
 
     @Composable
     fun LiveDataComponentNewsList(
         newsList: List<News>,
-        onItemClick: (Int) -> Unit,
-        navigateUp: () -> Unit
+        navigateTo: Actions
     ) {
 
         val typography = MaterialTheme.typography
@@ -54,7 +53,7 @@ object NewsListScreen {
                 TopAppBar(
                     title = { Text(stringResource(id = R.string.actus)) },
                     navigationIcon = {
-                        IconButton(onClick = navigateUp) {
+                        IconButton(onClick = navigateTo.navigateUp) {
                             Icon(Icons.Rounded.ArrowLeft)
                             //Icon(imageResource(id = R.drawable.marche_logo))
                         }
@@ -68,7 +67,7 @@ object NewsListScreen {
                         shape = RoundedCornerShape(4.dp),
                         backgroundColor = Color.White,
                         modifier = Modifier.fillParentMaxWidth().padding(8.dp)
-                            .clickable(onClick = { onItemClick(news.id) })
+                            .clickable(onClick = { navigateTo.newsShow(news.id) })
                     ) {
                         ListItem(
                             text = {

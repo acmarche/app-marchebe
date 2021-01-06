@@ -15,7 +15,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import be.marche.www.model.News
+import be.marche.www.navigation.Actions
 import be.marche.www.news.NewsViewModel
 import be.marche.www.ui.MarcheComposeTheme
 import be.marche.www.ui.components.NetworkImageComponentPicasso
@@ -27,7 +29,8 @@ import be.marche.www.utils.fakeNews
 @Composable
 private fun PlantDescriptionPreview() {
     MarcheComposeTheme() {
-        NewsScreen.NewsContent(fakeNews(), {})
+        val navController = rememberNavController()
+        NewsScreen.NewsContent(fakeNews(), Actions(navController))
     }
 }
 
@@ -39,16 +42,16 @@ object NewsScreen {
     fun ShowComponent(
         newsId: Int,
         newsViewModel: NewsViewModel,
-        navigateUp: () -> Unit
+        navigateTo: Actions
     ) {
         val news by newsViewModel.findById(newsId).observeAsState(initial = null)
-        news?.let { NewsContent(it, navigateUp) }
+        news?.let { NewsContent(it, navigateTo) }
     }
 
     @Composable
     fun NewsContent(
         news: News,
-        navigateUp: () -> Unit
+        navigateTo: Actions
     ) {
         TopAppBar(
             title = { },
@@ -56,7 +59,7 @@ object NewsScreen {
             elevation = 0.dp,
             navigationIcon = {
                 Box {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateTo.navigateUp) {
                         Icon(Icons.Filled.ArrowLeft, tint = Color.White)
                     }
                 }

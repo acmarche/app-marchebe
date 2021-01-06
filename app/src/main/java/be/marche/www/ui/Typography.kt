@@ -28,7 +28,7 @@ val typography = Typography(
         fontSize = 13.sp
     ),
 
-    body2 = defaultTypography.body2.copy(fontFamily = Montserrat),
+    body2 = defaultTypography.body2.copy(fontFamily = Montserrat, fontSize = 12.sp),
 
     h2 = TextStyle(
         fontFamily = Montserrat,

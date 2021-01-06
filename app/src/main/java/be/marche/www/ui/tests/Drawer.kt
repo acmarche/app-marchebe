@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import be.marche.www.home.HomeScreen
 import be.marche.www.sync.SyncViewModel
 
-
+/*
 @Composable
 fun DrawerScreen(
     listNews: () -> Unit,
@@ -43,7 +43,7 @@ fun DrawerScreen(
         }
     )
 }
-
+*/
 @Composable
 fun HomeDrawer() {
     val drawerState = rememberBottomDrawerState(BottomDrawerValue.Closed)

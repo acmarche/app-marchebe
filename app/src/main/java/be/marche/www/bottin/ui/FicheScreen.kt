@@ -18,9 +18,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
+import be.marche.www.navigation.Actions
 import be.marche.www.ui.MarcheComposeTheme
 import be.marche.www.ui.blue3
 import be.marche.www.ui.components.NetworkImageComponentPicasso
@@ -32,7 +34,8 @@ import be.marche.www.utils.fakeFiche
 @Composable
 fun PreviewFiche() {
     MarcheComposeTheme {
-        FicheScreen.Content(fakeFiche(), fakeCategory().id, {})
+        val navController = rememberNavController()
+        FicheScreen.Content(fakeFiche(), fakeCategory().id, Actions(navController))
     }
 }
 
@@ -44,7 +47,7 @@ object FicheScreen {
         ficheId: Int,
         categoryViewModel: CategoryViewModel,
         ficheViewModel: FicheViewModel,
-        navigateUp: () -> Unit
+        navigateTo: Actions
     ) {
         val category by categoryViewModel.findById(categoryId).observeAsState(initial = null)
         category?.let {
@@ -54,7 +57,7 @@ object FicheScreen {
 
         fiche.let {
             if (it != null) {
-                Content(it, categoryId, navigateUp)
+                Content(it, categoryId, navigateTo)
             } else {
                 NotFound()
             }
@@ -62,7 +65,7 @@ object FicheScreen {
     }
 
     @Composable
-    fun Content(fiche: Fiche, categoryId: Int, navigateUp: () -> Unit) {
+    fun Content(fiche: Fiche, categoryId: Int, navigateTo: Actions) {
         Surface(
             elevation = 10.dp,
             shape = RectangleShape
@@ -72,7 +75,7 @@ object FicheScreen {
                     TopAppBar(
                         title = { Text(fiche.societe) },
                         navigationIcon = {
-                            IconButton(onClick = { navigateUp() }) {
+                            IconButton(onClick = navigateTo.navigateUp) {
                                 Icon(Icons.Rounded.ArrowLeft)
                             }
                         },

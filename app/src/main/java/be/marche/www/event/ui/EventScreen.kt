@@ -15,8 +15,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import be.marche.www.event.EventViewModel
 import be.marche.www.model.Event
+import be.marche.www.navigation.Actions
 import be.marche.www.ui.MarcheComposeTheme
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.ui.components.TextHtml
@@ -27,7 +29,8 @@ import be.marche.www.utils.fakeEvent
 @Composable
 private fun PlantDescriptionPreview() {
     MarcheComposeTheme() {
-        EventScreen.EventContent(fakeEvent(), {})
+        val navController = rememberNavController()
+        EventScreen.EventContent(fakeEvent(), Actions(navController))
     }
 }
 
@@ -37,16 +40,16 @@ object EventScreen {
     @Composable
     fun ShowComponent(
         eventId: Int, eventViewModel: EventViewModel,
-        navigateUp: () -> Unit
+        navigateTo: Actions
     ) {
         val event by eventViewModel.findById(eventId).observeAsState(initial = null)
-        event?.let { EventContent(it, navigateUp) }
+        event?.let { EventContent(it, navigateTo) }
     }
 
     @Composable
     fun EventContent(
         event: Event,
-        navigateUp: () -> Unit
+        navigateTo: Actions
     ) {
         TopAppBar(
             title = { },
@@ -54,7 +57,7 @@ object EventScreen {
             elevation = 0.dp,
             navigationIcon = {
                 Box {
-                    IconButton(onClick = navigateUp) {
+                    IconButton(onClick = navigateTo.navigateUp) {
                         Icon(Icons.Filled.ArrowLeft, tint = Color.White)
                         //Icon(imageResource(id = R.drawable.marche_logo))
                     }

@@ -1,7 +1,10 @@
 package be.marche.www.navigation
 
+import android.content.Context
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
+import be.marche.www.utils.makeOpenUrl
+import be.marche.www.utils.makePhoneCall2
 
 /**
  *
@@ -25,7 +28,16 @@ class Actions(navController: NavHostController) {
     val ficheShow: (categoryId: Int, ficheId: Int) -> Unit = { categoryId, ficheId ->
         navController.navigate("ficheShow/$categoryId/$ficheId")
     }
+    val urgenceList: () -> Unit = {
+        navController.navigate(Router.Routes.Urgence)
+    }
     val navigateUp: () -> Unit = {
         navController.popBackStack()
+    }
+    val callNumber: (context: Context, number: String) -> Unit = { context, number ->
+        makePhoneCall2(context, number)
+    }
+    val openUrl: (context: Context, url: String) -> Unit = { context, url ->
+        makeOpenUrl(context, url)
     }
 }

@@ -14,4 +14,11 @@
     <string name="twitter">Twitter</string>
     <string name="no_internet">Vous n\'êtes pas connecté à internet</string>
     <string name="welcome">Bienvenue</string>
+    <string name="urgences">Urgences</string>
+    <string name="poste_medical">Poste médical et médecin de garde - 1733</string>
+    <string name="tel_1733">1733</string>
+    <string name="tel_112">112</string>
+    <string name="tel_101">101</string>
+    <string name="pompier">Pompiers 112</string>
+    <string name="police">Police</string>
 </resources>

@@ -3,6 +3,7 @@ package be.marche.www.navigation
 class Router  {
     object Routes {
         const val Home = "home"
+        const val Urgence = "urgences"
         const val News = "listNews"
         const val Agenda = "listEvents"
         const val EventShow = "eventShow/{eventId}"

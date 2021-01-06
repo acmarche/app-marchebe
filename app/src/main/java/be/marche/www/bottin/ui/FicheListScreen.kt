@@ -1,5 +1,6 @@
 package be.marche.www.bottin.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,11 +14,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
 import be.marche.bottin.model.Category
 import be.marche.bottin.model.Fiche
+import be.marche.www.R
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
+import be.marche.www.navigation.Actions
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 
 object FicheListScreen {
@@ -27,9 +31,7 @@ object FicheListScreen {
         categoryId: Int,
         categoryViewModel: CategoryViewModel,
         ficheViewModel: FicheViewModel,
-        onCategoryClick: (categoryId: Int) -> Unit,
-        onFicheItemClick: (categoryId: Int, ficheId: Int) -> Unit,
-        navigateUp: () -> Unit
+        navigateTo: Actions
     ) {
         val categoryLive by categoryViewModel.findById(categoryId).observeAsState(initial = null)
         categoryLive?.let { category ->
@@ -50,13 +52,12 @@ object FicheListScreen {
                             ListFichesComponent(
                                 category,
                                 fiches,
-                                onFicheItemClick,
-                                onCategoryClick
+                               navigateTo
                             )
                         }
                     }
                     else -> {
-                        CategoryChildrenComponent(category, children, onCategoryClick, navigateUp)
+                        CategoryChildrenComponent(category, children, navigateTo)
                     }
                 }
             }
@@ -68,8 +69,7 @@ object FicheListScreen {
     fun CategoryChildrenComponent(
         currentCategory: Category,
         categories: List<Category>,
-        onCategoryClick: (categoryId: Int) -> Unit,
-        navigateUp: () -> Unit
+        navigateTo: Actions
     ) {
 
         val typography = MaterialTheme.typography
@@ -81,7 +81,6 @@ object FicheListScreen {
                     navigationIcon = {
                         IconButton(onClick = {}) {
                             Icon(Icons.Rounded.ArrowLeft)
-                            //Icon(imageResource(id = R.drawable.marche_logo))
                         }
                     },
                 )
@@ -93,7 +92,7 @@ object FicheListScreen {
                         shape = RoundedCornerShape(4.dp),
                         backgroundColor = Color.White,
                         modifier = Modifier.fillParentMaxWidth().padding(8.dp)
-                            .clickable(onClick = { onCategoryClick(category.id) })
+                            .clickable(onClick = { navigateTo.listFiches(category.id) })
                     ) {
                         ListItem(
                             text = {
@@ -103,12 +102,24 @@ object FicheListScreen {
                                 )
                             },
                             icon = {
-                                category.logo?.let {
+                                if(category.logo != null)
+                                 {
                                     NetworkImageComponentPicasso(
-                                        url = it,
+                                        url = category.logo,
                                         modifier = Modifier.preferredWidth(60.dp)
                                             .preferredHeight(60.dp)
                                     )
+                                }
+                                else {
+                                    val sizeModifier = Modifier.height(70.dp).width(70.dp)
+                                    Column(
+                                        modifier = sizeModifier,
+                                        verticalArrangement = Arrangement.Center,
+                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+                                        // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+                                        Image(imageResource(R.drawable.header))
+                                    }
                                 }
                             }
                         )
@@ -123,8 +134,7 @@ object FicheListScreen {
     fun ListFichesComponent(
         category: Category,
         ficheList: List<Fiche>,
-        onItemClick: (Int, Int) -> Unit,
-        onCategoryClick: (categoryId: Int) -> Unit,
+        navigateTo: Actions
     ) {
 
         val typography = MaterialTheme.typography
@@ -147,7 +157,7 @@ object FicheListScreen {
                         shape = RoundedCornerShape(4.dp),
                         backgroundColor = Color.White,
                         modifier = Modifier.fillParentMaxWidth().padding(8.dp)
-                            .clickable(onClick = { onItemClick(category.id, fiche.id) })
+                            .clickable(onClick = { navigateTo.ficheShow(category.id, fiche.id) })
                     ) {
                         ListItem(text = {
                             Text(

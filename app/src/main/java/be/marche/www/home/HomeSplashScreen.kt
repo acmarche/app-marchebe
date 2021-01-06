@@ -14,10 +14,12 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
+import be.marche.www.navigation.Actions
 import be.marche.www.ui.MarcheComposeTheme
 import kotlinx.coroutines.delay
 
@@ -30,21 +32,18 @@ private const val SplashWaitTime: Long = 2000
 
 @Composable
 fun MainScreen(
-    listNews: () -> Unit,
-    listEvents: () -> Unit,
-    listFiches: (Int) -> Unit,
-    navigateUp: () -> Unit
+    navigateTo: Actions
 ) {
     CraneScaffold {
         var splashShown by remember { mutableStateOf(SplashState.Shown) }
         val transition = transition(splashTransitionDefinition, splashShown)
         Box {
-            /*  LandingScreen(
-                   modifier = Modifier.alpha(transition[splashAlphaKey]),
-                   onTimeout = { splashShown = SplashState.Completed }
-               )*/
+            LandingScreen(
+                modifier = Modifier.alpha(transition[splashAlphaKey]),
+                onTimeout = { splashShown = SplashState.Completed }
+            )
             HomeScreen.HomeComponent(
-                listNews, listEvents, listFiches, navigateUp
+                navigateTo
             )
         }
     }
@@ -68,7 +67,7 @@ fun LandingScreen(modifier: Modifier = Modifier, onTimeout: () -> Unit) {
             delay(SplashWaitTime)
             currentOnTimeout()
         }
-        Image(imageVector = vectorResource(id = R.drawable.ic_launcher_marche_background))
+        Image(imageVector = vectorResource(id = R.drawable.marche_logo))
     }
 }
 
