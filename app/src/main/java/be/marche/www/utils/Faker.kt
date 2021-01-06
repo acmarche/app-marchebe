@@ -14,7 +14,8 @@ fun fakeFiches(): List<Fiche> {
 fun fakeFiche(): Fiche {
     val fiche =
     Fiche(
-        id = 5,
+        idlocal = 5,
+        id = 2,
         societe = "Societe de jf",
         midi = false,
         pmr = false,

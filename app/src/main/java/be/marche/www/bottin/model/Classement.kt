@@ -2,6 +2,7 @@ package be.marche.www.bottin.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity(
    /* foreignKeys = [
@@ -19,6 +20,7 @@ import androidx.room.PrimaryKey
 )
 data class Classement(
     @PrimaryKey(autoGenerate = true)
+    val idlocal: Int,
     val id: Int,
     val fiche_id: Int,
     val category_id: Int,

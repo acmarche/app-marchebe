@@ -57,6 +57,7 @@ object UrgenceScreen {
         val n101 = stringResource(R.string.tel_101)
         val n1733 = stringResource(R.string.tel_1733)
         val n112 = stringResource(R.string.tel_112)
+        val urlGarde = stringResource(R.string.pharmacie_url)
 
         val items: List<ItemMenu> = listOf(
             ItemMenu(stringResource(R.string.police)) {
@@ -68,19 +69,19 @@ object UrgenceScreen {
             ItemMenu(stringResource(R.string.poste_medical)) {
                 navigateTo.callNumber(context, n1733)
             },
-            ItemMenu("Hôpital Princesse Paola") {
+            ItemMenu(stringResource(R.string.hopital)) {
                 navigateTo.ficheShow(0, Bottin.HOPITAL)
             },
-            ItemMenu("Pharmacies de garde") {
-                navigateTo.openUrl(context, "https://www.pharmacie.be")
+            ItemMenu(stringResource(R.string.pharamacies_garde)) {
+                navigateTo.openUrl(context, urlGarde)
             },
-            ItemMenu("Médecins") {
+            ItemMenu(stringResource(R.string.medecins)) {
                 navigateTo.listFiches(Bottin.MEDECINS)
             },
-            ItemMenu("Pharmacies") {
+            ItemMenu(stringResource(R.string.pharmacies)) {
                 navigateTo.listFiches(Bottin.PHARMACIES)
             },
-            ItemMenu("Mutuelles") {
+            ItemMenu(stringResource(R.string.mutuelles)) {
                 navigateTo.listFiches(Bottin.MUTUELLES)
             }
         )

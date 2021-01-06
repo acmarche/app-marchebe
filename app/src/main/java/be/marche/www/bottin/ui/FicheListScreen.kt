@@ -23,6 +23,7 @@ import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
 import be.marche.www.navigation.Actions
 import be.marche.www.ui.components.NetworkImageComponentPicasso
+import timber.log.Timber
 
 object FicheListScreen {
 
@@ -33,13 +34,20 @@ object FicheListScreen {
         ficheViewModel: FicheViewModel,
         navigateTo: Actions
     ) {
+        Timber.w("category id" + categoryId)
         val categoryLive by categoryViewModel.findById(categoryId).observeAsState(initial = null)
+        Timber.w("category live" + categoryLive)
+
         categoryLive?.let { category ->
+
+            Timber.w("category object " + category.name)
 
             val childrenLive by categoryViewModel.findChildren(categoryId)
                 .observeAsState(initial = emptyList())
 
             childrenLive.let { children ->
+
+                Timber.w("category children " + children)
 
                 when (children.count()) {
                     0 -> {
@@ -47,12 +55,14 @@ object FicheListScreen {
                             .observeAsState(initial = emptyList())
 
                         if (fiches.isEmpty()) {
+                            Timber.w("category fiches empty " + categoryId)
+
                             //Todo
                         } else {
                             ListFichesComponent(
                                 category,
                                 fiches,
-                               navigateTo
+                                navigateTo
                             )
                         }
                     }
@@ -61,7 +71,6 @@ object FicheListScreen {
                     }
                 }
             }
-
         }
     }
 
@@ -102,15 +111,13 @@ object FicheListScreen {
                                 )
                             },
                             icon = {
-                                if(category.logo != null)
-                                 {
+                                if (category.logo != null) {
                                     NetworkImageComponentPicasso(
                                         url = category.logo,
                                         modifier = Modifier.preferredWidth(60.dp)
                                             .preferredHeight(60.dp)
                                     )
-                                }
-                                else {
+                                } else {
                                     val sizeModifier = Modifier.height(70.dp).width(70.dp)
                                     Column(
                                         modifier = sizeModifier,
