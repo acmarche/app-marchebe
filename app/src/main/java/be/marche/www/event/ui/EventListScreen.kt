@@ -21,7 +21,7 @@ import be.marche.www.model.Event
 import be.marche.www.navigation.Actions
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 
-object EventListScreen {
+class EventListScreen {
 
     @Composable
     fun ListComponent(

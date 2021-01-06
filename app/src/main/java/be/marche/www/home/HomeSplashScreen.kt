@@ -42,7 +42,8 @@ fun MainScreen(
                 modifier = Modifier.alpha(transition[splashAlphaKey]),
                 onTimeout = { splashShown = SplashState.Completed }
             )
-            HomeScreen.HomeComponent(
+            val screen = HomeScreen()
+            screen.HomeComponent(
                 navigateTo
             )
         }

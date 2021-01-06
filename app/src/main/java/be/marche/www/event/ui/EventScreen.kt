@@ -30,11 +30,12 @@ import be.marche.www.utils.fakeEvent
 private fun PlantDescriptionPreview() {
     MarcheComposeTheme() {
         val navController = rememberNavController()
-        EventScreen.EventContent(fakeEvent(), Actions(navController))
+        val screen = EventScreen()
+        screen.EventContent(fakeEvent(), Actions(navController))
     }
 }
 
-object EventScreen {
+class EventScreen {
     private val defaultSpacerSize = 16.dp
 
     @Composable

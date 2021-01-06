@@ -32,12 +32,14 @@ fun RegisterRoutes(
 
     NavHost(navController = navController, startDestination = Router.Routes.Home) {
         composable(Router.Routes.Home) {
-            HomeScreen.HomeComponent(
+            val screen = HomeScreen()
+            screen.HomeComponent(
                 navigateTo = navigateTo,
             )
         }
         composable(Router.Routes.News) {
-            NewsListScreen.ListComponent(
+            val screen = NewsListScreen()
+            screen.ListComponent(
                 newsViewModel.findAllNews(),
                 navigateTo = navigateTo,
             )
@@ -48,14 +50,16 @@ fun RegisterRoutes(
                 type = NavType.IntType
             })
         ) { backStackEntry ->
-            NewsScreen.ShowComponent(
+            val screen = NewsScreen()
+            screen.ShowComponent(
                 newsId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.newsId) ?: 0,
                 newsViewModel,
                 navigateTo = navigateTo,
             )
         }
         composable(Router.Routes.Agenda) {
-            EventListScreen.ListComponent(
+            val screen = EventListScreen()
+            screen.ListComponent(
                 eventViewModel.findAllEvent(),
                 navigateTo = navigateTo,
             )
@@ -66,7 +70,8 @@ fun RegisterRoutes(
                 type = NavType.IntType
             })
         ) { backStackEntry ->
-            EventScreen.ShowComponent(
+            val screen = EventScreen()
+            screen.ShowComponent(
                 eventId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.eventId) ?: 0,
                 eventViewModel = eventViewModel,
                 navigateTo = navigateTo,
@@ -78,7 +83,8 @@ fun RegisterRoutes(
                 type = NavType.IntType
             })
         ) { backStackEntry ->
-            FicheListScreen.NavigateCategoryComponent(
+            val screen = FicheListScreen()
+            screen.NavigateCategoryComponent(
                 categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId)
                     ?: 0,
                 categoryViewModel = categoryViewModel,
@@ -96,7 +102,8 @@ fun RegisterRoutes(
                     type = NavType.IntType
                 })
         ) { backStackEntry ->
-            FicheScreen.ShowComponent(
+            val screen = FicheScreen()
+            screen.ShowComponent(
                 categoryId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.categoryId)
                     ?: 0,
                 ficheId = backStackEntry.arguments?.getInt(Router.Routes.routeArgs.ficheId) ?: 0,
@@ -106,7 +113,8 @@ fun RegisterRoutes(
             )
         }
         composable(Router.Routes.Urgence) {
-            UrgenceScreen.ListComponent(
+            val screen = UrgenceScreen()
+            screen.ListComponent(
                 navigateTo = navigateTo,
             )
         }

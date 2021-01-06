@@ -26,9 +26,10 @@ import be.marche.www.navigation.Actions
 import be.marche.www.sync.SyncViewModel
 import be.marche.www.ui.MarcheComposeTheme
 import be.marche.www.ui.components.BottomBar
+import timber.log.Timber
 
 
-object HomeScreen {
+class HomeScreen {
 
     @Composable
     fun HomeComponent(

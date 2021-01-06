@@ -21,7 +21,7 @@ import be.marche.www.model.ItemMenu
 import be.marche.www.navigation.Actions
 import be.marche.www.ui.typography
 
-object UrgenceScreen {
+class UrgenceScreen {
 
     @Composable
     fun ListComponent(navigateTo: Actions) {

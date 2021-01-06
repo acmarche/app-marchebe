@@ -35,11 +35,12 @@ import be.marche.www.utils.fakeFiche
 fun PreviewFiche() {
     MarcheComposeTheme {
         val navController = rememberNavController()
-        FicheScreen.Content(fakeFiche(), fakeCategory().id, Actions(navController))
+        val screen = FicheScreen()
+        screen.Content(fakeFiche(), fakeCategory().id, Actions(navController))
     }
 }
 
-object FicheScreen {
+class FicheScreen {
 
     @Composable
     fun ShowComponent(

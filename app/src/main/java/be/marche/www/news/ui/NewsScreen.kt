@@ -30,11 +30,12 @@ import be.marche.www.utils.fakeNews
 private fun PlantDescriptionPreview() {
     MarcheComposeTheme() {
         val navController = rememberNavController()
-        NewsScreen.NewsContent(fakeNews(), Actions(navController))
+        val screen = NewsScreen()
+        screen.NewsContent(fakeNews(), Actions(navController))
     }
 }
 
-object NewsScreen {
+class NewsScreen {
     private val defaultSpacerSize = 16.dp
 
     //todo Collapsing Toolbar en compose ?

@@ -25,7 +25,7 @@ import be.marche.www.navigation.Actions
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import timber.log.Timber
 
-object FicheListScreen {
+class FicheListScreen {
 
     @Composable
     fun NavigateCategoryComponent(

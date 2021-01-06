@@ -24,7 +24,7 @@ import be.marche.www.ui.components.NetworkImageComponentPicasso
 /**
  * https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/livedata/LiveDataActivity.kt
  */
-object NewsListScreen {
+class NewsListScreen {
 
     @Composable
     fun ListComponent(
