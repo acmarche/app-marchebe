@@ -40,7 +40,8 @@ class EventScreen {
 
     @Composable
     fun ShowComponent(
-        eventId: Int, eventViewModel: EventViewModel,
+        eventId: Int,
+        eventViewModel: EventViewModel,
         navigateTo: Actions
     ) {
         val event by eventViewModel.findById(eventId).observeAsState(initial = null)
