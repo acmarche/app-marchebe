@@ -13,7 +13,7 @@ import be.marche.www.model.News
 
 @Database(
     entities = [News::class, Event::class, Fiche::class, Categorie::class, Classement::class],
-    version = 13
+    version = 15
 )
 
 @TypeConverters(Converters::class)

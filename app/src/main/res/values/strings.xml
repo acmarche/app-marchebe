@@ -27,4 +27,5 @@
     <string name="pharmacies">Pharmacies</string>
     <string name="mutuelles">Mutuelles</string>
     <string name="pharmacie_url">https://www.pharmacie.be</string>
+    <string name="category_not_found">Catégorie non trouvée</string>
 </resources>

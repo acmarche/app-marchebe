@@ -18,7 +18,7 @@ interface BottinService {
     /**
      * Fiches
      */
-    @GET("bottin/fiches")
+    @GET("bottin/fichesandroid")
     suspend fun loadAllFiches(
     ): List<Fiche>
 

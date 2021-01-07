@@ -40,7 +40,7 @@ interface BottinDao {
   suspend  fun findAllFiches(): List<Fiche>
 
     @Query("SELECT * FROM fiche WHERE id = :ficheId")
-    suspend fun findFicheById(ficheId: Int): Fiche
+    suspend fun findFicheById(ficheId: Int): Fiche?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFiches(fiches: List<Fiche>)

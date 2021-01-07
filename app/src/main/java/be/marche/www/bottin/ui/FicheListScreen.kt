@@ -9,14 +9,15 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowLeft
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.LiveData
 import be.marche.bottin.model.Categorie
 import be.marche.bottin.model.Fiche
 import be.marche.www.R
@@ -47,7 +48,7 @@ class FicheListScreen {
                         if (category != null) {
                             Text(category!!.name)
                         } else {
-                            Text("Catégorie non trouvée")
+                            Text(stringResource(R.string.category_not_found))
                         }
                     },
                     navigationIcon = {
@@ -60,22 +61,19 @@ class FicheListScreen {
             bodyContent = {
                 category.let { categorie ->
                     if (categorie !== null) {
-                        if (categorie.children.size > 0) {
+                        if (categorie.children.isNotEmpty()) {
                             categorie.children.let { children ->
                                 CategoryChildrenComponent(
-                                    currentCategory = categorie,
                                     categories = children,
                                     navigateTo = navigateTo
                                 )
                             }
                         } else {
-                            val fiches =
-                                ficheViewModel.findFichesByCategory(categoryId)
-                                    .observeAsState(initial = emptyList())
+                            val fiches = ficheViewModel.findFichesByCategory(categoryId)
                             fiches.let {
                                 ListFichesComponent(
                                     category = categorie,
-                                    ficheList = it.value,
+                                    ficheList = it,
                                     navigateTo = navigateTo
                                 )
                             }
@@ -90,12 +88,16 @@ class FicheListScreen {
 
     private @Composable
     fun CategoryNotFoundComponent() {
-        Text(text = "Catégorie non trouvée")
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            modifier = Modifier.padding(16.dp).fillMaxWidth()
+        ) {
+            Text(text = stringResource(R.string.category_not_found))
+        }
     }
 
     @Composable
     fun CategoryChildrenComponent(
-        currentCategory: Categorie,
         categories: List<Categorie>,
         navigateTo: Actions
     ) {
@@ -144,41 +146,54 @@ class FicheListScreen {
     @Composable
     fun ListFichesComponent(
         category: Categorie,
-        ficheList: List<Fiche>,
+        ficheList: LiveData<List<Fiche>>,
         navigateTo: Actions
     ) {
         val typography = MaterialTheme.typography
+        val fiches by ficheList.observeAsState(initial = emptyList())
+
         LazyColumn {
-            items(items = ficheList, itemContent = { fiche ->
-                Card(
-                    shape = RoundedCornerShape(4.dp),
-                    backgroundColor = Color.White,
-                    modifier = Modifier.fillParentMaxWidth().padding(8.dp)
-                        .clickable(onClick = { navigateTo.ficheShow(category.id, fiche.id) })
-                ) {
+            items(items = fiches, itemContent = { fiche ->
+
+                if (fiche !== null) {
+                    Card(
+                        shape = RoundedCornerShape(4.dp),
+                        backgroundColor = Color.White,
+                        modifier = Modifier.fillParentMaxWidth().padding(8.dp)
+                            .clickable(onClick = { navigateTo.ficheShow(category.id, fiche.id) })
+                    ) {
+                        ListItem(text = {
+                            Text(
+                                text = fiche.societe,
+                                style = typography.h3
+                            )
+                        }, secondaryText = {
+                            val adresse = "${fiche.rue} ${fiche.numero}\n${fiche.localite} "
+                            fiche.rue?.let { it1 ->
+                                Text(
+                                    text = adresse,
+                                    style = typography.h4
+                                )
+                            }
+                        }, icon = {
+                            fiche.logo?.let { imageUrl ->
+                                NetworkImageComponentPicasso(
+                                    url = imageUrl,
+                                    modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
+                                )
+                            }
+                        })
+                    }
+                } else {
                     ListItem(text = {
                         Text(
-                            text = fiche.societe,
+                            text = "Fiche vide",
                             style = typography.h3
                         )
-                    }, secondaryText = {
-                        val adresse = "${fiche.rue} ${fiche.numero}\n${fiche.localite} "
-                        fiche.rue?.let { it1 ->
-                            Text(
-                                text = adresse,
-                                style = typography.h4
-                            )
-                        }
-                    }, icon = {
-                        fiche.logo?.let { imageUrl ->
-                            NetworkImageComponentPicasso(
-                                url = imageUrl,
-                                modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
-                            )
-                        }
                     })
                 }
             })
+
         }
     }
 
