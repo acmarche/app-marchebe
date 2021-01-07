@@ -18,7 +18,7 @@ class CategoryRepository @Inject constructor(
         bottinDao.insertCategories(categories)
     }
 
-    suspend fun findById(categoryId: Int): Categorie {
+    suspend fun findById(categoryId: Int): Categorie? {
         return bottinDao.findCategoryById(categoryId)
     }
 

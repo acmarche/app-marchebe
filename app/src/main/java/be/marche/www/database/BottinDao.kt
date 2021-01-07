@@ -19,7 +19,7 @@ interface BottinDao {
    suspend fun findAllCategories(): List<Categorie>
 
     @Query("SELECT * FROM categorie WHERE id = :categoryId")
-    suspend fun findCategoryById(categoryId: Int): Categorie
+    suspend fun findCategoryById(categoryId: Int): Categorie?
 
     @Query("SELECT * FROM categorie WHERE parent_id = 0 OR parent_id IS NULL ORDER BY name")
     fun findRootsCategories(): List<Categorie>

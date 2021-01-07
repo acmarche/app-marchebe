@@ -1,6 +1,7 @@
 package be.marche.bottin.model
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
@@ -14,4 +15,7 @@ class Categorie(
     val description: String?,
     val logo: String?,
     val logoBlanc: String?
-)
+) {
+    @Ignore
+    var children: List<Categorie> = emptyList()
+}

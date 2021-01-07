@@ -33,8 +33,11 @@ class CategoryViewModel @ViewModelInject constructor(
         emit(categoryRepository.findChildren(categoryId))
     }
 
-    fun findByIdAsLiveData(categoryId: Int): LiveData<Categorie> = liveData {
-        emit(categoryRepository.findById(categoryId))
+    fun findByIdAsLiveData(categoryId: Int): LiveData<Categorie?> = liveData {
+        val category = categoryRepository.findById(categoryId)
+        val children = categoryRepository.findChildren(categoryId)
+        category?.children = children
+        emit(category)
     }
 
 }
