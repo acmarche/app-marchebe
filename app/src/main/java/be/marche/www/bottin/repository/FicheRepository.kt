@@ -12,7 +12,7 @@ class FicheRepository @Inject constructor(
 
     suspend fun loadAllFromRemote() = bottinService.loadAllFiches()
 
-    fun findAllFiches() = bottinDao.findAllFiches()
+   suspend fun findAllFiches() = bottinDao.findAllFiches()
 
     suspend fun insertAll(fiches: List<Fiche>) {
         bottinDao.insertFiches(fiches)

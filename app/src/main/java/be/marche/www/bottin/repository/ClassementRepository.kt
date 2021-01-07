@@ -1,11 +1,8 @@
 package be.marche.www.bottin.repository
 
-import be.marche.bottin.model.Category
 import be.marche.www.api.BottinService
 import be.marche.www.bottin.model.Classement
 import be.marche.www.database.BottinDao
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ClassementRepository @Inject constructor(

@@ -5,15 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import be.marche.bottin.model.Category
+import be.marche.bottin.model.Categorie
 import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.model.Classement
 import be.marche.www.model.Event
 import be.marche.www.model.News
 
 @Database(
-    entities = [News::class, Event::class, Fiche::class, Category::class, Classement::class],
-    version = 9
+    entities = [News::class, Event::class, Fiche::class, Categorie::class, Classement::class],
+    version = 12
 )
 
 @TypeConverters(Converters::class)

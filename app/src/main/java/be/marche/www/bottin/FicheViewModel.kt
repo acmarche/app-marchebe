@@ -6,9 +6,7 @@ import androidx.lifecycle.*
 import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.repository.ClassementRepository
 import be.marche.www.bottin.repository.FicheRepository
-import be.marche.www.model.Event
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class FicheViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
@@ -29,10 +27,6 @@ class FicheViewModel @ViewModelInject constructor(
             emit(ficheRepository.findAllFiches())
         }
 
-    fun findAllFiches(): List<Fiche> {
-        return ficheRepository.findAllFiches()
-    }
-
     fun findFichesByCategory(categoryId: Int): LiveData<List<Fiche>> {
         return liveData {
             val list: MutableList<Fiche> = ArrayList()
@@ -42,6 +36,11 @@ class FicheViewModel @ViewModelInject constructor(
             }
             emit(list)
         }
+    }
+
+
+    fun findAll(): LiveData<List<Fiche>> = liveData {
+        emit(ficheRepository.findAllFiches())
     }
 
     fun findByIdAsLive(ficheId: Int): LiveData<Fiche> = liveData {

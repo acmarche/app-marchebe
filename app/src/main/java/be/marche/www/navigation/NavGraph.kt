@@ -9,12 +9,14 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
+import be.marche.www.bottin.model.Bottin
 import be.marche.www.bottin.ui.FicheListScreen
 import be.marche.www.bottin.ui.FicheScreen
 import be.marche.www.event.EventViewModel
 import be.marche.www.event.ui.EventListScreen
 import be.marche.www.event.ui.EventScreen
 import be.marche.www.home.HomeScreen
+import be.marche.www.home.HomeT
 import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.NewsListScreen
 import be.marche.www.news.ui.NewsScreen
@@ -34,7 +36,7 @@ fun RegisterRoutes(
         composable(Router.Routes.Home) {
             val screen = HomeScreen()
             screen.HomeComponent(
-                navigateTo = navigateTo,
+                navigateTo = navigateTo
             )
         }
         composable(Router.Routes.News) {

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import be.marche.bottin.model.Category
+import be.marche.bottin.model.Categorie
 import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.model.Classement
 import kotlinx.coroutines.flow.Flow
@@ -15,29 +15,29 @@ interface BottinDao {
     /**
      * Category
      */
-    @Query("SELECT * FROM category ORDER BY name")
-    fun findAllCategories(): List<Category>
+    @Query("SELECT * FROM categorie ORDER BY name")
+   suspend fun findAllCategories(): List<Categorie>
 
-    @Query("SELECT * FROM category WHERE id = :categoryId")
-    suspend fun findCategoryById(categoryId: Int): Category
+    @Query("SELECT * FROM categorie WHERE id = :categoryId")
+    suspend fun findCategoryById(categoryId: Int): Categorie
 
-    @Query("SELECT * FROM category WHERE parent_id = 0 OR parent_id IS NULL ORDER BY name")
-    fun findRootsCategories(): List<Category>
+    @Query("SELECT * FROM categorie WHERE parent_id = 0 OR parent_id IS NULL ORDER BY name")
+    fun findRootsCategories(): List<Categorie>
 
-    @Query("SELECT * FROM category WHERE parent_id = 0 OR parent_id IS NULL ORDER BY name")
-    fun findRootsCategoriesFlow(): Flow<List<Category>>
+    @Query("SELECT * FROM categorie WHERE parent_id = 0 OR parent_id IS NULL ORDER BY name")
+    fun findRootsCategoriesFlow(): Flow<List<Categorie>>
 
-    @Query("SELECT * FROM category WHERE parent_id = :categoryId ORDER BY name")
-    suspend fun findChildren(categoryId: Int): List<Category>
+    @Query("SELECT * FROM categorie WHERE parent_id = :categoryId ORDER BY name")
+    suspend fun findChildren(categoryId: Int): List<Categorie>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCategories(categories: List<Category>)
+    suspend fun insertCategories(categories: List<Categorie>)
 
     /**
      * Fiche
      */
     @Query("SELECT * FROM fiche")
-    fun findAllFiches(): List<Fiche>
+  suspend  fun findAllFiches(): List<Fiche>
 
     @Query("SELECT * FROM fiche WHERE id = :ficheId")
     suspend fun findFicheById(ficheId: Int): Fiche

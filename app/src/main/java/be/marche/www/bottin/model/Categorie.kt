@@ -5,9 +5,8 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity()
-class Category(
-    @PrimaryKey(autoGenerate = true)
-    val idlocal: Int,
+class Categorie(
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val name: String,
     @SerializedName("parent")

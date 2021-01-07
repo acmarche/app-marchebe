@@ -20,7 +20,6 @@ import com.google.gson.annotations.SerializedName
 )
 data class Classement(
     @PrimaryKey(autoGenerate = true)
-    val idlocal: Int,
     val id: Int,
     val fiche_id: Int,
     val category_id: Int,

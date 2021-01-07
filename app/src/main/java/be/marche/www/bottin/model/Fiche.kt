@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName
 @Entity()
 data class Fiche(
     @PrimaryKey(autoGenerate = true)
-    val idlocal: Int,
     val id: Int,
     val societe: String,
     val rue: String?,

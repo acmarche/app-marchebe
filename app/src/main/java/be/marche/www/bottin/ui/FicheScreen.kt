@@ -50,7 +50,7 @@ class FicheScreen {
         ficheViewModel: FicheViewModel,
         navigateTo: Actions
     ) {
-        val category by categoryViewModel.findById(categoryId).observeAsState(initial = null)
+        val category by categoryViewModel.findByIdAsLiveData(categoryId).observeAsState(initial = null)
         category?.let {
 
         }

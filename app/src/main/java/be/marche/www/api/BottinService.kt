@@ -1,6 +1,6 @@
 package be.marche.www.api
 
-import be.marche.bottin.model.Category
+import be.marche.bottin.model.Categorie
 import be.marche.bottin.model.Fiche
 import be.marche.www.bottin.model.Classement
 import retrofit2.http.GET
@@ -13,7 +13,7 @@ interface BottinService {
      */
     @GET("bottin/categories")
     suspend fun loadAllCategories(
-    ): List<Category>
+    ): List<Categorie>
 
     /**
      * Fiches

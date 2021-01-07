@@ -1,6 +1,6 @@
 package be.marche.www.utils
 
-import be.marche.bottin.model.Category
+import be.marche.bottin.model.Categorie
 import be.marche.bottin.model.Fiche
 import be.marche.www.model.Event
 import be.marche.www.model.News
@@ -14,7 +14,6 @@ fun fakeFiches(): List<Fiche> {
 fun fakeFiche(): Fiche {
     val fiche =
     Fiche(
-        idlocal = 5,
         id = 2,
         societe = "Societe de jf",
         midi = false,
@@ -58,11 +57,11 @@ fun fakeFiche(): Fiche {
     return fiche
 }
 
-fun fakeCategory(): Category {
+fun fakeCategory(): Categorie {
     return Category(name = "Category test")
 }
 
-fun Category(name: String): Category {
+fun Category(name: String): Categorie {
     return Category(name = "Category test")
 }
 

@@ -1,6 +1,7 @@
 package be.marche.www.bottin.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,11 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
-import be.marche.bottin.model.Category
+import be.marche.bottin.model.Categorie
 import be.marche.bottin.model.Fiche
 import be.marche.www.R
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
+import be.marche.www.bottin.model.Bottin
 import be.marche.www.navigation.Actions
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import timber.log.Timber
@@ -34,50 +36,29 @@ class FicheListScreen {
         ficheViewModel: FicheViewModel,
         navigateTo: Actions
     ) {
-        Timber.w("zeze category id" + categoryId)
-        val categoryLive by categoryViewModel.findById(categoryId).observeAsState(initial = null)
-        Timber.w("zeze category live" + categoryLive)
 
-        categoryLive?.let { category ->
+        Timber.w("zeze coucou")
+        // val all2 by categoryViewModel.findAll().observeAsState(initial = emptyList())
+        val category by categoryViewModel.findByIdAsLiveData(categoryId)
+            .observeAsState(initial = null)
 
-            Timber.w("zeze category object " + category.name)
+        ScrollableColumn() {
 
-            val childrenLive by categoryViewModel.findChildren(categoryId)
-                .observeAsState(initial = emptyList())
+            //       Timber.w("zeze nom " + it.name + "id " + it.id)
 
-            childrenLive.let { children ->
-
-                Timber.w("zeze category children " + children)
-
-                when (children.count()) {
-                    0 -> {
-                        val fiches by ficheViewModel.findFichesByCategory(categoryId)
-                            .observeAsState(initial = emptyList())
-
-                        if (fiches.isEmpty()) {
-                            Timber.w("zeze category fiches empty " + categoryId)
-
-                            //Todo
-                        } else {
-                            ListFichesComponent(
-                                category,
-                                fiches,
-                                navigateTo
-                            )
-                        }
-                    }
-                    else -> {
-                        CategoryChildrenComponent(category, children, navigateTo)
-                    }
+            category.let {
+                if (it != null) {
+                    Text(text = it.name)
                 }
+                Timber.w("zeze cat" + category?.name)
             }
         }
     }
 
     @Composable
     fun CategoryChildrenComponent(
-        currentCategory: Category,
-        categories: List<Category>,
+        currentCategory: Categorie,
+        categories: List<Categorie>,
         navigateTo: Actions
     ) {
 
@@ -139,7 +120,7 @@ class FicheListScreen {
 
     @Composable
     fun ListFichesComponent(
-        category: Category,
+        category: Categorie,
         ficheList: List<Fiche>,
         navigateTo: Actions
     ) {

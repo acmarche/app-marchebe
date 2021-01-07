@@ -13,6 +13,7 @@ import be.marche.www.event.repository.NewsRepository
 import be.marche.www.model.Event
 import be.marche.www.model.News
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class SyncViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
@@ -77,6 +78,7 @@ class SyncViewModel @ViewModelInject constructor(
                 // uiState.value = UiState.Success(categories)
                 categoryRepository.insertAll(categories)
             } catch (exception: Exception) {
+                Timber.w("zeze errror " + exception.message)
                 uiState.value =
                     UiState.Error("Erreur lors du chargement des catégories! : " + exception.message)
             }

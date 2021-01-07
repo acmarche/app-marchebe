@@ -1,6 +1,6 @@
 package be.marche.www.bottin.repository
 
-import be.marche.bottin.model.Category
+import be.marche.bottin.model.Categorie
 import be.marche.www.api.BottinService
 import be.marche.www.database.BottinDao
 import javax.inject.Inject
@@ -12,21 +12,21 @@ class CategoryRepository @Inject constructor(
 
     suspend fun loadAllFromRemote() = bottinService.loadAllCategories()
 
-    fun findAllCategories() = bottinDao.findAllCategories()
+    suspend fun findAllCategories() = bottinDao.findAllCategories()
 
-    suspend fun insertAll(categories: List<Category>) {
+    suspend fun insertAll(categories: List<Categorie>) {
         bottinDao.insertCategories(categories)
     }
 
-    suspend fun findById(categoryId: Int): Category {
+    suspend fun findById(categoryId: Int): Categorie {
         return bottinDao.findCategoryById(categoryId)
     }
 
-    fun findRootsCategories(): List<Category> {
+    fun findRootsCategories(): List<Categorie> {
         return bottinDao.findRootsCategories()
     }
 
-    suspend fun findChildren(categoryId: Int): List<Category> {
+    suspend fun findChildren(categoryId: Int): List<Categorie> {
         return bottinDao.findChildren(categoryId)
     }
 
