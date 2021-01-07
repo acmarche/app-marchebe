@@ -34,7 +34,7 @@ class UrgenceScreen {
                     TopAppBar(
                         title = { Text(stringResource(R.string.urgences)) },
                         navigationIcon = {
-                            IconButton(onClick = navigateTo.navigateUp) {
+                            IconButton(onClick = navigateTo.home) {
                                 Icon(Icons.Rounded.Home)
                             }
                         },

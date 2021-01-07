@@ -10,6 +10,9 @@ import be.marche.www.utils.makePhoneCall2
  *
  */
 class Actions(navController: NavHostController) {
+    val home: () -> Unit = {
+        navController.navigate(Router.Routes.Home)
+    }
     val listNews: () -> Unit = {
         navController.navigate(Router.Routes.News)
     }

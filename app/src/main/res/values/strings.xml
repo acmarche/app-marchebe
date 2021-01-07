@@ -28,4 +28,6 @@
     <string name="mutuelles">Mutuelles</string>
     <string name="pharmacie_url">https://www.pharmacie.be</string>
     <string name="category_not_found">Catégorie non trouvée</string>
+    <string name="url_facebook">https://www.facebook.com/VilledeMarcheenFamenne</string>
+    <string name="url_twitter">https://twitter.com/VilledeMarche</string>
 </resources>

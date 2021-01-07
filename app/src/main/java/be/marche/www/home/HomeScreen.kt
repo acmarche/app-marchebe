@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.res.loadImageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -64,6 +65,10 @@ class HomeScreen {
     fun HomeContent(
         navigateTo: Actions
     ) {
+        val context = AmbientContext.current
+        val url_facebook = stringResource(R.string.url_facebook)
+        val url_twitter = stringResource(R.string.url_twitter)
+
         ScrollableColumn(
             modifier = Modifier
                 .padding(16.dp)
@@ -157,16 +162,20 @@ class HomeScreen {
                 )
                 RoundedIconButton(
                     R.drawable.facebook,
-                    navigateTo.listNews,
+                    {
+                        navigateTo.openUrl(
+                            context,
+                            url_facebook
+                        )
+                    },
                     stringResource(id = R.string.facebook)
                 )
                 RoundedIconButton(
                     R.drawable.twitter,
-                    navigateTo.listNews,
+                    { navigateTo.openUrl(context, url_twitter) },
                     stringResource(id = R.string.twitter)
                 )
             }
-
         }
     }
 
