@@ -3,6 +3,7 @@ package be.marche.www.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 
 
 fun Context.makePhoneCall(number: String): Boolean {
@@ -30,4 +31,14 @@ fun makePhoneCall2(context: Context, number: String): Boolean {
 fun makeOpenUrl(context: Context, url: String) {
     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
     context.startActivity(browserIntent);
+}
+
+fun sendEmail(context: Context, recipient: String) {
+    val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
+    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient));
+    try {
+        context.startActivity(Intent.createChooser(intent, "Choisissez un client email"))
+    } catch (e: Exception) {
+        Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+    }
 }

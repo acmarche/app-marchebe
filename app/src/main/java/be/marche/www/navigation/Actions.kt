@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import be.marche.www.utils.makeOpenUrl
 import be.marche.www.utils.makePhoneCall2
+import be.marche.www.utils.sendEmail
 
 /**
  *
@@ -45,5 +46,8 @@ class Actions(navController: NavHostController) {
     }
     val openUrl: (context: Context, url: String) -> Unit = { context, url ->
         makeOpenUrl(context, url)
+    }
+    val mailTo: (context: Context, email: String) -> Unit = { context, email ->
+        sendEmail(context, email)
     }
 }
