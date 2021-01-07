@@ -1,7 +1,8 @@
 package be.marche.www.navigation
 
-class Router  {
+class Router {
     object Routes {
+        const val Administration = "administration"
         const val Home = "home"
         const val Urgence = "urgences"
         const val News = "listNews"

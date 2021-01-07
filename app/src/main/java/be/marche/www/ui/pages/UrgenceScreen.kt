@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowRight
+import androidx.compose.material.icons.rounded.ArrowLeft
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -34,8 +35,8 @@ class UrgenceScreen {
                     TopAppBar(
                         title = { Text(stringResource(R.string.urgences)) },
                         navigationIcon = {
-                            IconButton(onClick = navigateTo.home) {
-                                Icon(Icons.Rounded.Home)
+                            IconButton(onClick = { navigateTo.home() }) {
+                                Icon(Icons.Rounded.ArrowLeft)
                             }
                         },
                     )

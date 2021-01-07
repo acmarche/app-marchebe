@@ -1,5 +1,6 @@
 package be.marche.www.home
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.clickable
@@ -94,7 +95,7 @@ class HomeScreen {
             {
                 RoundedIconButton(
                     R.drawable.accueil,
-                    navigateTo.listNews,
+                    { navigateTo.administration() },
                     stringResource(id = R.string.contact)
                 )
                 RoundedIconButton(
@@ -120,12 +121,12 @@ class HomeScreen {
                 )
                 RoundedIconButton(
                     R.drawable.enfance,
-                    navigateTo.listNews,
+                    { Toast.makeText(context, "Page en préparation", Toast.LENGTH_LONG).show() },
                     stringResource(id = R.string.enfance)
                 )
                 RoundedIconButton(
                     R.drawable.loisirs,
-                    navigateTo.listNews,
+                    { Toast.makeText(context, "Page en préparation", Toast.LENGTH_LONG).show() },
                     stringResource(id = R.string.loisirs)
                 )
             }
@@ -141,12 +142,13 @@ class HomeScreen {
                 )
                 RoundedIconButton(
                     R.drawable.fetes,
-                    navigateTo.listNews,
+                    { Toast.makeText(context, "Page en préparation", Toast.LENGTH_LONG).show() },
+
                     stringResource(id = R.string.marchefete)
                 )
                 RoundedIconButton(
                     R.drawable.jour_marche,
-                    navigateTo.listNews,
+                    { Toast.makeText(context, "Page en préparation", Toast.LENGTH_LONG).show() },
                     stringResource(id = R.string.jour_marche)
                 )
             }

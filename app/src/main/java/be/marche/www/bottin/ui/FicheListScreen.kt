@@ -52,7 +52,7 @@ class FicheListScreen {
                         }
                     },
                     navigationIcon = {
-                        IconButton(onClick = {}) {
+                        IconButton(onClick = { navigateTo.navigateUp }) {
                             Icon(Icons.Rounded.ArrowLeft)
                         }
                     },
