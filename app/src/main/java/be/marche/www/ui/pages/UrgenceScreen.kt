@@ -1,4 +1,4 @@
-package be.marche.www.pages.ui
+package be.marche.www.ui.pages
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
@@ -32,7 +32,7 @@ class UrgenceScreen {
             Scaffold(
                 topBar = {
                     TopAppBar(
-                        title = { Text(stringResource(R.string.welcome)) },
+                        title = { Text(stringResource(R.string.urgences)) },
                         navigationIcon = {
                             IconButton(onClick = navigateTo.navigateUp) {
                                 Icon(Icons.Rounded.Home)
