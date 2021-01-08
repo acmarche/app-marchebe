@@ -20,16 +20,12 @@ import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.res.loadImageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.marche.www.R
 import be.marche.www.bottin.model.Bottin
 import be.marche.www.navigation.Actions
 import be.marche.www.sync.SyncViewModel
-import be.marche.www.ui.MarcheComposeTheme
 import be.marche.www.ui.components.BottomBar
-import timber.log.Timber
-
 
 class HomeScreen {
 

@@ -25,7 +25,6 @@ import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
 import be.marche.www.navigation.Actions
 import be.marche.www.ui.components.NetworkImageComponentPicasso
-import timber.log.Timber
 
 class FicheListScreen {
 
@@ -36,8 +35,6 @@ class FicheListScreen {
         ficheViewModel: FicheViewModel,
         navigateTo: Actions
     ) {
-
-        Timber.w("zeze coucou")
         val category by categoryViewModel.findByIdAsLiveData(categoryId)
             .observeAsState(initial = null)
 
@@ -154,42 +151,32 @@ class FicheListScreen {
 
         LazyColumn {
             items(items = fiches, itemContent = { fiche ->
-
-                if (fiche !== null) {
-                    Card(
-                        shape = RoundedCornerShape(4.dp),
-                        backgroundColor = Color.White,
-                        modifier = Modifier.fillParentMaxWidth().padding(8.dp)
-                            .clickable(onClick = { navigateTo.ficheShow(category.id, fiche.id) })
-                    ) {
-                        ListItem(text = {
-                            Text(
-                                text = fiche.societe,
-                                style = typography.h3
-                            )
-                        }, secondaryText = {
-                            val adresse = "${fiche.rue} ${fiche.numero}\n${fiche.localite} "
-                            fiche.rue?.let { it1 ->
-                                Text(
-                                    text = adresse,
-                                    style = typography.h4
-                                )
-                            }
-                        }, icon = {
-                            fiche.logo?.let { imageUrl ->
-                                NetworkImageComponentPicasso(
-                                    url = imageUrl,
-                                    modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
-                                )
-                            }
-                        })
-                    }
-                } else {
+                Card(
+                    shape = RoundedCornerShape(4.dp),
+                    backgroundColor = Color.White,
+                    modifier = Modifier.fillParentMaxWidth().padding(8.dp)
+                        .clickable(onClick = { navigateTo.ficheShow(category.id, fiche.id) })
+                ) {
                     ListItem(text = {
                         Text(
-                            text = "Fiche vide",
+                            text = fiche.societe,
                             style = typography.h3
                         )
+                    }, secondaryText = {
+                        val adresse = "${fiche.rue} ${fiche.numero}\n${fiche.localite} "
+                        fiche.rue?.let {
+                            Text(
+                                text = adresse,
+                                style = typography.h4
+                            )
+                        }
+                    }, icon = {
+                        fiche.logo?.let { imageUrl ->
+                            NetworkImageComponentPicasso(
+                                url = imageUrl,
+                                modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
+                            )
+                        }
                     })
                 }
             })

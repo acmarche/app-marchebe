@@ -71,7 +71,6 @@ fun NewsShow(news: News) {
 fun NewsCard(news: News) {
 
     val typography = MaterialTheme.typography
-    val image = imageResource(R.drawable.header)
 
     Column(
         modifier = Modifier.padding(16.dp)

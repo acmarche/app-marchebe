@@ -5,8 +5,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import be.marche.www.api.UiState
 import be.marche.www.sync.SyncViewModel
-import timber.log.Timber
-
 
 @Composable
 fun CheckSync(syncViewModel: SyncViewModel) {
@@ -17,7 +15,7 @@ fun CheckSync(syncViewModel: SyncViewModel) {
 
         when (uiState) {
             is UiState.Loading -> {
-                //                Timber.w("zeze loading")
+
             }
             is UiState.Success -> {
                 val news = (uiState as UiState.Success).value
@@ -25,8 +23,6 @@ fun CheckSync(syncViewModel: SyncViewModel) {
             }
             is UiState.Error -> {
                 AlertMessage("Error ${(uiState as UiState.Error).message}")
-
-                Timber.w("zeze error")
             }
         }
     }

@@ -62,7 +62,7 @@ fun fakeCategory(): Categorie {
 }
 
 fun Category(name: String): Categorie {
-    return Category(name = "Category test")
+    return Category(name = name)
 }
 
 
