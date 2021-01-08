@@ -43,4 +43,15 @@
     <string name="pmr">Pmr</string>
     <string name="centre_ville">Centre ville</string>
     <string name="ouvert_midi">Ouvert à midi</string>
+    <string name="piscine">Piscine</string>
+    <string name="cinema">Cinéma</string>
+    <string name="centre_culturel">Centre culturel et sportif</string>
+    <string name="musees">Musées</string>
+    <string name="maison_culture">Maison de la Culture</string>
+    <string name="academie_arts">Académie des Beaux Arts</string>
+    <string name="conservatoire">Conservatoire de musique</string>
+    <string name="bibliotheque">Bibliothèque</string>
+    <string name="url_piscine">https://www.marche.be/sport?p=132</string>
+    <string name="url_cinema">http://www.cinepointcom.be/marche/</string>
+    <string name="sports">Sports</string>
 </resources>

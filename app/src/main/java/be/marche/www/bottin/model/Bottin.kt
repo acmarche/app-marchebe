@@ -3,10 +3,9 @@ package be.marche.www.bottin.model
 class Bottin {
     companion object {
         const val HOPITAL: Int = 1753
-        const val USER: String = "*"
-        const val PASSWORD: String = "*"
         const val COMMERCES = 610
         const val SANTE = 5
+        const val SPORT = 486
         const val SERVICES_COMMUNAUX = 665
         const val COLLEGE = 667
         const val CONSEIL = 666
@@ -18,5 +17,11 @@ class Bottin {
         const val CRECHES = 495
         const val ACCUEILLANTES = 672
         const val ENSEIGNEMENT = 493
+        const val MUSEES = 673
+        const val ACADEMIES_ARTS = 624
+        const val CONSERVATOIRE = 669
+        const val MDA = 782
+        const val BIBLIOTHEQUES = 674
+        const val MCFA = 477
     }
 }

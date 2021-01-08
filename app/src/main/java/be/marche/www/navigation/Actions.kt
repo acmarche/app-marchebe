@@ -39,6 +39,9 @@ class Actions(navController: NavHostController) {
     val urgenceList: () -> Unit = {
         navController.navigate(Router.Routes.Urgence)
     }
+    val loisirsList: () -> Unit = {
+        navController.navigate(Router.Routes.Loisirs)
+    }
     val navigateUp: () -> Unit = {
         navController.popBackStack()
     }

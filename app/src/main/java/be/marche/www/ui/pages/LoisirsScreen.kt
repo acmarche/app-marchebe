@@ -21,7 +21,7 @@ import be.marche.www.model.ItemMenu
 import be.marche.www.navigation.Actions
 import be.marche.www.ui.typography
 
-class UrgenceScreen {
+class LoisirsScreen {
 
     @Composable
     fun ListComponent(navigateTo: Actions) {
@@ -32,7 +32,7 @@ class UrgenceScreen {
             Scaffold(
                 topBar = {
                     TopAppBar(
-                        title = { Text(stringResource(R.string.urgences)) },
+                        title = { Text(stringResource(R.string.loisirs)) },
                         navigationIcon = {
                             IconButton(onClick = { navigateTo.home() }) {
                                 Icon(Icons.Rounded.ArrowLeft)
@@ -54,35 +54,33 @@ class UrgenceScreen {
     private fun Content(navigateTo: Actions) {
 
         val context = AmbientContext.current
-        val n101 = stringResource(R.string.tel_101)
-        val n1733 = stringResource(R.string.tel_1733)
-        val n112 = stringResource(R.string.tel_112)
-        val urlGarde = stringResource(R.string.pharmacie_url)
+        val urlPiscine = stringResource(R.string.url_piscine)
+        val urlCinema = stringResource(R.string.url_cinema)
 
         val items: List<ItemMenu> = listOf(
-            ItemMenu(stringResource(R.string.police)) {
-                navigateTo.callNumber(context, n101)
+            ItemMenu(stringResource(R.string.piscine)) {
+                navigateTo.openUrl(context, urlPiscine)
             },
-            ItemMenu(stringResource(R.string.pompier)) {
-                navigateTo.callNumber(context, n112)
+            ItemMenu(stringResource(R.string.cinema)) {
+                navigateTo.openUrl(context, urlCinema)
             },
-            ItemMenu(stringResource(R.string.poste_medical)) {
-                navigateTo.callNumber(context, n1733)
+            ItemMenu(stringResource(R.string.sports)) {
+                navigateTo.listFiches(Bottin.SPORT)
             },
-            ItemMenu(stringResource(R.string.hopital)) {
-                navigateTo.ficheShow(0, Bottin.HOPITAL)
+            ItemMenu(stringResource(R.string.musees)) {
+                navigateTo.listFiches(Bottin.MUSEES)
             },
-            ItemMenu(stringResource(R.string.pharamacies_garde)) {
-                navigateTo.openUrl(context, urlGarde)
+            ItemMenu(stringResource(R.string.maison_culture)) {
+                navigateTo.ficheShow(0, Bottin.MCFA)
             },
-            ItemMenu(stringResource(R.string.medecins)) {
-                navigateTo.listFiches(Bottin.MEDECINS)
+            ItemMenu(stringResource(R.string.academie_arts)) {
+                navigateTo.ficheShow(0, Bottin.ACADEMIES_ARTS)
             },
-            ItemMenu(stringResource(R.string.pharmacies)) {
-                navigateTo.listFiches(Bottin.PHARMACIES)
+            ItemMenu(stringResource(R.string.conservatoire)) {
+                navigateTo.ficheShow(0, Bottin.CONSERVATOIRE)
             },
-            ItemMenu(stringResource(R.string.mutuelles)) {
-                navigateTo.listFiches(Bottin.MUTUELLES)
+            ItemMenu(stringResource(R.string.bibliotheque)) {
+                navigateTo.listFiches(Bottin.BIBLIOTHEQUES)
             }
         )
 

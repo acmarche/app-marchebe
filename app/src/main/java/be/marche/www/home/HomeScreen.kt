@@ -122,7 +122,7 @@ class HomeScreen {
                 )
                 RoundedIconButton(
                     R.drawable.loisirs,
-                    { Toast.makeText(context, "Page en préparation", Toast.LENGTH_LONG).show() },
+                    { navigateTo.loisirsList },
                     stringResource(id = R.string.loisirs)
                 )
             }
@@ -139,7 +139,6 @@ class HomeScreen {
                 RoundedIconButton(
                     R.drawable.fetes,
                     { Toast.makeText(context, "Page en préparation", Toast.LENGTH_LONG).show() },
-
                     stringResource(id = R.string.marchefete)
                 )
                 RoundedIconButton(
