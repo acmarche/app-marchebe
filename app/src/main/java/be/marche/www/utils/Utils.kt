@@ -45,6 +45,5 @@ fun sendEmail(context: Context, recipient: String) {
 fun openMapT(context: Context, latitude: String, longitude: String) {
     val gmmIntentUri = Uri.parse("geo:$latitude,$longitude")
     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
- //   mapIntent.setPackage("com.google.android.apps.maps")
     context.startActivity(mapIntent)
 }
