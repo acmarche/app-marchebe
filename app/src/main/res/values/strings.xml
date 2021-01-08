@@ -37,4 +37,10 @@
     <string name="courriel">Courriel</string>
     <string name="site_internet">Site internet</string>
     <string name="telephone">Téléphone</string>
+    <string name="fax">Fax</string>
+    <string name="gsm">Gsm</string>
+    <string name="instagram">Instagram</string>
+    <string name="pmr">Pmr</string>
+    <string name="centre_ville">Centre ville</string>
+    <string name="ouvert_midi">Ouvert à midi</string>
 </resources>

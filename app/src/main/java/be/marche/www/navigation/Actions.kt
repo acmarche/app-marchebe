@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import be.marche.www.utils.makeOpenUrl
 import be.marche.www.utils.makePhoneCall2
+import be.marche.www.utils.openMapT
 import be.marche.www.utils.sendEmail
 
 /**
@@ -50,4 +51,8 @@ class Actions(navController: NavHostController) {
     val mailTo: (context: Context, email: String) -> Unit = { context, email ->
         sendEmail(context, email)
     }
+    val openMap: (context: Context, latitude: String, longitude: String) -> Unit =
+        { context, latitude, longitude ->
+            openMapT(context, latitude, longitude)
+        }
 }

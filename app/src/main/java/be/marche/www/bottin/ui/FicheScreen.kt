@@ -15,18 +15,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import be.marche.bottin.model.Fiche
+import be.marche.www.R
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
 import be.marche.www.navigation.Actions
 import be.marche.www.ui.MarcheComposeTheme
-import be.marche.www.ui.blue3
 import be.marche.www.ui.components.IconeAndText
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.utils.fakeCategory
@@ -45,7 +45,7 @@ fun PreviewFiche() {
 
 class FicheScreen {
 
-  lateinit var context: Context
+    lateinit var context: Context
 
     @Composable
     fun ShowComponent(
@@ -55,7 +55,7 @@ class FicheScreen {
         ficheViewModel: FicheViewModel,
         navigateTo: Actions
     ) {
-        val context = AmbientContext.current
+        context = AmbientContext.current
 
         val category by categoryViewModel.findByIdAsLiveData(categoryId)
             .observeAsState(initial = null)
@@ -108,9 +108,19 @@ class FicheScreen {
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         val adresse = "${fiche.rue} ${fiche.numero} \n${fiche.cp} ${fiche.localite}"
-                        IconeAndText( null,  adresse, Icons.Filled.Map)
+                        IconeAndText(
+                            null, adresse, Icons.Filled.Map,
+                        ) {
+                            fiche.latitude?.let {
+                                if (fiche.longitude != null) navigateTo.openMap(
+                                    context,
+                                    fiche.latitude,
+                                    fiche.longitude
+                                )
+                            }
+                        }
                     }
-                    Coordonnees(fiche, false,navigateTo)
+                    Coordonnees(fiche, false, navigateTo)
                     Social(fiche, navigateTo)
                     Contact(fiche, navigateTo)
                     Comments(fiche)
@@ -130,28 +140,68 @@ class FicheScreen {
         val gsm = if (isContact) fiche.contact_gsm else fiche.gsm
         val fax = if (isContact) fiche.contact_fax else fiche.fax
 
-        IconeAndText( "Site", website, Icons.Filled.Public, { navigateTo.openUrl(context, website) })
-        IconeAndText( "Email",  email, Icons.Filled.Email, { navigateTo.mailTo(context, email) })
-        IconeAndText( "Téléphone",  telephone, Icons.Filled.Phone, { navigateTo.callNumber(context, telephone) })
-        IconeAndText( "Téléphone",  telephoneAutre, Icons.Filled.Phone, { navigateTo.callNumber(context, telephoneAutre) })
-        IconeAndText( "Gsm",  gsm, Icons.Filled.Smartphone, { navigateTo.callNumber(context, gsm) })
-        IconeAndText( "Fax",  fax, Icons.Filled.SpeakerPhone)
+        IconeAndText(
+            stringResource(R.string.site_internet),
+            website,
+            Icons.Filled.Public
+        ) { website?.let { navigateTo.openUrl(context, website) } }
+        IconeAndText(
+            stringResource(R.string.courriel),
+            email,
+            Icons.Filled.Email
+        ) { email?.let { navigateTo.mailTo(context, email) } }
+        IconeAndText(
+            stringResource(R.string.telephone),
+            telephone,
+            Icons.Filled.Phone
+        ) { telephone?.let { navigateTo.callNumber(context, telephone) } }
+        IconeAndText(
+            stringResource(R.string.telephone),
+            telephoneAutre,
+            Icons.Filled.Phone
+        ) { telephoneAutre?.let { navigateTo.callNumber(context, telephoneAutre) } }
+        IconeAndText(
+            stringResource(R.string.gsm),
+            gsm,
+            Icons.Filled.Smartphone
+        ) { gsm?.let { navigateTo.callNumber(context, gsm) } }
+        IconeAndText(stringResource(R.string.fax), fax, Icons.Filled.SpeakerPhone)
     }
 
     @Composable
     private fun Social(
         fiche: Fiche, navigateTo: Actions
     ) {
-        IconeAndText( "Facebook",  fiche.facebook, Icons.Filled.Facebook, { navigateTo.openUrl(context, fiche.facebook) })
-        IconeAndText( "Twitter",  fiche.twitter, Icons.Filled.Facebook, { navigateTo.openUrl(context, fiche.twitter) })
-        IconeAndText(             "Instagram",             fiche.instagram,            Icons.Filled.SportsSoccer, { navigateTo.openUrl(context, fiche.instagram) }       )
+        IconeAndText(
+            stringResource(R.string.facebook),
+            fiche.facebook,
+            Icons.Filled.Facebook
+        ) { fiche.facebook?.let { navigateTo.openUrl(context, fiche.facebook) } }
+        IconeAndText(
+            stringResource(R.string.twitter),
+            fiche.twitter,
+            Icons.Filled.Facebook
+        ) { fiche.twitter?.let { navigateTo.openUrl(context, fiche.twitter) } }
+        IconeAndText(
+            stringResource(R.string.instagram),
+            fiche.instagram,
+            Icons.Filled.SportsSoccer
+        ) { fiche.instagram?.let { navigateTo.openUrl(context, fiche.instagram) } }
     }
 
     @Composable
     private fun Accessibility(fiche: Fiche) {
-        IconeAndText( "Pmr",  fiche.pmr.toString(), Icons.Filled.Accessibility)
-        IconeAndText( "Centre",  fiche.centreville.toString(), Icons.Filled.Construction)
-        IconeAndText( "Midi",  fiche.midi.toString(), Icons.Filled.Fastfood)
+        IconeAndText(stringResource(R.string.pmr), fiche.pmr.toString(), Icons.Filled.Accessibility)
+        IconeAndText(
+            stringResource(R.string.centre_ville),
+            fiche.centreville.toString(),
+            Icons.Filled.Construction
+        )
+        IconeAndText(
+            stringResource(R.string.ouvert_midi),
+            fiche.midi.toString(),
+            Icons.Filled.Fastfood
+        )
     }
 
     @Composable
@@ -183,7 +233,7 @@ class FicheScreen {
         fiche.contact_rue?.let {
             val adresse =
                 "${fiche.contact_rue} ${fiche.contact_num} \n${fiche.contact_cp} ${fiche.contact_localite}"
-            IconeAndText( null,  adresse, Icons.Filled.Map)
+            IconeAndText(null, adresse, Icons.Filled.Map)
         }
         Coordonnees(fiche, true, navigateTo)
     }

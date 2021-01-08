@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 
-
 fun Context.makePhoneCall(number: String): Boolean {
     try {
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number"))
@@ -41,4 +40,11 @@ fun sendEmail(context: Context, recipient: String) {
     } catch (e: Exception) {
         Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
     }
+}
+
+fun openMapT(context: Context, latitude: String, longitude: String) {
+    val gmmIntentUri = Uri.parse("geo:$latitude,$longitude")
+    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+ //   mapIntent.setPackage("com.google.android.apps.maps")
+    context.startActivity(mapIntent)
 }
