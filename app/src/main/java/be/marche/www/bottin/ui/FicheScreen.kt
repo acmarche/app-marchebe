@@ -1,5 +1,6 @@
 package be.marche.www.bottin.ui
 
+import android.content.Context
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,6 +27,7 @@ import be.marche.www.bottin.FicheViewModel
 import be.marche.www.navigation.Actions
 import be.marche.www.ui.MarcheComposeTheme
 import be.marche.www.ui.blue3
+import be.marche.www.ui.components.IconeAndText
 import be.marche.www.ui.components.NetworkImageComponentPicasso
 import be.marche.www.utils.fakeCategory
 import be.marche.www.utils.fakeFiche
@@ -42,6 +45,8 @@ fun PreviewFiche() {
 
 class FicheScreen {
 
+  lateinit var context: Context
+
     @Composable
     fun ShowComponent(
         categoryId: Int,
@@ -50,7 +55,10 @@ class FicheScreen {
         ficheViewModel: FicheViewModel,
         navigateTo: Actions
     ) {
-        val category by categoryViewModel.findByIdAsLiveData(categoryId).observeAsState(initial = null)
+        val context = AmbientContext.current
+
+        val category by categoryViewModel.findByIdAsLiveData(categoryId)
+            .observeAsState(initial = null)
         category?.let {
 
         }
@@ -100,11 +108,11 @@ class FicheScreen {
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         val adresse = "${fiche.rue} ${fiche.numero} \n${fiche.cp} ${fiche.localite}"
-                        IconeAndText(texte = null, value = adresse, Icons.Filled.Map)
+                        IconeAndText( null,  adresse, Icons.Filled.Map)
                     }
-                    Coordonnees(fiche)
-                    Social(fiche)
-                    Contact(fiche)
+                    Coordonnees(fiche, false,navigateTo)
+                    Social(fiche, navigateTo)
+                    Contact(fiche, navigateTo)
                     Comments(fiche)
                 }
             }
@@ -112,8 +120,9 @@ class FicheScreen {
     }
 
     @Composable
-    private fun Coordonnees(fiche: Fiche, isContact: Boolean = false) {
-
+    private fun Coordonnees(
+        fiche: Fiche, isContact: Boolean = false, navigateTo: Actions
+    ) {
         val website = if (isContact) null else fiche.website
         val email = if (isContact) fiche.contact_email else fiche.email
         val telephone = if (isContact) fiche.contact_telephone else fiche.telephone
@@ -121,30 +130,28 @@ class FicheScreen {
         val gsm = if (isContact) fiche.contact_gsm else fiche.gsm
         val fax = if (isContact) fiche.contact_fax else fiche.fax
 
-        IconeAndText(texte = "Site", value = website, Icons.Filled.Public)
-        IconeAndText(texte = "Email", value = email, Icons.Filled.Email)
-        IconeAndText(texte = "Téléphone", value = telephone, Icons.Filled.Phone)
-        IconeAndText(texte = "Téléphone", value = telephoneAutre, Icons.Filled.Phone)
-        IconeAndText(texte = "Gsm", value = gsm, Icons.Filled.Smartphone)
-        IconeAndText(texte = "Fax", value = fax, Icons.Filled.SpeakerPhone)
+        IconeAndText( "Site", website, Icons.Filled.Public, { navigateTo.openUrl(context, website) })
+        IconeAndText( "Email",  email, Icons.Filled.Email, { navigateTo.mailTo(context, email) })
+        IconeAndText( "Téléphone",  telephone, Icons.Filled.Phone, { navigateTo.callNumber(context, telephone) })
+        IconeAndText( "Téléphone",  telephoneAutre, Icons.Filled.Phone, { navigateTo.callNumber(context, telephoneAutre) })
+        IconeAndText( "Gsm",  gsm, Icons.Filled.Smartphone, { navigateTo.callNumber(context, gsm) })
+        IconeAndText( "Fax",  fax, Icons.Filled.SpeakerPhone)
     }
 
     @Composable
-    private fun Social(fiche: Fiche) {
-        IconeAndText(texte = "Facebook", value = fiche.facebook, Icons.Filled.Facebook)
-        IconeAndText(texte = "Twitter", value = fiche.twitter, Icons.Filled.Facebook)
-        IconeAndText(
-            texte = "Instagram",
-            value = fiche.instagram,
-            Icons.Filled.SportsSoccer
-        )
+    private fun Social(
+        fiche: Fiche, navigateTo: Actions
+    ) {
+        IconeAndText( "Facebook",  fiche.facebook, Icons.Filled.Facebook, { navigateTo.openUrl(context, fiche.facebook) })
+        IconeAndText( "Twitter",  fiche.twitter, Icons.Filled.Facebook, { navigateTo.openUrl(context, fiche.twitter) })
+        IconeAndText(             "Instagram",             fiche.instagram,            Icons.Filled.SportsSoccer, { navigateTo.openUrl(context, fiche.instagram) }       )
     }
 
     @Composable
     private fun Accessibility(fiche: Fiche) {
-        IconeAndText(texte = "Pmr", value = fiche.facebook, Icons.Filled.Accessibility)
-        IconeAndText(texte = "Centre", value = fiche.twitter, Icons.Filled.Construction)
-        IconeAndText(texte = "Midi", value = fiche.instagram, Icons.Filled.Fastfood)
+        IconeAndText( "Pmr",  fiche.pmr.toString(), Icons.Filled.Accessibility)
+        IconeAndText( "Centre",  fiche.centreville.toString(), Icons.Filled.Construction)
+        IconeAndText( "Midi",  fiche.midi.toString(), Icons.Filled.Fastfood)
     }
 
     @Composable
@@ -167,16 +174,18 @@ class FicheScreen {
     }
 
     @Composable
-    private fun Contact(fiche: Fiche) {
+    private fun Contact(
+        fiche: Fiche, navigateTo: Actions
+    ) {
         fiche.nom?.let {
             Text("$it ${fiche.prenom} ")
         }
         fiche.contact_rue?.let {
             val adresse =
                 "${fiche.contact_rue} ${fiche.contact_num} \n${fiche.contact_cp} ${fiche.contact_localite}"
-            IconeAndText(texte = null, value = adresse, Icons.Filled.Map)
+            IconeAndText( null,  adresse, Icons.Filled.Map)
         }
-        Coordonnees(fiche, true)
+        Coordonnees(fiche, true, navigateTo)
     }
 
 
@@ -195,22 +204,6 @@ class FicheScreen {
         }
     }
 
-    @Composable
-    private fun IconeAndText(texte: String?, value: String?, icon: ImageVector) {
-        if (value !== null) {
-            Row() {
-                IconButton(onClick = {}) {
-                    Icon(icon, tint = blue3)
-                }
-                val content = StringBuilder()
-                if (texte != null) {
-                    content.append("$texte: \n")
-                }
-                content.append(value)
-                Text(text = content.toString())
-            }
-        }
-    }
 
     private @Composable
     fun NotFound() {
