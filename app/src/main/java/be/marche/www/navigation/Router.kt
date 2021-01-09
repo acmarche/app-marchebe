@@ -2,6 +2,7 @@ package be.marche.www.navigation
 
 class Router {
     object Routes {
+        const val UnJour = "unjour"
         const val Enfance = "enfance"
         const val Administration = "administration"
         const val Home = "home"

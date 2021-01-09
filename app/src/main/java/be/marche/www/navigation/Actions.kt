@@ -45,6 +45,9 @@ class Actions(navController: NavHostController) {
     val enfanceList: () -> Unit = {
         navController.navigate(Router.Routes.Enfance)
     }
+    val unJourList: () -> Unit = {
+        navController.navigate(Router.Routes.UnJour)
+    }
     val navigateUp: () -> Unit = {
         navController.popBackStack()
     }

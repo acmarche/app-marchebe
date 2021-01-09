@@ -143,7 +143,7 @@ class HomeScreen {
                 )
                 RoundedIconButton(
                     R.drawable.jour_marche,
-                    { Toast.makeText(context, "Page en préparation", Toast.LENGTH_LONG).show() },
+                    { navigateTo.unJourList },
                     stringResource(id = R.string.jour_marche)
                 )
             }

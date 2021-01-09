@@ -29,5 +29,8 @@ class Bottin {
         const val MDJ = 707
         const val EDUCATEURS = 1757
         const val INFOR_JEUNES = 735
+        const val RESTAURATION = 104
+        const val HEBERGEMENTS = 498
+        const val MDT = 419
     }
 }

@@ -66,4 +66,11 @@
     <string name="educateurs">Educateurs de rue</string>
     <string name="infor_jeunes">Info Jeunes</string>
     <string name="mda">Maison des Aînés</string>
+    <string name="un_jour">Un jour à Marche</string>
+    <string name="restauration">Restauration</string>
+    <string name="hebergements">Hébergements</string>
+    <string name="maison_tourisme">Maison du Tourisme</string>
+    <string name="train_tect">Trains - Bus</string>
+    <string name="parkings">Parkings</string>
+    <string name="marches">Les marchés</string>
 </resources>
