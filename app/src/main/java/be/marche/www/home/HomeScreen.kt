@@ -117,7 +117,7 @@ class HomeScreen {
                 )
                 RoundedIconButton(
                     R.drawable.enfance,
-                    { Toast.makeText(context, "Page en préparation", Toast.LENGTH_LONG).show() },
+                    { navigateTo.enfanceList },
                     stringResource(id = R.string.enfance)
                 )
                 RoundedIconButton(

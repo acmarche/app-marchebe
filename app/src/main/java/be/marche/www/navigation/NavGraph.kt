@@ -19,6 +19,7 @@ import be.marche.www.news.NewsViewModel
 import be.marche.www.news.ui.NewsListScreen
 import be.marche.www.news.ui.NewsScreen
 import be.marche.www.ui.pages.AdministrationScreen
+import be.marche.www.ui.pages.EnfanceScreen
 import be.marche.www.ui.pages.LoisirsScreen
 import be.marche.www.ui.pages.UrgenceScreen
 
@@ -128,6 +129,12 @@ fun RegisterRoutes(
         }
         composable(Router.Routes.Loisirs) {
             val screen = LoisirsScreen()
+            screen.ListComponent(
+                navigateTo = navigateTo,
+            )
+        }
+        composable(Router.Routes.Enfance) {
+            val screen = EnfanceScreen()
             screen.ListComponent(
                 navigateTo = navigateTo,
             )

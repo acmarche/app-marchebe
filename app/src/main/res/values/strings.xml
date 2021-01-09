@@ -54,4 +54,15 @@
     <string name="url_piscine">https://www.marche.be/sport?p=132</string>
     <string name="url_cinema">http://www.cinepointcom.be/marche/</string>
     <string name="sports">Sports</string>
+    <string name="cee">Coordination Education Enfance</string>
+    <string name="accueillantes">Accueillantes</string>
+    <string name="creches">Crèches</string>
+    <string name="repas_url">http://www.rescolm.be/</string>
+    <string name="repas_scolaires">Repas scolaires</string>
+    <string name="enseignement">Enseignement</string>
+    <string name="plaines">Plaines de vacances et stages</string>
+    <string name="mdj">Maison des Jeunes</string>
+    <string name="stages_url">https://enfance-jeunesse.marche.be</string>
+    <string name="educateurs">Educateurs de rue</string>
+    <string name="infor_jeunes">Info Jeunes</string>
 </resources>
