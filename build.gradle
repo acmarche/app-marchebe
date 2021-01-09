@@ -27,6 +27,9 @@ buildscript {
             'timber'               : '4.7.1',
             'logging'              : '4.9.0',
             'lifecycle_kt '        : '2.2.0',
+            'google_services'      : '4.3.4',
+            'firebase'             : '26.2.0',
+            'crashlytics'          : '2.4.1'
     ]
 
     ext.deps = [
@@ -91,6 +94,17 @@ buildscript {
             'tool'            : [
                     'timber': "com.jakewharton.timber:timber:${versions.timber}"
             ],
+            'firebase'        : [
+                    'bom'        : "com.google.firebase:firebase-bom:${versions.firebase}",
+                    'analytics'  : 'com.google.firebase:firebase-analytics-ktx',
+                    'crashlytics': 'com.google.firebase:firebase-crashlytics'
+
+                    // Add the dependencies for any other desired Firebase products
+                    // https://firebase.google.com/docs/android/setup#available-libraries
+                    // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
+                    // implementation 'com.google.firebase:firebase-auth'
+                    // implementation 'com.google.firebase:firebase-firestore'
+            ]
     ]
 
     repositories {
@@ -101,6 +115,8 @@ buildscript {
         classpath "com.android.tools.build:gradle:${versions.gradle}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
         classpath "com.google.dagger:hilt-android-gradle-plugin:${versions.hilt}"
+        classpath "com.google.gms:google-services:${versions.google_services}"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:${versions.crashlytics}"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

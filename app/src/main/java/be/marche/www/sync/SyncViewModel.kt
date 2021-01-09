@@ -12,6 +12,7 @@ import be.marche.www.event.repository.EventRepository
 import be.marche.www.event.repository.NewsRepository
 import be.marche.www.model.Event
 import be.marche.www.model.News
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.launch
 
 class SyncViewModel @ViewModelInject constructor(
@@ -35,6 +36,7 @@ class SyncViewModel @ViewModelInject constructor(
                 uiState.value = UiState.Success(news)
                 newsRepository.insertAll(news)
             } catch (exception: Exception) {
+                FirebaseCrashlytics.getInstance().log("sync actu"+exception.message)
                 uiState.value =
                     UiState.Error("Erreur lors du chargement des actualités! : " + exception.message)
             }
