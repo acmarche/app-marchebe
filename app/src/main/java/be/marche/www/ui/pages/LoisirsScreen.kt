@@ -81,6 +81,9 @@ class LoisirsScreen {
             },
             ItemMenu(stringResource(R.string.bibliotheque)) {
                 navigateTo.listFiches(Bottin.BIBLIOTHEQUES)
+            },
+            ItemMenu(stringResource(R.string.mda)) {
+                navigateTo.ficheShow(0,Bottin.MDA)
             }
         )
 
