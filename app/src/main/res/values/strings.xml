@@ -73,4 +73,7 @@
     <string name="train_tect">Trains - Bus</string>
     <string name="parkings">Parkings</string>
     <string name="marches">Les marchés</string>
+    <string name="url_mobilite">https://www.marche.be/mobilite/</string>
+    <string name="url_parking">https://www.marche.be/tourisme/?p=19419</string>
+    <string name="url_marches"><![CDATA[https://www.luxembourg-belge.be/fr/agenda/agenda.php#we12[glGeo]=12~50.16876221865776~5.117568969726563~50.28846183451485~5.5707550048828125&we12[glDays]=tday2565~0-399&we12[id0]=|LiAgendaV01|Dates|0|1|MoAgendaV01|FO-5|FO|S]]></string>
 </resources>

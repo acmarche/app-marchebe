@@ -54,7 +54,9 @@ class UnJourScreen {
     private fun Content(navigateTo: Actions) {
 
         val context = AmbientContext.current
-        val urlGarde = stringResource(R.string.pharmacie_url)
+        val urlMobilite = stringResource(R.string.url_mobilite)
+        val urlParking = stringResource(R.string.url_parking)
+        val urlMarches = stringResource(R.string.url_marches)
 
         val items: List<ItemMenu> = listOf(
             ItemMenu(stringResource(R.string.restauration)) {
@@ -67,13 +69,13 @@ class UnJourScreen {
                 navigateTo.ficheShow(0, Bottin.MDT)
             },
             ItemMenu(stringResource(R.string.train_tect)) {
-                navigateTo.ficheShow(0, Bottin.HOPITAL)
+                navigateTo.openUrl(context, urlMobilite)
             },
             ItemMenu(stringResource(R.string.parkings)) {
-                navigateTo.openUrl(context, urlGarde)
+                navigateTo.openUrl(context, urlParking)
             },
             ItemMenu(stringResource(R.string.marches)) {
-                navigateTo.listFiches(Bottin.MEDECINS)
+                navigateTo.openUrl(context, urlMarches)
             },
         )
 
