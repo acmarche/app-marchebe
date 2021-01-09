@@ -2,43 +2,39 @@ package be.marche.www
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
 import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
 import be.marche.www.event.EventViewModel
-import be.marche.www.navigation.RegisterRoutes
+import be.marche.www.navigation.NavGraph
 import be.marche.www.news.NewsViewModel
 import be.marche.www.sync.SyncViewModel
 import be.marche.www.ui.MarcheComposeTheme
 import be.marche.www.utils.NetworkUtils
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val newsViewModel: NewsViewModel by viewModels()
     private val eventViewModel: EventViewModel by viewModels()
     private val ficheViewModel: FicheViewModel by viewModels()
     private val categoryViewModel: CategoryViewModel by viewModels()
     private val syncViewModel: SyncViewModel by viewModels()
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    @Inject
+    lateinit var navGraph: NavGraph
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        firebaseAnalytics = Firebase.analytics
 
         syncContent()
 
         setContent {
             MarcheComposeTheme {
-                RegisterRoutes(
+                navGraph.RegisterRoutes(
                     newsViewModel,
                     eventViewModel,
                     ficheViewModel,

@@ -50,7 +50,7 @@ dependencies {
     implementation deps.kotlinStdLib
 
     // Support Libraries
-  //  implementation deps.support.appCompat
+    implementation deps.support.appCompat
     implementation deps.support.ktx
     implementation deps.support.ktxViewModel
     implementation deps.support.ktxLiveData
