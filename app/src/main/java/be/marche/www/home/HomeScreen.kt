@@ -91,7 +91,7 @@ class HomeScreen {
             {
                 RoundedIconButton(
                     R.drawable.accueil,
-                    { navigateTo.administration() },
+                    navigateTo.administration,
                     stringResource(id = R.string.contact)
                 )
                 RoundedIconButton(
@@ -117,12 +117,12 @@ class HomeScreen {
                 )
                 RoundedIconButton(
                     R.drawable.enfance,
-                    { navigateTo.enfanceList },
+                    navigateTo.enfanceList,
                     stringResource(id = R.string.enfance)
                 )
                 RoundedIconButton(
                     R.drawable.loisirs,
-                    { navigateTo.loisirsList },
+                    navigateTo.loisirsList,
                     stringResource(id = R.string.loisirs)
                 )
             }
@@ -143,7 +143,7 @@ class HomeScreen {
                 )
                 RoundedIconButton(
                     R.drawable.jour_marche,
-                    { navigateTo.unJourList },
+                    navigateTo.unJourList,
                     stringResource(id = R.string.jour_marche)
                 )
             }
@@ -154,7 +154,7 @@ class HomeScreen {
             ) {
                 RoundedIconButton(
                     R.drawable.urgences,
-                    { navigateTo.urgenceList() },
+                    navigateTo.urgenceList,
                     stringResource(id = R.string.urgences)
                 )
                 RoundedIconButton(
