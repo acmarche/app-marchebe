@@ -25,8 +25,12 @@ import be.marche.www.bottin.CategoryViewModel
 import be.marche.www.bottin.FicheViewModel
 import be.marche.www.navigation.Actions
 import be.marche.www.ui.components.NetworkImageComponentPicasso
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 class FicheListScreen {
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     @Composable
     fun NavigateCategoryComponent(
@@ -38,12 +42,16 @@ class FicheListScreen {
         val category by categoryViewModel.findByIdAsLiveData(categoryId)
             .observeAsState(initial = null)
 
+        firebaseAnalytics = Firebase.analytics
+
         Scaffold(
             topBar = {
                 TopAppBar(
                     title = {
                         if (category != null) {
                             Text(category!!.name)
+//                            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM)
+
                         } else {
                             Text(stringResource(R.string.category_not_found))
                         }
