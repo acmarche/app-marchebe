@@ -24,6 +24,20 @@ class Analytics @Inject constructor(
         }
     }
 
+    fun logEvent(id: String, nameEvent: String, name: String, fullText: String) {
+        firebaseAnalytics.logEvent("share_image") {
+            param("image_name", name)
+            param("full_text", fullText)
+        }
+    }
+
+    fun logScreen(id: String, screenName: String, name: String, fullText: String) {
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
+            param(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
+            param(FirebaseAnalytics.Param.SCREEN_CLASS, "MainActivity")
+        }
+    }
+
     fun logHomePage() {
         log("homepage", "HomePage")
     }

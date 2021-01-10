@@ -29,7 +29,9 @@ buildscript {
             'lifecycle_kt '        : '2.2.0',
             'google_services'      : '4.3.4',
             'firebase'             : '26.2.0',
-            'crashlytics'          : '2.4.1'
+            'crashlytics'          : '2.4.1',
+            'compat'               : '28.0.0',
+            'worker'               : '2.4.0'
     ]
 
     ext.deps = [
@@ -78,13 +80,15 @@ buildscript {
                     'ktx'     : "androidx.room:room-ktx:${versions.room}",// optional - Kotlin Extensions and Coroutines support for Room
             ],
             'support'         : [
+                    'compat'             : "com.android.support:support-compat:${versions.compat}",
                     'appCompat'          : "androidx.appcompat:appcompat:${versions.supportLibrary}",
                     'material'           : 'com.google.android.material:material:1.2.1',
                     'ktx'                : "androidx.core:core-ktx:${versions.ktxCore}",
                     'ktxLiveData'        : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.ktxSupport}",
                     'ktxViewModel'       : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.ktxSupport}",
                     'lifecycleExtensions': "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}",
-                    'fragmentKtx'        : "androidx.fragment:fragment-ktx:${versions.fragment}"
+                    'fragmentKtx'        : "androidx.fragment:fragment-ktx:${versions.fragment}",
+                    'worker'             : "androidx.work:work-runtime-ktx:${versions.worker}"
             ],
             'test'            : [
                     'junit'              : "junit:junit:${versions.junit}",
@@ -97,7 +101,8 @@ buildscript {
             'firebase'        : [
                     'bom'        : "com.google.firebase:firebase-bom:${versions.firebase}",
                     'analytics'  : 'com.google.firebase:firebase-analytics-ktx',
-                    'crashlytics': 'com.google.firebase:firebase-crashlytics'
+                    'crashlytics': 'com.google.firebase:firebase-crashlytics',
+                    'messaging'  : 'com.google.firebase:firebase-messaging-ktx'
 
                     // Add the dependencies for any other desired Firebase products
                     // https://firebase.google.com/docs/android/setup#available-libraries

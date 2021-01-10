@@ -76,4 +76,13 @@
     <string name="url_mobilite">https://www.marche.be/mobilite/</string>
     <string name="url_parking">https://www.marche.be/tourisme/?p=19419</string>
     <string name="url_marches"><![CDATA[https://www.luxembourg-belge.be/fr/agenda/agenda.php#we12[glGeo]=12~50.16876221865776~5.117568969726563~50.28846183451485~5.5707550048828125&we12[glDays]=tday2565~0-399&we12[id0]=|LiAgendaV01|Dates|0|1|MoAgendaV01|FO-5|FO|S]]></string>
+    <string name="msg_token_fmt">test coucou</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name">fcm_default_channel</string>
+
+    <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
+    <string name="msg_subscribed">Subscribed to weather topic</string>
+    <string name="fcm_message">Title message</string>
+    <string name="channel_name">channel_marche_be</string>
+    <string name="channel_description">channel description</string>
 </resources>

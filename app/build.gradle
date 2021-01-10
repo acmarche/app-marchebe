@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "be.marche.www"
-        minSdkVersion 26
+        minSdkVersion 22
         targetSdkVersion 30
         versionCode 3
         versionName "1.2"
@@ -127,4 +127,6 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation deps.firebase.analytics
     implementation deps.firebase.crashlytics
+    implementation deps.firebase.messaging
+    implementation deps.support.worker
 }
